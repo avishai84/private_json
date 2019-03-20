@@ -11,16 +11,14 @@ Or simply cd into a directory and run to clone from our WCD repo:
 
 ```
 git clone https://github.gapinc.com/wcd/sew.git
-
 ```
 cd `sew` - the new cloned directory you downloaded from Git.
 
-```
+
 ### Setting up the Project dependencies:
 
-From `sew` the root dir. you will need to update all dependencies. run
+From `sew` the root dir. you will need to update all dependencies. 
 ```
 npm install
-
 ```
 
