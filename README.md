@@ -28,3 +28,6 @@ npm install
 npm start
 ```
 
+Confluence page:
+https://confluence.gapinc.com/pages/viewpage.action?pageId=310657045
+
