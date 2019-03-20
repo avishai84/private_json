@@ -22,3 +22,9 @@ From `sew` the root dir. you will need to update all dependencies.
 npm install
 ```
 
+
+### Starting local dev:
+```
+npm start
+```
+
