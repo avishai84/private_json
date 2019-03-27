@@ -29,5 +29,5 @@ npm start
 ```
 
 Confluence page:
-https://confluence.gapinc.com/pages/viewpage.action?pageId=310657045
+https://confluence.gapinc.com/pages/viewpage.action?pageId=313300755
 
