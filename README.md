@@ -36,9 +36,9 @@ You Should see something like this:
 If you are interested in fixing issues and contributing directly to the code base, please see the document How to Contribute, which covers the following:
 
 How to build and run from source
-• The development workflow, including debugging and running tests
-• Coding Guidelines
-• Submitting pull requests
+* The development workflow, including debugging and running tests
+* Coding Guidelines
+* Submitting pull requests
 
 
 Confluence page:
