@@ -27,6 +27,10 @@ npm install
 ```
 npm start
 ```
+You Should see something like this:
+<p align="center">
+  <img alt="welcome screen" src="https://myfolio.gap.com/personal/ataashu_gap_com/Documents/images/welcome.png">
+</p>
 
 Confluence page:
 https://confluence.gapinc.com/pages/viewpage.action?pageId=313300755
