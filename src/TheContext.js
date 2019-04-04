@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import jsonData from './marketing_json/marketing-gap.json';
 // first we will make a new context
-const DefaultValue = {"default Data":"no data"};
+const DefaultValue = {"defaultData":"no data"};
 const MyContext = React.createContext(DefaultValue);
 
 // Then create a provider Component
 class MyProvider extends Component {
-  state = {
-    foo:'you',
-    data: jsonData
+  constructor(props){
+    super(props);
+    this.state = {
+      data: jsonData
+    }
   }
+
   render() {
+
     return (
       <MyContext.Provider value={this.state}>
         {this.props.children}
@@ -19,8 +23,6 @@ class MyProvider extends Component {
   }
 }
 
-
-
 class ContextOutput extends Component {
   render() {
     return (
@@ -28,7 +30,7 @@ class ContextOutput extends Component {
         <MyContext.Consumer>
           {(context) => (
             <React.Fragment>
-              <p>state: 🍥 {context.data.home.name}</p>
+            <p>Mapping: {context.data.home.components[0].data.svgoverlay.altText} </p>
               {/* <button onClick={context.growAYearOlder}>🍰🎂</button> */}
             </React.Fragment>
           )}
@@ -40,10 +42,11 @@ class ContextOutput extends Component {
 
 const SomeData = (props) => (
   <div className="SomeData">
-    <ContextOutput/>
+    <ContextOutput>
+  
+    </ContextOutput>
   </div>
 )
-
 
 class TheContext extends Component {
   render() {
