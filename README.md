@@ -44,3 +44,5 @@ How to build and run from source
 Confluence page:
 https://confluence.gapinc.com/pages/viewpage.action?pageId=313300755
 
+For more info how to set up a React app:
+https://www.codecademy.com/articles/how-to-create-a-react-app
