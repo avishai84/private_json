@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import AppData from './AppData.js';
 import logo from './images/wcdLogo.png';
+import DataGeneral from './DataGeneral';
 class App extends Component {
 
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
            <img src={logo} alt="Logo" />
         </header>
         <main>
-          main
+          <DataGeneral />
         </main>
         <footer>
          <AppData/>
