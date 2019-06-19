@@ -10,8 +10,8 @@ class ListItem extends Component {
   render() {
     return ( 
       <Fragment>
-	      <small style={{ "fontSize": "12px", "color": "orange" }}>{ this.props.name}</small>
-			  <small style={{ "fontSize": "12px", "color": "red" }}>{ this.props.list}</small>
+	      <small style={{ "fontSize": "12px", "color": "orange" }}>{this.props.customName} {this.props.name}</small>&nbsp;
+			  <small style={{ "fontSize": "12px", "color": "red" }}>{this.props.list}</small>
 			</Fragment>
     );
   }
@@ -25,7 +25,8 @@ class PlainJson extends Component {
       markup: this.props,
       jsonValue: this.props,
       jsonStringify: JSON.stringify(this.jsonValue, null, 2),
-      clicked: ''
+      clicked: '',
+      customName:this.props
       //Object.entries(this.props)
       // 
     };
@@ -90,23 +91,24 @@ class DataGeneral extends Component {
     let ctaLinksArray = origJson.data.links.content;
     let linkInputs = ctaLinksArray.map((item, index) => {
       return (`<br> <label htmlFor="text-input-ctaText_${index}">
-    ${item.text}: 
-    <input data-instanceName="text" id="text-input-ctaText_${index}" placeholder=${item.text} value="${item.text}"/>
+    Text:
+    <input data-instancename="text" id="text-input-ctaText_${index}" name="text" placeholder=${item.text} value="${item.text}"/>
     </label>
     <label htmlFor="text-input-ctaLink_${index}" >
     href: 
-    <input data-instanceName="href" id="text-input-ctaLink_${index}" placeholder=${item.href} value=${item.href} />
+    <input data-instancename="href" id="text-input-ctaLink_${index}" name="href" placeholder=${item.href} value=${item.href} />
     </label>`);
     });
+
     let instanceHtml = '';
 
     instanceHtml = `
         <label htmlFor="text-input_${origJson.instanceDesc.replace(/\s/g, '')}">instanceDesc:
-        <input data-instanceName='instanceDesc' id="text-input_${origJson.instanceDesc.replace(/\s/g, '')}" type="text" value=${jsonNew.instanceDesc} placeholder="${origJson.instanceDesc}" />
+        <input data-instancename='instanceDesc' id="text-input_${origJson.instanceDesc.replace(/\s/g, '')}" type="text" value=${jsonNew.instanceDesc} placeholder="${origJson.instanceDesc}" />
       </label>
       <br>
       <label htmlFor="text-input_${origJson.experimentRunning}">experimentRunning:
-        <select data-instanceName='experimentRunning' id="text-input_${origJson.experimentRunning}">
+        <select data-instancename='experimentRunning' id="text-input_${origJson.experimentRunning}">
           <option defaultValue="${jsonNew.experimentRunning}">${jsonNew.experimentRunning}</option>
           <option value="${!jsonNew.experimentRunning}">${!jsonNew.experimentRunning}</option>
         </select>
@@ -114,28 +116,28 @@ class DataGeneral extends Component {
       <br>
       <h5>background properties</h5>
       <label htmlFor="text-input_${origJson.data.background.content.altText.replace(/\s/g, '')}">background altText:
-        <input data-instanceName='altText' name="background" id="text-input_${origJson.data.background.content.altText.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.altText} placeholder="${origJson.data.background.content.altText}" />
+        <input data-instancename='altText' name="background" id="text-input_${origJson.data.background.content.altText.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.altText} placeholder="${origJson.data.background.content.altText}" />
       </label>
       <br>
       <label htmlFor="text-input_${origJson.data.background.content.largeImg.replace(/\s/g, '')}">background largeImg:
-        <input data-instanceName='largeImg' name="background" id="text-input_${origJson.data.background.content.largeImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.largeImg} placeholder="${origJson.data.background.content.largeImg}" />
+        <input data-instancename='largeImg' name="background" id="text-input_${origJson.data.background.content.largeImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.largeImg} placeholder="${origJson.data.background.content.largeImg}" />
       </label>
       <br>
       <label htmlFor="text-input_${origJson.data.background.content.smallImg.replace(/\s/g, '')}">background smallImg:
-        <input data-instanceName='smallImg' name="background" id="text-input_${origJson.data.background.content.smallImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.smallImg} placeholder="${origJson.data.background.content.smallImg}" />
+        <input data-instancename='smallImg' name="background" id="text-input_${origJson.data.background.content.smallImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.smallImg} placeholder="${origJson.data.background.content.smallImg}" />
       </label>
       <br>
       <h5>svgoverlay properties</h5>
       <label htmlFor="text-input_${origJson.data.svgoverlay.altText.replace(/\s/g, '')}">svgoverlay altText:
-        <input data-instanceName='altText' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.altText.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.altText} placeholder="${origJson.data.svgoverlay.altText}" />
+        <input data-instancename='altText' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.altText.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.altText} placeholder="${origJson.data.svgoverlay.altText}" />
       </label>
       <br>
       <label htmlFor="text-input_${origJson.data.svgoverlay.largeImg.replace(/\s/g, '')}">svgoverlay largeImg:
-        <input data-instanceName='largeImg' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.largeImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.largeImg} placeholder="${origJson.data.svgoverlay.largeImg}" />
+        <input data-instancename='largeImg' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.largeImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.largeImg} placeholder="${origJson.data.svgoverlay.largeImg}" />
       </label>
       <br>
       <label htmlFor="text-input_${origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}">svgoverlay smallImg:
-        <input data-instanceName='smallImg' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.smallImg} placeholder="${origJson.data.svgoverlay.smallImg}" />
+        <input data-instancename='smallImg' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.smallImg} placeholder="${origJson.data.svgoverlay.smallImg}" />
       </label>
       <br>
       <h5>CTA links</h5>
@@ -171,7 +173,8 @@ class DataGeneral extends Component {
     this.makeChangesJson();
   }
   makeChangesJson() {
-    const deepChange = this.state.jsonValue;
+    let deepChange = this.state.jsonValue;
+
     setTimeout(() => {
       // changing json new value
       let currentChange = this.state.jsonValue[this.state.customName];
@@ -199,12 +202,20 @@ class DataGeneral extends Component {
 
       }
       // links - CTA
-      console.log(this.state.targetName);
       if (this.state.targetName === 'href') {
-        console.log(this.state.targetName);
+        deepChange.data.links.content.map((element, index) => {
+          //console.log(element.text);
+          console.log(deepChange.data.links.content[index][this.state.targetName] = this.state.markup);
+         return deepChange.data.links.content[index][this.state.targetName] = this.state.markup;
+        });
       }
       if (this.state.targetName === 'text') {
-        console.log(this.state.targetName);
+        deepChange.data.links.content.map((element, index) => {
+          //console.log(element.text);
+          console.log(deepChange.data.links.content[index][this.state.targetName] = this.state.markup);
+         return deepChange.data.links.content[index][this.state.targetName] = this.state.markup;
+        });
+
       }
 
       //jsonNew.data.background.content.altText
@@ -229,9 +240,10 @@ class DataGeneral extends Component {
     this.setState({
       jsonValue: json
     })
+    alert();
   }
   focusElem(e) {
-    // this fn helps identify which elem. we are changing
+    // this fn helps identify which input elem we are changing
     this.setState({
       targetName: e.target.name
     })
@@ -239,60 +251,29 @@ class DataGeneral extends Component {
   render() {
     //changeName += `${this.state.changedDetected} ${this.state.markup}`;
 
-    return(<Fragment>
-        <div className = "DataGeneral">
-        <p>JSON will show here</p>  
-        <select onChange = {
-          this.parseJson
-        } >
-        <option defaultValue>JSON Modules</option> 
-        <option onSelect = {
-        this.setJsonBrand
-      }
-      value = "empty" > SVGOverlay </option> 
-      <option value = "empty">future jsons</option> 
-      <option value = "empty">future jsons</option> 
-      <option value = "empty" >future jsons</option> 
-      </select >
-      <br/>
-        <Fragment >
-        <form style = {
-          {
-            "display": "flex"
-          }
-        }
-      onInput = {
-        this.elemUpdatedInForm
-      }
-      onFocus = {
-          this.focusElem
-        }>
-        <div dangerouslySetInnerHTML = {
-          this.createMarkup()
-        }/>
-         </form >
-        </Fragment> 
-        <PlainJson json = {
-        this.state.jsonDataRaw
-      }detect = {
-        this.state.changedDetected
-      }markup = {
-        this.state.markup
-      }jsonValue = {
-        this.state.jsonValue
-      }/> 
-      </div> 
-      <div >
-        <h6>Last Change</h6> 
-        <ListItem name = {
-        this.state.changedDetected
-      }
-      list = {
-        this.state.markup
-      }/>
-       </div>
-    </Fragment>
+    return(
+      <Fragment>
+        <div className="DataGeneral">
+          <p>JSON will show here</p>
+          <select onChange={ this.parseJson }>
+            <option defaultValue>JSON Modules</option>
+            <option onSelect={ this.setJsonBrand } value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
+          </select>
+          <br/>
+          <Fragment>
+            <form style={{ "display": "flex" }} onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
+               <div dangerouslySetInnerHTML={this.createMarkup()}/>
+            </form>
+          </Fragment>
+          <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} />
+        </div>
+        <div>
+          <h6>Last Change</h6> 
+          <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName}/>
+        </div>
+      </Fragment>
     );
+
   }
 }
 
