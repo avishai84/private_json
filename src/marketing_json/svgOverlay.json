@@ -61,7 +61,6 @@
 			}
 		},
 		"links": {
-			"type": "dropdown",
 			"style": {
 				"desktop": {
 					"border": "0"
@@ -70,48 +69,17 @@
 					"paddingLeft": "3%"
 				}
 			},
-			"content": [{
-				"heading": {
-					"text": "Shop It Now"
-				},
-				"submenu": [{
+			"content": [
+					{
 						"text": "Women",
 						"href": "/browse/category.do?cid=1132018#pageId=0&department=136&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_IMAGE"
 					},
 					{
 						"text": "Maternity",
 						"href": "/browse/category.do?cid=11437#pageId=0&department=136&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Men",
-						"href": "/browse/category.do?cid=1132025#pageId=0&department=75&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Girls",
-						"href": "/browse/category.do?cid=1127150#pageId=0&department=48&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Boys",
-						"href": "/browse/category.do?cid=1127158#pageId=0&department=16&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Toddler Girl",
-						"href": "/browse/category.do?cid=1126783#pageId=0&department=165&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Toddler Boy",
-						"href": "/browse/category.do?cid=1126790#pageId=0&department=165&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Baby Girl",
-						"href": "/browse/category.do?cid=1123664#pageId=0&department=166&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
-					},
-					{
-						"text": "Baby Boy",
-						"href": "/browse/category.do?cid=1123665#pageId=0&department=166&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_CTA"
 					}
-				]
-			}]
+				
+			]
 		}
 	}
 }
