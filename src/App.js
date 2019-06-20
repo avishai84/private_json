@@ -3,6 +3,7 @@ import './App.scss';
 import AppData from './AppData.js';
 import logo from './images/wcdLogo.png';
 import DataGeneral from './DataGeneral';
+// This is where the App get assembeld. If you use CSS frameworks you may need to import that here.
 class App extends Component {
 
   render() {
