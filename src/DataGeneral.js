@@ -30,25 +30,12 @@ class PlainJson extends Component {
       //Object.entries(this.props)
       // 
     };
-
   }
 
   render() {
-
-    //const jsonView = (this.state.jsonValue != '') ? `${this.state.jsonStringify}` : 'Nothing to show';
-    //let jsonView = JSON.stringify(this.state.jsonValue, null, 2);
-    // console.log(`value json now: ${JSON.stringify(this.state.jsonValue)}`);
-
-    //remove first open bracket and last
-    /* 
-     function s(e) {
-            Object.keys(e).forEach(a),
-            window.localStorage.setItem(l, JSON.stringify(e))
-        }
-    */
-
+    console.log();
     return (
-      <div className="rightDiv">
+      <div className="rightDiv" style={{"visibility":`${this.props.visibility}`}}>
         <Fragment>
           <label htmlFor="textarea-a--json" className="sds_field sds-js_input-control">
             <textarea disabled="disabled" id="textarea-a--json" value={ JSON.stringify(this.state.jsonValue.json, null, 2) }>
@@ -70,13 +57,13 @@ class DataGeneral extends Component {
       jsonDataRaw: jsonData,
       markup: '',
       customName: '',
-      targetName: ''
+      targetName: '',
+      visibility:'hidden'
     }
     this.parseJson = this.parseJson.bind(this);
     this.toUpdate = this.toUpdate.bind(this);
     this.createMarkup = this.createMarkup.bind(this);
     this.elemUpdatedInForm = this.elemUpdatedInForm.bind(this);
-    this.setJsonBrand = this.setJsonBrand.bind(this);
     this.focusElem = this.focusElem.bind(this);
 
   }
@@ -143,6 +130,9 @@ class DataGeneral extends Component {
       <h5>CTA links</h5>
       ${linkInputs}
     `;
+    this.setState({
+      visibility: 'visible'
+    })
     this.toUpdate(instanceHtml);
   }
   // Update the new HTML state
@@ -235,13 +225,7 @@ class DataGeneral extends Component {
     }, 2000);
   }
 
-  setJsonBrand() {
-    // selected dropdown json
-    this.setState({
-      jsonValue: json
-    })
-    alert();
-  }
+
   focusElem(e) {
     // this fn helps identify which input elem we are changing
     this.setState({
@@ -250,14 +234,14 @@ class DataGeneral extends Component {
   }
   render() {
     //changeName += `${this.state.changedDetected} ${this.state.markup}`;
-
+    console.log(this.state.jsonValue);
     return(
       <Fragment>
         <div className="DataGeneral">
           <p>JSON will show here</p>
-          <select onChange={ this.parseJson }>
+          <select onChange={this.parseJson} >
             <option defaultValue>JSON Modules</option>
-            <option onSelect={ this.setJsonBrand } value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
+            <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
           </select>
           <br/>
           <Fragment>
@@ -265,11 +249,11 @@ class DataGeneral extends Component {
                <div dangerouslySetInnerHTML={this.createMarkup()}/>
             </form>
           </Fragment>
-          <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} />
+          <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
         </div>
         <div>
           <h6>Last Change</h6> 
-          <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName}/>
+          <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
         </div>
       </Fragment>
     );
