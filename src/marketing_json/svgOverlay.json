@@ -1,0 +1,81 @@
+{
+	"instanceName": "optly-placeholder-1",
+	"instanceDesc": "051419_UNREC1",
+	"experimentRunning": true,
+	"name": "SVGOverlay",
+	"type": "sitewide",
+	"data": {
+		"lazy": false,
+		"defaultHeight": {
+			"small": "437px",
+			"large": "330px"
+		},
+		"placeholderSettings": {
+			"useGreyLoadingEffect": true,
+			"mobile": {
+				"backgroundColor": "#ccc",
+				"height": 437,
+				"margin": "0 auto 3rem",
+				"maxWidth": "100%",
+				"width": 640
+			},
+			"desktop": {
+				"backgroundColor": "#ccc",
+				"height": 550,
+				"margin": "0 auto 3rem",
+				"maxWidth": "1920px",
+				"width": "100%"
+			}
+		},
+		"containerStyle": {
+			"mobile": {
+				"margin": "0 auto 3rem",
+				"maxWidth": "640px"
+			},
+			"desktop": {
+				"margin": "2rem auto 3rem",
+				"maxWidth": "1920px",
+				"width": "100%"
+			}
+		},
+		"background": {
+			"content": {
+				"smallImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_MOB_V1.jpg",
+				"largeImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_DESK_v2.jpg",
+				"altText": "Summer Starts Now"
+			}
+		},
+		"svgoverlay": {
+			"smallImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_MOB_V1.svg",
+			"largeImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_DESK_V1.svg",
+			"altText": "In everything red, white, and new",
+			"link": {
+				"url": "/browse/category.do?cid=1132018#pageId=0&department=136&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_IMAGE"
+			}
+		},
+		"linksContainerStyle": {
+			"desktop": {
+				"left": "31.7%",
+				"padding": "0",
+				"top": "58.5%"
+			}
+		},
+		"links": {
+			"style": {
+				"desktop": {
+					"border": "0"
+				},
+				"mobile": {
+					"paddingLeft": "3%"
+				}
+			},
+			"content": [
+					{
+						"text": "Women",
+						"href": "/browse/category.do?cid=1132018#pageId=0&department=136&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_IMAGE"
+					}
+				
+			]
+		}
+	}
+}

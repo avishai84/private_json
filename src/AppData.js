@@ -5,14 +5,19 @@ class AppData extends Component {
     constructor(props){
         super(props);
         this.state = {
-            version: toolData.version
+            version: toolData
         };
     }
 
   render() {
+    console.log(this.state.version.contributers);
+    let contributor = this.state.version.contributors.map((name) => {
+      return `${name}, `;
+    });
     return (
       <div className="AppData">
-        <small>Version: {this.state.version}</small>
+        <small>Version: {this.state.version.version}</small><br/>
+        <small>WCD contributors: {contributor}</small>
       </div>
     );
   }
