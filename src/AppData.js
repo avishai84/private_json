@@ -10,7 +10,6 @@ class AppData extends Component {
     }
 
   render() {
-    console.log(this.state.version.contributers);
     let contributor = this.state.version.contributors.map((name) => {
       return `${name}, `;
     });
