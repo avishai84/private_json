@@ -1,24 +1,75 @@
+
+
+@mixin input-placeholder {
+  width: 100%;
+  padding: 5px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+@mixin label-description {
+ text-align: left;
+ width: 100%;
+}
+
 .DataGeneral{
-    display: flex;
-    flex-flow: row;
-    align-items: flex-start;
-     > *:nth-child(odd) {
-        /* outline: 2px solid red; */
-        padding: 0 1.5%;
+
+    .SelectForm{
+        display: flex;
+        flex-flow: row;
+        align-items: flex-start;
+        margin: 0 auto;
+        width: 1280px;
+         > *:nth-child(odd) {
+             /*outline: 2px solid red; */
+            padding: 0 1.5%;
+        }
+        > *:nth-child(even) {
+            /* outline: 2px solid red; */
+            padding: 0 1.5%;
+        }
     }
-    > *:nth-child(even) {
-        /* outline: 2px solid red; */
-        padding: 0 1.5%;
+    .SelectTemp{
+
     }
+    input[type=text],
+    select[type=text]
+    {
+      @include input-placeholder;
+    }
+    
+     label{
+         @include label-description;
+     }
+     h5{
+        text-align: left;
+        padding-top: 5%;
+     }
+     p{
+        display: inline-block;
+     }
+    
 }
 pre{
     color:white;
 }
 .rightDiv{
     display: flex;
+
     textarea{
-        width: 500px;
-        height: 500px;
+          margin-top: 4%;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          background-color: #f8f8f8;
+          width: 50vw;
+          height: 60vh;
     
     }
 }
+
+
