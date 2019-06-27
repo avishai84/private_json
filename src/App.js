@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import AppData from './AppData.js';
-import logo from './images/wcdLogo.png';
+import logo from './images/logo_wcd-json-builder.svg';
 import DataGeneral from './DataGeneral';
 // This is where the App get assembeld. If you use CSS frameworks you may need to import that here.
 class App extends Component {
