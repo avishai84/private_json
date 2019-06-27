@@ -11,7 +11,6 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} alt="Logo" />
-          <h2>Welcome to SEW JSON/HTML Tool</h2>
         </header>
         <main>
           <DataGeneral />
