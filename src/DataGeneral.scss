@@ -26,15 +26,77 @@
     letter-spacing: 0.025rem;
 }
 
-.DataGeneral{
+    .select-dropdown {
+          position: relative;
+          display: inline-block;
+          vertical-align: middle;
+          margin: 10px; 
+         /*border: 2px solid #00a698;*/
+
+        select {
+          /*background-color: #00a698;*/
+          /*color: #fff;*/
+          border: 2px solid #00a698;
+          font-size: inherit;
+          padding: .7em;
+          padding-right: 2.5em; 
+          border: 2px solid #00a698;
+          margin: 0;
+          border-radius: 1px;
+          text-indent: 0.01px;
+          text-overflow: '';
+          -webkit-appearance: button; /* hide default arrow in chrome OSX */
+          width: 17rem;
+          font-weight: 600;
         }
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          pointer-events: none;
+        }
+        &:after { /*  Custom dropdown arrow */
+        content: "\25BC";
+        height: 1em;
+        font-size: .9em;
+        line-height: 1;
+        right: 1.15em;
+        top: 50%;
+        margin-top: -.55em;
+        }
+
+        &:before { /*  Custom dropdown arrow cover */
+          width: 3em;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: 0 3px 3px 0;
+        }
+
+        >[disabled] {
+          color: rgba(0,0,0,.3);
+        }
+
+        >[disabled]::after {
+          color: rgba(0,0,0,.1);
+        }
+
+        &:before {
+          /*background-color: rgba(0,0,0,.15);*/
+          background-color: #00a698;
+        }
+
+        &:after {
+          /*color: rgba(0,0,0,.4);*/
+          background-color: #00a698;
+        }
+    }
 
     .SelectForm{
        display: -webkit-flex;
        display: flex;
        flex: wrap;
-
-/*       -webkit-flex-direction: column;
+/*      -webkit-flex-direction: column;
        flex-direction: column;
        -webkit-align-items: flex-start;
        align-items: flex-start;
@@ -71,9 +133,6 @@
             border-bottom: 1px solid #fff;
             padding: 1.5rem 0 0.4rem;
 
-         }
-         p{
-            display: inline-block;
          }
 
          .rightDiv{

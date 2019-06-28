@@ -239,19 +239,19 @@ class DataGeneral extends Component {
       <Fragment>
         <div className="DataGeneral">
          <div>
-         <div className="SelectTemp">
-          <p>Select template: &nbsp;</p>
-          <select  onChange={this.parseJson} >
-            <option defaultValue>JSON Modules</option>
-            <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
-          </select>
-          </div>
+         <span className="select-dropdown">
+          
+            <select onChange={this.parseJson} ><option>Select Template</option>
+              <option defaultValue>JSON Modules</option>
+              <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
+            </select>
+        </span>
          <div className="SelectForm">
           <Fragment>
-          <div className="leftDiv">
-            <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
-               <div dangerouslySetInnerHTML={this.createMarkup()}/>
-            </form>
+            <div className="leftDiv">
+              <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
+                 <div dangerouslySetInnerHTML={this.createMarkup()}/>
+              </form>
             </div>
           </Fragment>
           <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
