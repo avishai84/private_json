@@ -106,7 +106,7 @@ class DataGeneral extends Component {
         <input data-instancename='altText' name="background" id="text-input_${origJson.data.background.content.altText.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.altText} placeholder="${origJson.data.background.content.altText}" />
       </label>
       <br>
-      <label htmlFor="text-input_${origJson.data.background.content.largeImg.replace(/\s/g, '')}">Background Desktop Imgage:
+      <label htmlFor="text-input_${origJson.data.background.content.largeImg.replace(/\s/g, '')}">Background Desktop Image:
         <input data-instancename='largeImg' name="background" id="text-input_${origJson.data.background.content.largeImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.largeImg} placeholder="${origJson.data.background.content.largeImg}" />
       </label>
       <br>
@@ -123,7 +123,7 @@ class DataGeneral extends Component {
         <input data-instancename='largeImg' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.largeImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.largeImg} placeholder="${origJson.data.svgoverlay.largeImg}" />
       </label>
       <br>
-      <label htmlFor="text-input_${origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}">Svg Overlay Mobile Imgage:
+      <label htmlFor="text-input_${origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}">Svg Overlay Mobile Image:
         <input data-instancename='smallImg' name="svgoverlay" id="text-input_${origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}" type="text" value=${jsonNew.data.svgoverlay.smallImg} placeholder="${origJson.data.svgoverlay.smallImg}" />
       </label>
       <br>
