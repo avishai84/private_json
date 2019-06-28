@@ -8,7 +8,7 @@
   text-align: center;
     .App-header {
       background-color: #282c34;
-      height: 10vh;
+      height: 7vh;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap:1em;
@@ -16,7 +16,7 @@
       justify-content: center;
       margin: 0 5%;
       font-size: calc(13px + (16 - 13) * ((100vw - 768px) / (1400 - 768)));
-        img{width:20%;}
+        img{width:27%;}
         h2{
         font-size: calc(14px + (14 - 20) * ((100vw - 320px) / (320 - 1400))); padding-left: 39%;
         }

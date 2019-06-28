@@ -238,6 +238,7 @@ class DataGeneral extends Component {
     return(
       <Fragment>
         <div className="DataGeneral">
+         <div>
          <div className="SelectTemp">
           <p>Select template: &nbsp;</p>
           <select  onChange={this.parseJson} >
@@ -247,14 +248,16 @@ class DataGeneral extends Component {
           </div>
          <div className="SelectForm">
           <Fragment>
-            <form style={{ "display": "flex" }} onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
+          <div className="leftDiv">
+            <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
                <div dangerouslySetInnerHTML={this.createMarkup()}/>
             </form>
+            </div>
           </Fragment>
           <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
           </div>
         </div>
-        <div>
+       
         
           <h6>Last Change</h6> 
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
