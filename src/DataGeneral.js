@@ -240,7 +240,7 @@ class DataGeneral extends Component {
         <div className="DataGeneral">
          <div className="SelectTemp">
           <p>Select template: &nbsp;</p>
-          <select onChange={this.parseJson} >
+          <select  onChange={this.parseJson} >
             <option defaultValue>JSON Modules</option>
             <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
           </select>
