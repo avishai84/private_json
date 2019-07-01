@@ -18,7 +18,6 @@ class ImgPreview extends Component {
       const largeImg = `https://www.gol.wip.gidapps.com${this.state.img.largeImg}`;
       const href =this.props.linksText[0].href;
       const text = this.props.linksText[0].text;
-      
   
       return ( 
         <Fragment>
