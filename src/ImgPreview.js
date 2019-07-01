@@ -6,7 +6,8 @@ class ImgPreview extends Component {
         svg: this.props.svg,
         img: this.props.img,
         linksText: this.prop,
-        elemChange:this.props.elemChange
+        elemChange:this.props.elemChange,
+        jsonValue : this.props.jsonValue
       };
     }
   
@@ -18,7 +19,11 @@ class ImgPreview extends Component {
       const largeImg = `https://www.gol.wip.gidapps.com${this.state.img.largeImg}`;
       const href =this.props.linksText[0].href;
       const text = this.props.linksText[0].text;
-  
+//   console.log(this.state.img.largeImg);
+//   console.log(largeImg);
+//   console.log(this.state.img.smallImg);
+  console.log(this.state.jsonValue);
+
       return ( 
         <Fragment>
           <div className="imgPreview" style={{"visibility":`${this.props.visibility}`}}>
