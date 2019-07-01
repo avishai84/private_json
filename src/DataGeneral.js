@@ -1,9 +1,7 @@
-import React, {
-  Component,
-  Fragment
-} from 'react';
+import React, {Component, Fragment} from 'react';
 import jsonData from './marketing_json/svgOverlay.json';
 import './DataGeneral.scss';
+import ImgPreview from './ImgPreview'
 let json = JSON.parse(JSON.stringify(jsonData));
 
 class ListItem extends Component {
@@ -256,6 +254,8 @@ class DataGeneral extends Component {
           </Fragment>
           <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
         </div>
+        <ImgPreview svg={this.state.jsonValue.data.svgoverlay} img={this.state.jsonValue.data.background.content} linksText={this.state.jsonValue.data.links.content} elemChange={this.state.elem} visibility={this.state.visibility}/>
+
         <div>
           <h6>Last Change</h6> 
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
