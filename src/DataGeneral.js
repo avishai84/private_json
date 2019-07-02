@@ -69,7 +69,7 @@ class DataGeneral extends Component {
     const origJson = json;
     let jsonNew = this.state.jsonValue;
     let ctaLinksArray = origJson.data.links.content;
-
+<<<<<<< HEAD
     let linkInputs = ctaLinksArray.map((item, index) => {
       return (` <label htmlFor="text-input-ctaText_${index}">
     Text:
@@ -81,7 +81,9 @@ class DataGeneral extends Component {
     </label>`);
     });
 
+=======
     let linkInputs = '';
+>>>>>>> 955f4d12c170c40963afeca3bf591578892ad694
     let instanceHtml = '';
     
     instanceHtml = 
@@ -153,6 +155,7 @@ class DataGeneral extends Component {
       </div>;
 
 
+<<<<<<< HEAD
     instanceHtml = `
         <label htmlFor="text-input_${origJson.instanceDesc.replace(/\s/g, '')}">Instance Description:
         <input data-instancename='instanceDesc' id="text-input_${origJson.instanceDesc.replace(/\s/g, '')}" type="text" value=${jsonNew.instanceDesc} placeholder="${origJson.instanceDesc}" />
@@ -195,6 +198,8 @@ class DataGeneral extends Component {
         </select>
       </label>
     `;
+=======
+>>>>>>> 955f4d12c170c40963afeca3bf591578892ad694
     this.setState({
       visibility: 'visible'
     })
@@ -294,25 +299,42 @@ class DataGeneral extends Component {
     return(
       <Fragment>
         <div className="DataGeneral">
-           <div>
-             <span className="select-dropdown">
-                <select onChange={this.parseJson} ><option>Select Template</option>
-                  <option defaultValue>JSON Modules</option>
-                  <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
-                </select>
-            </span>
-           <div className="SelectForm">
-              <Fragment>
-                <div className="leftDiv">
-                  <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
-                     <div dangerouslySetInnerHTML={this.createMarkup()}/>
-                  </form>
-
-                </div>
-              </Fragment>
-            <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
+<<<<<<< HEAD
+         <div>
+         <span className="select-dropdown">
+          
+            <select onChange={this.parseJson} ><option>Select Template</option>
+              <option defaultValue>JSON Modules</option>
+              <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
+            </select>
+        </span>
+         <div className="SelectForm">
+          <Fragment>
+            <div className="leftDiv">
+              <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
+                 <div dangerouslySetInnerHTML={this.createMarkup()}/>
+              </form>
+=======
+          <p style={{"visibility":`${(this.state.visibility) == 'hidden' ? 'visible': 'hidden'}`}}>JSON will show here</p>
+          <select onChange={this.parseJson} >
+            <option defaultValue>JSON Modules</option>
+            <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
+          </select>
+          <br/>
+          <Fragment>
+            {/* onInput={this.elemUpdatedInForm} */}
+            <div style={{ "display": "flex" }} >  
+               <form onChange={this.elemUpdatedInForm} onKeyUp={this.focusElem}>
+                 {this.state.elem}
+               </form>
+>>>>>>> 955f4d12c170c40963afeca3bf591578892ad694
             </div>
-          </div>        
+          </Fragment>
+          <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
+          </div>
+        </div>
+       
+        
           <h6>Last Change</h6> 
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
         </div>
