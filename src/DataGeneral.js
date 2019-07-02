@@ -94,13 +94,6 @@ class DataGeneral extends Component {
         <input data-instancename='instanceDesc' id="text-input_${origJson.instanceDesc.replace(/\s/g, '')}" type="text" value=${jsonNew.instanceDesc} placeholder="${origJson.instanceDesc}" />
       </label>
       <br>
-      <label htmlFor="text-input_${origJson.experimentRunning}">Experiment Running:
-        <select data-instancename='experimentRunning' id="text-input_${origJson.experimentRunning}">
-          <option defaultValue="${jsonNew.experimentRunning}">${jsonNew.experimentRunning}</option>
-          <option value="${!jsonNew.experimentRunning}">${!jsonNew.experimentRunning}</option>
-        </select>
-      </label>
-      <br>
       <h5>Background Properties</h5>
       <label htmlFor="text-input_${origJson.data.background.content.altText.replace(/\s/g, '')}">Background Alt Text:
         <input data-instancename='altText' name="background" id="text-input_${origJson.data.background.content.altText.replace(/\s/g, '')}" type="text" value=${jsonNew.data.background.content.altText} placeholder="${origJson.data.background.content.altText}" />
@@ -129,6 +122,14 @@ class DataGeneral extends Component {
       <br>
       <h5>CTA links</h5>
       ${linkInputs}
+      <br>
+      <h5>advanced option</h5>
+      <label htmlFor="text-input_${origJson.experimentRunning}">Experiment Running:
+        <select data-instancename='experimentRunning' id="text-input_${origJson.experimentRunning}">
+          <option defaultValue="${jsonNew.experimentRunning}">${jsonNew.experimentRunning}</option>
+          <option value="${!jsonNew.experimentRunning}">${!jsonNew.experimentRunning}</option>
+        </select>
+      </label>
     `;
     this.setState({
       visibility: 'visible'
