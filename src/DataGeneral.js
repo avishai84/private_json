@@ -1,9 +1,7 @@
-import React, {
-  Component,
-  Fragment
-} from 'react';
+import React, {Component, Fragment} from 'react';
 import jsonData from './marketing_json/svgOverlay.json';
 import './DataGeneral.scss';
+import ImgPreview from './ImgPreview'
 let json = JSON.parse(JSON.stringify(jsonData));
 
 class ListItem extends Component {
@@ -85,8 +83,8 @@ class DataGeneral extends Component {
             <option defaultValue={jsonNew.experimentRunning.toString()}> 
               {jsonNew.experimentRunning.toString()}
             </option>
-            <option value={(jsonNew.experimentRunning.toString() == true) ? false: false}>
-            {(jsonNew.experimentRunning.toString() == true) ? "false": "false"}
+            <option value={(jsonNew.experimentRunning.toString() === true) ? false: false}>
+            {(jsonNew.experimentRunning.toString() === true) ? "false": "false"}
             </option>
           </select>
         </label>
@@ -163,7 +161,7 @@ class DataGeneral extends Component {
 
   // Detect change on the form
   elemUpdatedInForm(e) {
-    console.dir(e.target);
+  //  console.dir(e.target);
     this.setState({
       changedDetected: `${e.target.nodeName.toLowerCase()}`,
       markup: e.target.value,
@@ -176,7 +174,7 @@ class DataGeneral extends Component {
   makeChangesJson() {
     let deepChange = this.state.jsonValue;
 
-    setTimeout(() => {
+
       // changing json new value
       let currentChange = this.state.jsonValue[this.state.customName];
  
@@ -223,7 +221,7 @@ class DataGeneral extends Component {
       });
  
       this.parseJson();
-    }, 50);
+
   }
 
   globalOnChange(e){
@@ -236,11 +234,11 @@ class DataGeneral extends Component {
     })
   }
   render() {
-
+console.log(this.state.jsonValue.data.background.content);
     return(
       <Fragment>
         <div className="DataGeneral">
-          <p style={{"visibility":`${(this.state.visibility) == 'hidden' ? 'visible': 'hidden'}`}}>JSON will show here</p>
+          <p style={{"visibility":`${(this.state.visibility) === 'hidden' ? 'visible': 'hidden'}`}}>JSON will show here</p>
           <select onChange={this.parseJson} >
             <option defaultValue>JSON Modules</option>
             <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
@@ -249,13 +247,18 @@ class DataGeneral extends Component {
           <Fragment>
             {/* onInput={this.elemUpdatedInForm} */}
             <div style={{ "display": "flex" }} >  
-               <form onChange={this.elemUpdatedInForm} onKeyUp={this.focusElem}>
-                 {this.state.elem}
+               <form 
+               onChange={this.elemUpdatedInForm} 
+               onKeyUp={this.focusElem}
+               onBlur={this.focusElem}>
+                {this.state.elem}
                </form>
             </div>
           </Fragment>
           <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
         </div>
+        <ImgPreview svg={this.state.jsonValue.data.svgoverlay} img={this.state.jsonValue.data.background.content} linksText={this.state.jsonValue.data.links.content} elemChange={this.state.elem} visibility={this.state.visibility} jsonValue={this.state.jsonValue}/>
+
         <div>
           <h6>Last Change</h6> 
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />

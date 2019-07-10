@@ -22,3 +22,20 @@ pre{
     
     }
 }
+.imgPreview{
+    outline:2px solid white;
+    padding:1%;
+    position:relative;
+    img{
+    width:100%;
+    }
+    a{outline:2px solid rgb(6, 208, 194);
+        padding:1em;
+        &:hover{
+            cursor:move
+        }
+    }
+    .leftTop{left:0;top:0;width:100%;}
+    .absolute{position:absolute;}
+    .mkt-image{margin:0 auto; width:100%;display:block;}
+}
