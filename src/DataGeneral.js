@@ -142,8 +142,7 @@ class DataGeneral extends Component {
   }
 
   // Detect change on the form
-  elemUpdatedInForm = (e, prevState) => {
-  console.dir(e.target, prevState);
+  elemUpdatedInForm = (e) => {
     this.setState({
       changedDetected: `${e.target.nodeName.toLowerCase()}`,
       markup: e.target.value,
@@ -155,8 +154,6 @@ class DataGeneral extends Component {
   makeChangesJson() {
       // changing json new value
       let currentChange = this.state.jsonValue[this.state.customName];
- 
-      console.dir('makeChangesJson currentChange '+ currentChange);
       //console.log(this.state.customName);
       if (this.state.customName === 'experimentRunning') {
         currentChange = currentChange ? (this.state.jsonValue[this.state.customName] = false) : (this.state.jsonValue[this.state.customName] = true);
@@ -194,13 +191,10 @@ class DataGeneral extends Component {
         });
 
       }
-
       this.setState({
         jsonValue: this.state.jsonValue
       });
- 
       this.parseJson();
-
   }
 
   globalOnChange(e){
@@ -214,7 +208,7 @@ class DataGeneral extends Component {
     })
   }
   render() {
-console.log(this.state.jsonValue);
+
     return(
       <Fragment>
         <div className="DataGeneral">
