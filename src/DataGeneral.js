@@ -69,7 +69,7 @@ class DataGeneral extends Component {
     let ctaLinksArray = origJson.data.links.content;
     let linkInputs = ctaLinksArray.map((item, index) => {
       return (
-      <div>`<label key={"key_"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" value={item.text}/></label><label key={"key__"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" value={item.href} /></label>`</div>);
+      <div>`<label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label>`</div>);
     });
 
 
@@ -114,9 +114,8 @@ class DataGeneral extends Component {
           <option defaultValue={jsonNew.experimentRunning.toString()}> 
             {jsonNew.experimentRunning.toString()}
           </option>
-          <option value={(jsonNew.experimentRunning.toString() === true) ? false: true}>
-          {this.state.jsonValue.experimentRunning.toString()}
-          
+          <option value={(jsonNew.experimentRunning === true) ? 'true': 'false'}>
+          {(jsonNew.experimentRunning === true) ? 'false': 'true'}
           </option>
         </select>
       </label></div>;
