@@ -67,76 +67,59 @@ class DataGeneral extends Component {
     const origJson = json;
     let jsonNew = this.state.jsonValue;
     let ctaLinksArray = origJson.data.links.content;
-    let linkInputs = '';
-    let instanceHtml = '';
-    
-    instanceHtml = 
+    let linkInputs = ctaLinksArray.map((item, index) => {
+      return (
+      <div>`<label key={"key_"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" value={item.text}/></label><label key={"key__"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" value={item.href} /></label>`</div>);
+    });
+
+
+    let instanceHtml = 
       <div>
-        <label htmlFor={origJson.instanceDesc.replace(/\s/g, '')}>
-          instance Desc:
+        <label htmlFor={origJson.instanceDesc.replace(/\s/g, '')}>Instance Description:
           <input data-instancename='instanceDesc' id={origJson.instanceDesc.replace(/\s/g, '')} type="text" placeholder={origJson.instanceDesc} defaultValue={origJson.instanceDesc}/>
         </label>
-
-        <label htmlFor="__experimentRunning">
-        experimentRunning:
-          <select data-instancename='experimentRunning' id="__experimentRunning">
-            <option defaultValue={jsonNew.experimentRunning.toString()}> 
-              {jsonNew.experimentRunning.toString()}
-            </option>
-            <option value={(jsonNew.experimentRunning.toString() === true) ? false: false}>
-            {(jsonNew.experimentRunning.toString() === true) ? "false": "false"}
-            </option>
-          </select>
-        </label>
-
-        <h5>background properties</h5>
-        <label htmlFor={origJson.data.background.content.altText.replace(/\s/g, '')}>
-          background altText:
+        <br/>
+        <h5>Background Properties</h5>
+        <label htmlFor={origJson.data.background.content.altText.replace(/\s/g, '')}>Background Alt Text:
         <input data-instancename='altText' name="background" id={origJson.data.background.content.altText.replace(/\s/g, '')} type="text" defaultValue={origJson.data.background.content.altText} placeholder={origJson.data.background.content.altText} />
         </label>
-
-        <label htmlFor={origJson.data.background.content.largeImg.replace(/\s/g, '')}>
-            background largeImg:
+        <br/>
+        <label htmlFor={origJson.data.background.content.largeImg.replace(/\s/g, '')}>Background Desktop Image:
           <input data-instancename='largeImg' name="background" id={origJson.data.background.content.largeImg.replace(/\s/g, '')} type="text" defaultValue={origJson.data.background.content.largeImg} placeholder={origJson.data.background.content.largeImg} />
         </label>
-
-        <label htmlFor={origJson.data.background.content.smallImg.replace(/\s/g, '')}>
-          background smallImg:
+        <br/>
+        <label htmlFor={origJson.data.background.content.smallImg.replace(/\s/g, '')}>Background Mobile Image:
         <input data-instancename='smallImg' name="background" id={origJson.data.background.content.smallImg.replace(/\s/g, '')} type="text" defaultValue={origJson.data.background.content.smallImg} placeholder={origJson.data.background.content.smallImg} />
         </label>
-
-        <h5>svgoverlay properties</h5>
-        <label htmlFor={origJson.data.svgoverlay.altText.replace(/\s/g, '')}>
-          svgoverlay altText:
+        <br/>
+        <h5>SVG Overlay Properties</h5>
+        <label htmlFor={origJson.data.svgoverlay.altText.replace(/\s/g, '')}>Svg Overlay Alt Text:
            <input data-instancename='altText' name="svgoverlay" id={origJson.data.svgoverlay.altText.replace(/\s/g, '')} type="text" defaultValue={origJson.data.svgoverlay.altText} placeholder={origJson.data.svgoverlay.altText} />
         </label>
-
-        <label htmlFor={origJson.data.svgoverlay.largeImg.replace(/\s/g, '')}>
-          svgoverlay largeImg:
-          <input data-instancename='largeImg' name="svgoverlay" id={origJson.data.svgoverlay.largeImg.replace(/\s/g, '')} type="text" defaultValue={jsonNew.data.svgoverlay.largeImg} placeholder={origJson.data.svgoverlay.largeImg} />
+        <br/>
+        <label htmlFor={origJson.data.svgoverlay.largeImg.replace(/\s/g, '')}>Svg Overlay Desktop Image:
+          <input data-instancename='largeImg' name="svgoverlay" id={origJson.data.svgoverlay.largeImg.replace(/\s/g, '')} type="text" defaultValue={origJson.data.svgoverlay.largeImg} placeholder={origJson.data.svgoverlay.largeImg} />
         </label>
-
-        <label htmlFor={origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}>
-          svgoverlay smallImg:
-         <input data-instancename='smallImg' name="svgoverlay" id={origJson.data.svgoverlay.smallImg.replace(/\s/g, '')} type="text" defaultValue={jsonNew.data.svgoverlay.smallImg} placeholder={origJson.data.svgoverlay.smallImg} />
-       </label>
-
-       <h5>CTA links</h5>
-
-      {linkInputs = ctaLinksArray.map((item, index) => {
-        return (
-        <div key={`__wrp_text${index}`}>
-            <label key={`__key_text${index}`} htmlFor={`__text${index}`}>Text:
-            <input data-instancename="text" id={`__text${index}`} name="text" placeholder={item.text} defaultValue={item.text} onFocus={this.elemUpdatedInForm}/>
-            </label>
-            <label key={`__key_href${index}`} htmlFor={`__href${index}`}>href:
-            <input data-instancename="href" id={`__href${index}`} name="href" placeholder={item.href} defaultValue={item.href} onFocus={this.elemUpdatedInForm}/>
-            </label>
-        </div>
-        );
-      })}
-     
-      </div>;
+        <br/>
+        <label htmlFor={origJson.data.svgoverlay.smallImg.replace(/\s/g, '')}>Svg Overlay Mobile Image:
+          <input data-instancename='smallImg' name="svgoverlay" id={origJson.data.svgoverlay.smallImg.replace(/\s/g, '')} type="text" defaultValue={origJson.data.svgoverlay.smallImg} placeholder={origJson.data.svgoverlay.smallImg} />
+        </label>
+        <br/>
+        <h5>CTA links</h5>
+        {linkInputs}
+        <br/>
+        <h5>Advanced Option</h5>
+        <label htmlFor="__experimentRunning">Experiment Running:
+        <select data-instancename='experimentRunning' id="__experimentRunning">
+          <option defaultValue={jsonNew.experimentRunning.toString()}> 
+            {jsonNew.experimentRunning.toString()}
+          </option>
+          <option value={(jsonNew.experimentRunning.toString() === true) ? false: true}>
+          {this.state.jsonValue.experimentRunning.toString()}
+          
+          </option>
+        </select>
+      </label></div>;
 
 
     this.setState({
@@ -209,7 +192,7 @@ class DataGeneral extends Component {
         });
       }
       if (this.state.customName === 'text') {
-        console.log(this.state.customName);
+        //console.log(this.state.customName);
         deepChange.data.links.content.map((element, index) => {
          return element[this.state.customName]= this.state.markup;
         });
@@ -229,6 +212,7 @@ class DataGeneral extends Component {
   }
   focusElem(e) {
     // this fn helps identify which input elem we are changing
+   
     this.setState({
       targetName: e.target.name
     })
@@ -238,28 +222,32 @@ console.log(this.state.jsonValue.data.background.content);
     return(
       <Fragment>
         <div className="DataGeneral">
-          <p style={{"visibility":`${(this.state.visibility) === 'hidden' ? 'visible': 'hidden'}`}}>JSON will show here</p>
-          <select onChange={this.parseJson} >
-            <option defaultValue>JSON Modules</option>
-            <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
-          </select>
-          <br/>
-          <Fragment>
-            {/* onInput={this.elemUpdatedInForm} */}
-            <div style={{ "display": "flex" }} >  
-               <form 
+         
+          <span className="select-dropdown">
+            
+              <select onChange={this.parseJson} ><option>Select Template</option>
+                <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
+              </select>
+          </span>
+          <div className="SelectForm">
+            <Fragment>
+              <div className="leftDiv">
+              <form 
                onChange={this.elemUpdatedInForm} 
                onKeyUp={this.focusElem}
-               onBlur={this.focusElem}>
+               onClick={this.focusElem}>
                 {this.state.elem}
                </form>
+                {/* <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
+                  <div dangerouslySetInnerHTML={this.createMarkup()}/>
+                </form> */}
+              </div>
+            </Fragment>
+            <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
             </div>
-          </Fragment>
-          <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
-        </div>
-        <ImgPreview svg={this.state.jsonValue.data.svgoverlay} img={this.state.jsonValue.data.background.content} linksText={this.state.jsonValue.data.links.content} elemChange={this.state.elem} visibility={this.state.visibility} jsonValue={this.state.jsonValue}/>
-
-        <div>
+          </div>
+          <div>
+        
           <h6>Last Change</h6> 
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
         </div>
