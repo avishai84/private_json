@@ -111,11 +111,11 @@ class DataGeneral extends Component {
         <h5>Advanced Option</h5>
         <label htmlFor="__experimentRunning">Experiment Running:
         <select data-instancename='experimentRunning' id="__experimentRunning">
-          <option defaultValue={jsonNew.experimentRunning.toString()}> 
-            {jsonNew.experimentRunning.toString()}
+          <option defaultValue={this.state.jsonValue.experimentRunning.toString()}> 
+            {this.state.jsonValue.experimentRunning.toString()}
           </option>
-          <option value={(jsonNew.experimentRunning === true) ? 'true': 'false'}>
-          {(jsonNew.experimentRunning === true) ? 'false': 'true'}
+          <option defaultValue={(this.state.jsonValue.experimentRunning !== true) ? 'true': 'false'}>
+          {(this.state.jsonValue.experimentRunning !== true) ? 'true': 'false'}
           </option>
         </select>
       </label></div>;
