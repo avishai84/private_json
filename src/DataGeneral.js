@@ -234,10 +234,12 @@ console.log(this.state.jsonValue.data.background.content);
               <form 
                onChange={this.elemUpdatedInForm} 
                onKeyUp={this.focusElem}
-               onClick={this.focusElem}>
+               onBlur={this.focusElem}
+               onClick={this.elemUpdatedInForm} >
                 {this.state.elem}
+                
                </form>
-                {/* <form  onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
+                {/* <form onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
                   <div dangerouslySetInnerHTML={this.createMarkup()}/>
                 </form> */}
               </div>
