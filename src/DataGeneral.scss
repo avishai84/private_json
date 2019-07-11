@@ -138,7 +138,10 @@
       flex: 1 0 0;*/
       flex-basis: 40%;
       /* width: calc(33.3333% - 15px);*/
-
+      label.sds_field.sds-js_input-control{
+          position: sticky;
+          top: 120px;  
+      }
         textarea{
           margin-top: 4%;
           padding: 12px 20px;
@@ -148,6 +151,7 @@
           background-color: #f8f8f8; 
           width: 32rem;
           height: 34rem;   
+
         }
     }
 

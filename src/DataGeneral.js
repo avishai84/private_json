@@ -69,7 +69,7 @@ class DataGeneral extends Component {
     let ctaLinksArray = origJson.data.links.content;
     let linkInputs = ctaLinksArray.map((item, index) => {
       return (
-      <div>`<label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label>`</div>);
+      <div key={index}>`<label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label>`</div>);
     });
 
 
@@ -142,24 +142,21 @@ class DataGeneral extends Component {
   }
 
   // Detect change on the form
-  elemUpdatedInForm(e) {
-  //  console.dir(e.target);
+  elemUpdatedInForm = (e, prevState) => {
+  console.dir(e.target, prevState);
     this.setState({
       changedDetected: `${e.target.nodeName.toLowerCase()}`,
       markup: e.target.value,
       customName: e.target.dataset.instancename
-    });
-
-    // write changes to json
-    this.makeChangesJson();
+    }, () => { this.makeChangesJson() });
+   // write changes to json
+   // https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
   }
   makeChangesJson() {
-    let deepChange = this.state.jsonValue;
-
-
       // changing json new value
       let currentChange = this.state.jsonValue[this.state.customName];
  
+      console.dir('makeChangesJson currentChange '+ currentChange);
       //console.log(this.state.customName);
       if (this.state.customName === 'experimentRunning') {
         currentChange = currentChange ? (this.state.jsonValue[this.state.customName] = false) : (this.state.jsonValue[this.state.customName] = true);
@@ -179,20 +176,20 @@ class DataGeneral extends Component {
       // svgoverlay Image, SVG, Alt
       if (this.state.targetName === 'svgoverlay') {
         
-        if (deepChange.data.svgoverlay[this.state.customName]) {
+        if (this.state.jsonValue.data.svgoverlay[this.state.customName]) {
           this.state.jsonValue.data.svgoverlay[this.state.customName] = this.state.markup;
         }
 
       }
       // links - CTA
       if (this.state.customName === 'href') {
-        deepChange.data.links.content.map((element, index) => {
+        this.state.jsonValue.data.links.content.map((element, index) => {
           return element[this.state.customName]= this.state.markup;
         });
       }
       if (this.state.customName === 'text') {
         //console.log(this.state.customName);
-        deepChange.data.links.content.map((element, index) => {
+        this.state.jsonValue.data.links.content.map((element, index) => {
          return element[this.state.customName]= this.state.markup;
         });
 
@@ -217,14 +214,14 @@ class DataGeneral extends Component {
     })
   }
   render() {
-console.log(this.state.jsonValue.data.background.content);
+console.log(this.state.jsonValue);
     return(
       <Fragment>
         <div className="DataGeneral">
          
           <span className="select-dropdown">
             
-              <select onChange={this.parseJson} ><option>Select Template</option>
+              <select onChange={this.parseJson}><option>Select Template</option>
                 <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
               </select>
           </span>
@@ -235,13 +232,9 @@ console.log(this.state.jsonValue.data.background.content);
                onChange={this.elemUpdatedInForm} 
                onKeyUp={this.focusElem}
                onBlur={this.focusElem}
-               onClick={this.elemUpdatedInForm} >
+               onClick={this.focusElem}>
                 {this.state.elem}
-                
                </form>
-                {/* <form onInput={this.elemUpdatedInForm} onKeyDown={this.focusElem}>
-                  <div dangerouslySetInnerHTML={this.createMarkup()}/>
-                </form> */}
               </div>
             </Fragment>
             <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
