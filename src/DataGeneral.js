@@ -163,21 +163,16 @@ class DataGeneral extends Component {
         this.state.jsonValue[this.state.customName] = this.state.markup;
         //console.log(`3: ${currentChange}`);
       }
-      // Background Image, Alt
-     
+
       if (this.state.targetName === 'background') {
-        if (this.state.jsonValue.data.background.content[this.state.customName]) {
-          this.state.jsonValue.data.background.content[this.state.customName] = this.state.markup;
-        }
+         this.state.jsonValue.data.background.content[this.state.customName] = this.state.markup;
       }
+
       // svgoverlay Image, SVG, Alt
       if (this.state.targetName === 'svgoverlay') {
-        
-        if (this.state.jsonValue.data.svgoverlay[this.state.customName]) {
           this.state.jsonValue.data.svgoverlay[this.state.customName] = this.state.markup;
         }
 
-      }
       // links - CTA
       if (this.state.customName === 'href') {
         this.state.jsonValue.data.links.content.map((element, index) => {
@@ -197,12 +192,8 @@ class DataGeneral extends Component {
       this.parseJson();
   }
 
-  globalOnChange(e){
-    console.log(e.target.value);
-  }
   focusElem(e) {
     // this fn helps identify which input elem we are changing
-   
     this.setState({
       targetName: e.target.name
     })
