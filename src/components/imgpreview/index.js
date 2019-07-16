@@ -1,4 +1,5 @@
 import React, { Component, Fragment} from 'react';
+
 class ImgPreview extends Component {
     constructor(props){
       super(props);
@@ -10,8 +11,8 @@ class ImgPreview extends Component {
         jsonValue : this.props.jsonValue
       };
     }
-  
-  
+
+
     render() {
       const smallSvg = `https://www.gol.wip.gidapps.com${this.state.svg.smallImg}`;
       const largeSvg = `https://www.gol.wip.gidapps.com${this.state.svg.largeImg}`;
@@ -24,7 +25,7 @@ class ImgPreview extends Component {
 //   console.log(this.state.img.smallImg);
   console.log(this.state.jsonValue);
 
-      return ( 
+      return (
         <Fragment>
           <div className="imgPreview" style={{"visibility":`${this.props.visibility}`}}>
             <div className="mkt-image">
@@ -38,10 +39,10 @@ class ImgPreview extends Component {
                   <source media="(max-width: 767px)" srcSet={smallSvg}/>
                   <img src={largeSvg} alt={this.state.svg.altText}/>
                 </picture>
-              </div>  
+              </div>
              </div>
           </Fragment>
-  
+
         );
       }
   }

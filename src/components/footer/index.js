@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import toolData from './toolData.json'
+import toolData from '../../toolData.json'
 
-class AppData extends Component {
+class Footer extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,4 +22,4 @@ class AppData extends Component {
   }
 }
 
-export default AppData;
+export default Footer;
