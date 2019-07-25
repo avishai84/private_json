@@ -1,24 +1,163 @@
+@mixin input-placeholder {
+    width: 100%;
+    padding: 5px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #000;
+    font-size: 1.0625rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin label-description {
+     text-align: left;
+     width: 100%;
+     text-transform: uppercase;
+     font-size: 0.6875rem;
+     cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+    font-weight: 550;
+    letter-spacing: 0.025rem;
+}
 .DataGeneral{
-    display: flex;
-    flex-flow: row;
-    align-items: flex-start;
-     > *:nth-child(odd) {
-        /* outline: 2px solid red; */
-        padding: 0 1.5%;
+    .select-dropdown {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 10px; 
+    /*border: 2px solid #00a698;*/
+
+    select {
+      /*background-color: #00a698;*/
+      /*color: #fff;*/
+      border: 2px solid #00a698;
+      font-size: inherit;
+      padding: .5em;
+      padding-right: 2.5em; 
+      border: 2px solid #00a698;
+      margin: 0;
+      border-radius: 1px;
+      text-indent: 0.01px;
+      text-overflow: '';
+      -webkit-appearance: button; /* hide default arrow in chrome OSX */
+      width: 17rem;
+      font-weight: 600;
     }
-    > *:nth-child(even) {
-        /* outline: 2px solid red; */
-        padding: 0 1.5%;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
     }
-}
-pre{
-    color:white;
-}
-.rightDiv{
-    display: flex;
-    textarea{
-        width: 500px;
-        height: 500px;
-    
+    &:after { /*  Custom dropdown arrow */
+    content: "\25BC";
+    height: 1em;
+    font-size: .9em;
+    line-height: 1;
+    right: 1.15em;
+    top: 50%;
+    margin-top: -.55em;
     }
+
+    &:before { /*  Custom dropdown arrow cover */
+      width: 3em;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: 0 3px 3px 0;
+    }
+
+    >[disabled] {
+      color: rgba(0,0,0,.3);
+    }
+
+    >[disabled]::after {
+      color: rgba(0,0,0,.1);
+    }
+
+    &:before {
+      /*background-color: rgba(0,0,0,.15);*/
+      background-color: #00a698;
+    }
+
+    &:after {
+      /*color: rgba(0,0,0,.4);*/
+      background-color: #00a698;
+    }
+    }
+
+    .SelectForm{
+      display: -webkit-flex;
+      display: flex;
+      flex: wrap;
+      /*      -webkit-flex-direction: column;
+      flex-direction: column;
+      -webkit-align-items: flex-start;
+      align-items: flex-start;
+      justify-content: flex-start;*/
+        margin: 0 auto;
+        width: 1280px;
+
+    .leftDiv{
+      /* width: calc(70% - 15px);*/
+        flex-basis: 60%;
+      /* -webkit-flex: 2 0 0;
+      flex: 2 0 0;*/
+      padding-right: 4%;
+
+    }
+
+    input[type=text],
+    select[type=text]
+    {
+      @include input-placeholder;
+    }
+
+    label{
+        @include label-description;
+    }
+    h5{
+        text-align: left;
+        top: 0.375rem;
+        text-transform: none;
+        font-size: 1.0625rem;
+        color: #fff;
+        cursor: text;
+        font-family: "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+        border-bottom: 1px solid #fff;
+        padding: 1.5rem 0 0.4rem;
+
+    }
+
+    .rightDiv {
+  /*           -webkit-flex: 1 0 0;
+      flex: 1 0 0;*/
+      flex-basis: 40%;
+      /* width: calc(33.3333% - 15px);*/
+      label.sds_field.sds-js_input-control{
+          position: sticky;
+          top: 120px;  
+      }
+        textarea{
+          margin-top: 4%;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          background-color: #f8f8f8; 
+          width: 32rem;
+          height: 34rem;   
+
+        }
+    }
+
+  }
 }
+
+
+
+
