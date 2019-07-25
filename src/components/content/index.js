@@ -1,49 +1,11 @@
 import React, {Component, Fragment} from 'react';
-import jsonData from './marketing_json/svgOverlay.json';
-import './DataGeneral.scss';
-import ImgPreview from './ImgPreview'
+import jsonData from '../../marketing_json/svgOverlay.json';
+import ImgPreview from '../imgpreview'
+import ListItem from '../listitem';
+import PlainJson from '../plainjson';
 let json = JSON.parse(JSON.stringify(jsonData));
 
-class ListItem extends Component {
-  render() {
-    return ( 
-      <Fragment>
-	      <small style={{ "fontSize": "12px", "color": "orange" }}>{this.props.customName} {this.props.name}</small>&nbsp;
-			  <small style={{ "fontSize": "12px", "color": "red" }}>{this.props.list}</small>
-			</Fragment>
-    );
-  }
-}
-class PlainJson extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      json: this.props,
-      changedDetected: this.props,
-      markup: this.props,
-      jsonValue: this.props,
-      jsonStringify: JSON.stringify(this.jsonValue, null, 2),
-      clicked: '',
-      customName:this.props
-    };
-  }
-
-  render() {
-
-    return (
-      <div className="rightDiv" style={{"visibility":`${this.props.visibility}`}}>
-        <Fragment>
-          <label htmlFor="textarea-a--json" className="sds_field sds-js_input-control">
-            <textarea disabled="disabled" id="textarea-a--json" value={ JSON.stringify(this.state.jsonValue.json, null, 2) }>
-            </textarea>
-          </label>
-        </Fragment>
-      </div>
-    );
-  }
-};
-
-class DataGeneral extends Component {
+class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,7 +35,7 @@ class DataGeneral extends Component {
     });
 
 
-    let instanceHtml = 
+    let instanceHtml =
       <div>
         <label htmlFor={origJson.instanceDesc.replace(/\s/g, '')}>Instance Description:
           <input data-instancename='instanceDesc' id={origJson.instanceDesc.replace(/\s/g, '')} type="text" placeholder={origJson.instanceDesc} defaultValue={origJson.instanceDesc}/>
@@ -111,7 +73,7 @@ class DataGeneral extends Component {
         <h5>Advanced Option</h5>
         <label htmlFor="__experimentRunning">Experiment Running:
         <select data-instancename='experimentRunning' id="__experimentRunning">
-          <option defaultValue={this.state.jsonValue.experimentRunning.toString()}> 
+          <option defaultValue={this.state.jsonValue.experimentRunning.toString()}>
             {this.state.jsonValue.experimentRunning.toString()}
           </option>
           <option defaultValue={(this.state.jsonValue.experimentRunning !== true) ? 'true': 'false'}>
@@ -203,9 +165,9 @@ class DataGeneral extends Component {
     return(
       <Fragment>
         <div className="DataGeneral">
-         
+
           <span className="select-dropdown">
-            
+
               <select onChange={this.parseJson}><option>Select Template</option>
                 <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
               </select>
@@ -213,8 +175,8 @@ class DataGeneral extends Component {
           <div className="SelectForm">
             <Fragment>
               <div className="leftDiv">
-              <form 
-               onChange={this.elemUpdatedInForm} 
+              <form
+               onChange={this.elemUpdatedInForm}
                onKeyUp={this.focusElem}
                onBlur={this.focusElem}
                onClick={this.focusElem}>
@@ -226,8 +188,8 @@ class DataGeneral extends Component {
             </div>
           </div>
           <div>
-        
-          <h6>Last Change</h6> 
+
+          <h6>Last Change</h6>
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
         </div>
       </Fragment>
@@ -236,4 +198,4 @@ class DataGeneral extends Component {
   }
 }
 
-export default DataGeneral;
+export default Content;

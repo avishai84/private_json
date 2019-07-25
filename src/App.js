@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.scss';
-import AppData from './AppData.js';
 import logo from './images/logo_wcd-json-builder.svg';
-import DataGeneral from './DataGeneral';
+
+import Footer from './components/footer';
+import Content from './components/content';
+
 // This is where the App get assembeld. If you use CSS frameworks you may need to import that here.
 class App extends Component {
 
@@ -13,10 +14,10 @@ class App extends Component {
           <img src={logo} alt="Logo" />
         </header>
         <main>
-          <DataGeneral />
+          <Content />
         </main>
         <footer>
-         <AppData/>
+         <Footer/>
         </footer>
       </div>
     );
