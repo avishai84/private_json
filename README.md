@@ -29,7 +29,7 @@ npm start
 ```
 You Should see something like this:
 <p align="center">
-  <img alt="welcome screen" src="https://myfolio.gap.com/personal/ataashu_gap_com/Documents/images/welcome.png">
+  <img alt="welcome screen" src="https://live.staticflickr.com/65535/48375676442_6f144791c3_b.jpg">
 </p>
 
 ### Contributing [Documentation in progress]
