@@ -1,5 +1,5 @@
 import React, { Component, Fragment} from 'react';
-
+import SliderToggle from './SliderToggle';
 class ImgPreview extends Component {
     constructor(props){
       super(props);
@@ -7,14 +7,15 @@ class ImgPreview extends Component {
         imgData: this.props.imgData,
         linksText: this.prop,
         elemChange:this.props.elemChange,
-        jsonValue : this.props.jsonValue
+        jsonValue : this.props.jsonValue,
+        isChecked : this.props
       };
     }
 
 
     render() {
-      console.log(this.props);
-      console.log(this.state.imgData);
+      // console.log(this.props);
+      console.log(this.state.isChecked);
       const renderImg = () => {
         console.log('rendered');
       };
@@ -27,24 +28,27 @@ class ImgPreview extends Component {
 //   console.log(this.state.img.largeImg);
 //   console.log(largeImg);
 //   console.log(this.state.img.smallImg);
-renderImg();
+  renderImg();
 
       return (
         <Fragment>
-          <div className="imgPreview" style={{"visibility":`${this.props.visibility}`}}>
-            <div className="mkt-image">
-              <picture>
-                <source media="(max-width:767px)" srcSet={smallImg} />
-                  <img alt={this.state.imgData.data.background.altText} src={largeImg}/>
-                </picture>
-              </div>
-              <div className="absolute leftTop">
+          <div style={{"visibility":`${this.props.visibility}`}}>
+            <SliderToggle />
+            <div className="imgPreview" >
+              <div className="mkt-image">
                 <picture>
-                  <source media="(max-width: 767px)" srcSet={smallSvg}/>
-                  <img src={largeSvg} alt={this.state.imgData.data.svgoverlay.altText}/>
-                </picture>
+                  <source media="(max-width:767px)" srcSet={smallImg} />
+                    <img alt={this.state.imgData.data.background.altText} src={largeImg}/>
+                  </picture>
+                </div>
+                <div className="absolute leftTop">
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet={smallSvg}/>
+                    <img src={largeSvg} alt={this.state.imgData.data.svgoverlay.altText}/>
+                  </picture>
+                </div>
               </div>
-             </div>
+            </div>
           </Fragment>
 
         );
