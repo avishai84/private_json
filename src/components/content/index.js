@@ -159,6 +159,7 @@ class Content extends Component {
     this.setState({
       targetName: e.target.name
     })
+    console.log('BLUR '+ this.state.targetName);
   }
   render() {
 
@@ -184,11 +185,15 @@ class Content extends Component {
                </form>
               </div>
             </Fragment>
-            <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
+           <Fragment >
+            <div className="rightDiv">
+              <ImgPreview svg={this.state.jsonValue} img={this.state.jsonValue} visibility={this.state.visibility}/>
+              <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
             </div>
+           </Fragment> 
           </div>
-          <div>
-
+        </div>
+        <div>
           <h6>Last Change</h6>
           <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
         </div>

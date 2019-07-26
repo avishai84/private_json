@@ -14,16 +14,17 @@ class ImgPreview extends Component {
 
 
     render() {
+      console.log(this.props);
       const smallSvg = `https://www.gol.wip.gidapps.com${this.state.svg.smallImg}`;
       const largeSvg = `https://www.gol.wip.gidapps.com${this.state.svg.largeImg}`;
       const smallImg = `https://www.gol.wip.gidapps.com${this.state.img.smallImg}`;
       const largeImg = `https://www.gol.wip.gidapps.com${this.state.img.largeImg}`;
-      const href =this.props.linksText[0].href;
-      const text = this.props.linksText[0].text;
+      // const href = this.props.img.data.linksText[0].href;
+      // const text = this.props.img.linksText[0].text;
 //   console.log(this.state.img.largeImg);
 //   console.log(largeImg);
 //   console.log(this.state.img.smallImg);
-  console.log(this.state.jsonValue);
+
 
       return (
         <Fragment>

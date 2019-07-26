@@ -143,12 +143,37 @@
 
       .leftDiv{
         /* width: calc(70% - 15px);*/
-          flex-basis: 60%;
+          flex-basis: 50%;
         /* -webkit-flex: 2 0 0;
         flex: 2 0 0;*/
         padding-right: 4%;
 
       }
+      .rightDiv {
+        flex-basis: 50%;
+        /* width: calc(33.3333% - 15px);*/
+        label.sds_field.sds-js_input-control{
+            position: sticky;
+            top: 120px;
+        }
+          textarea{
+            margin-top: 4%;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            width: 32rem;
+            height: 34rem;
+            }
+      
+            .imgPreview{
+              margin-top:4%;
+              position: sticky;
+              top: 10px;
+              outline:2px solid orange;
+          }
+        }
 
       input[type=text],
       select[type=text]
@@ -170,29 +195,6 @@
           border-bottom: 1px solid #fff;
           padding: 1.5rem 0 0.4rem;
 
-      }
-
-      .rightDiv {
-    /*           -webkit-flex: 1 0 0;
-        flex: 1 0 0;*/
-        flex-basis: 40%;
-        /* width: calc(33.3333% - 15px);*/
-        label.sds_field.sds-js_input-control{
-            position: sticky;
-            top: 120px;
-        }
-          textarea{
-            margin-top: 4%;
-            padding: 12px 20px;
-            box-sizing: border-box;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            background-color: #f8f8f8;
-            width: 32rem;
-            height: 34rem;
-
           }
       }
-
-    }
   }
