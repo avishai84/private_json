@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import brand from '../../marketing_json/brands.json';
 import jsonData from '../../marketing_json/svgOverlay.json';
 import ImgPreview from '../imgpreview'
 import ListItem from '../listitem';
@@ -16,7 +17,8 @@ class Content extends Component {
       markup: '',
       customName: '',
       targetName: '',
-      visibility:'hidden'
+      visibility:'hidden',
+      brand: brand
     }
     this.parseJson = this.parseJson.bind(this);
     this.toUpdate = this.toUpdate.bind(this);
@@ -166,9 +168,15 @@ class Content extends Component {
     return(
       <Fragment>
         <div className="DataGeneral">
-
+        <span className="select-dropdown">
+              <select>
+                <option>Select Brand</option>
+                {Object.keys(this.state.brand.brand[0]).map((name, index) => {
+                  return <option key={index} value={name}>{name}</option>;
+                })}
+              </select>
+          </span>
           <span className="select-dropdown">
-
               <select onChange={this.parseJson}><option>Select Template</option>
                 <option value={this.state.jsonValue.name}>{this.state.jsonValue.name}</option>
               </select>
@@ -187,7 +195,7 @@ class Content extends Component {
             </Fragment>
            <Fragment >
             <div className="rightDiv">
-              <ImgPreview svg={this.state.jsonValue} img={this.state.jsonValue} visibility={this.state.visibility}/>
+              <ImgPreview imgData={this.state.jsonValue} visibility={this.state.visibility}/>
               <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
             </div>
            </Fragment> 
