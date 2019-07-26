@@ -4,6 +4,7 @@ import jsonData from '../../marketing_json/svgOverlay.json';
 import ImgPreview from '../imgpreview'
 import ListItem from '../listitem';
 import PlainJson from '../plainjson';
+
 let json = JSON.parse(JSON.stringify(jsonData));
 
 class Content extends Component {
@@ -18,13 +19,15 @@ class Content extends Component {
       customName: '',
       targetName: '',
       visibility:'hidden',
-      brand: brand
+      brand: brand,
+      brandName:'https://www.gol.wip.gidapps.com'
     }
     this.parseJson = this.parseJson.bind(this);
     this.toUpdate = this.toUpdate.bind(this);
     this.createMarkup = this.createMarkup.bind(this);
     this.elemUpdatedInForm = this.elemUpdatedInForm.bind(this);
     this.focusElem = this.focusElem.bind(this);
+    this.handleBrand = this.handleBrand.bind(this);
   }
   // Create HTML template from json
   parseJson() {
@@ -161,7 +164,12 @@ class Content extends Component {
     this.setState({
       targetName: e.target.name
     })
-    console.log('BLUR '+ this.state.targetName);
+  }
+
+  handleBrand(e){
+    this.setState({
+      brandName: e.target.value
+    })
   }
   render() {
 
@@ -169,10 +177,10 @@ class Content extends Component {
       <Fragment>
         <div className="DataGeneral">
         <span className="select-dropdown">
-              <select>
+              <select onChange={this.handleBrand}>
                 <option>Select Brand</option>
-                {Object.keys(this.state.brand.brand[0]).map((name, index) => {
-                  return <option key={index} value={name}>{name}</option>;
+                {Object.entries(this.state.brand.brand[0]).map((name, index) => {
+                  return <option key={'brand_'+index} value={name[1]}>{name[0]}</option>;
                 })}
               </select>
           </span>
@@ -195,7 +203,7 @@ class Content extends Component {
             </Fragment>
            <Fragment >
             <div className="rightDiv">
-              <ImgPreview imgData={this.state.jsonValue} visibility={this.state.visibility}/>
+              <ImgPreview imgData={this.state.jsonValue} visibility={this.state.visibility} brandName={this.state.brandName}/>
               <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
             </div>
            </Fragment> 

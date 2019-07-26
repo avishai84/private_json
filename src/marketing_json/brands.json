@@ -1,10 +1,10 @@
 {
     "brand" : [
         {
-            "Gap": "Gap",
-            "Banana Republic": "Banana Republic",
-            "Old Navy": "Old Navy",
-            "Athleta" : "Athleta" 
+            "Gap": "https://www.gol.wip.gidapps.com",
+            "Banana Republic": "https://www.brol.wip.gidapps.com",
+            "Old Navy": "https://www.onol.wip.gidapps.com",
+            "Athleta" : "https://www.atol.wip.gidapps.com" 
         }
     ]
     
