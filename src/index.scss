@@ -214,6 +214,9 @@
                 &:hover{
                     cursor:move
                 }
+                .draggingContainer{
+                  outline:3px solid red;
+                }
             }
           }
         }

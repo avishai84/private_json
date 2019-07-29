@@ -29,7 +29,6 @@ class ImgPreview extends Component {
       return (
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`}}>
-          
             <div className="imgPreview" >
               <div className="mkt-image">
                 <picture>
