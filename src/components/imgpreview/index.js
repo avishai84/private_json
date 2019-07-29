@@ -28,9 +28,6 @@ class ImgPreview extends Component {
  
       return (
         <Fragment>
-
-<DraggableComp link={this.state.jsonValue}>Hi H</DraggableComp>
-
           <div style={{"visibility":`${this.props.visibility}`}}>
             <div className="imgPreview" >
               <div className="mkt-image">
@@ -40,6 +37,7 @@ class ImgPreview extends Component {
                   </picture>
                 </div>
                 <div className="absolute leftTop">
+                <DraggableComp link={this.state.jsonValue}>Hi H</DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>
                     <img src={largeSvg} alt={this.state.imgData.data.svgoverlay.altText}/>

@@ -16,14 +16,15 @@ class DraggableComp extends Component {
         <Draggable
           axis="both"
           handle=".draggingContainer"
-          defaultPosition={{x: -100, y: -100}}
+          defaultPosition={{x: 200, y: 160}}
           position={null}
           grid={[1, 1]}
           scale={1}
           onStart={this.handleStart}
           onDrag={this.handleDrag}
           onStop={this.handleStop}
-          link={this.state.link}>
+          link={this.state.link}
+          bounds={{left:0, top: 0, right: 610, bottom: 250}}>
           <div className="draggable draggingContainer">
               {this.props.children}
           </div>
