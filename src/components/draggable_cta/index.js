@@ -6,12 +6,13 @@ class DraggableComp extends Component {
       super(props);
       this.state={
         x: this.props.x,
-        link:this.prop
+        link:this.prop,
+        desktopStyles: this.props.desktopStyles
       };
     }
 
     render() {
-        console.log(this.props.x);      
+    console.log(this.state.desktopStyles);
       return ( 
         <Draggable
           axis="both"
@@ -25,7 +26,7 @@ class DraggableComp extends Component {
           onStop={this.handleStop}
           link={this.state.link}
           bounds={{left:0, top: 0, right: 610, bottom: 250}}>
-          <div className="draggable draggingContainer">
+          <div className="draggable draggingContainer" style={{"color":this.state.desktopStyles.color, "backgroundColor":this.state.desktopStyles.backgroundColor}}>
               {this.props.children}
           </div>
         </Draggable>

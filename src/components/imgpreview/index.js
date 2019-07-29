@@ -37,7 +37,7 @@ class ImgPreview extends Component {
                   </picture>
                 </div>
                 <div className="absolute leftTop">
-                <DraggableComp link={this.state.jsonValue}>Hi H</DraggableComp>
+                <DraggableComp desktopStyles={this.state.imgData.data.links.style.desktop}>{this.state.imgData.data.links.content[0].text}</DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>
                     <img src={largeSvg} alt={this.state.imgData.data.svgoverlay.altText}/>

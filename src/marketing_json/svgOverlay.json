@@ -63,7 +63,9 @@
 		"links": {
 			"style": {
 				"desktop": {
-					"border": "0"
+					"border": "0",
+					"backgroundColor":"transparent",
+					"color":"#fff"
 				},
 				"mobile": {
 					"paddingLeft": "3%"
