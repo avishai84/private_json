@@ -1,5 +1,5 @@
 import React, { Component, Fragment} from 'react';
-
+import DraggableComp from '../draggable_cta';
 class ImgPreview extends Component {
 
     constructor(props){
@@ -28,6 +28,9 @@ class ImgPreview extends Component {
  
       return (
         <Fragment>
+
+<DraggableComp link={this.state.jsonValue}>Hi H</DraggableComp>
+
           <div style={{"visibility":`${this.props.visibility}`}}>
             <div className="imgPreview" >
               <div className="mkt-image">

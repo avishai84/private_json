@@ -190,35 +190,37 @@
                 z-index: 10;
                 position: relative;
               }
-              //  Draggble CTA 
-              .draggable{
-                padding: .5em .8em;
-                font-size: calc(12px + (4 * ((100vw - 768px) / 832)));
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                background-color: transparent;
-                text-align: center;
-                line-height: normal;
-                font-family: Helvetica Neue,Helvetica,Arial,Roboto,sans-serif;
-                font-weight: 700;
-                -webkit-font-smoothing: antialiased;
-                padding-left: 0;
-                padding-right: 0;
-                border-left: none;
-                border-right: none;
-                border-top:none;
-                background-color: transparent;
-                border-bottom: 2px solid;
-                color: #000;
-                box-sizing: border-box;
-                &:hover{
-                    cursor:move
-                }
-                .draggingContainer{
-                  outline:3px solid red;
-                }
-            }
+   
           }
+
+           //  Draggble CTA 
+           .draggable{
+            padding: .5em .8em;
+            font-size: calc(12px + (4 * ((100vw - 768px) / 832)));
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background-color: transparent;
+            text-align: center;
+            line-height: normal;
+            font-family: Helvetica Neue,Helvetica,Arial,Roboto,sans-serif;
+            font-weight: 700;
+            -webkit-font-smoothing: antialiased;
+            padding-left: 0;
+            padding-right: 0;
+            border-left: none;
+            border-right: none;
+            border-top:none;
+            background-color: transparent;
+            border-bottom: 2px solid;
+            color: #fff;
+            box-sizing: border-box;
+            z-index: 1;
+            position: absolute;
+            &:hover{
+                cursor:move
+            }
+        }
+
         }
       .absolute{
         position: absolute;

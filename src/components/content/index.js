@@ -4,7 +4,6 @@ import jsonData from '../../marketing_json/svgOverlay.json';
 import ImgPreview from '../imgpreview'
 import ListItem from '../listitem';
 import PlainJson from '../plainjson';
-import DraggableComp from '../cta';
 
 let json = JSON.parse(JSON.stringify(jsonData));
 
@@ -204,11 +203,7 @@ class Content extends Component {
             </Fragment>
            <Fragment >
             <div className="rightDiv">
-              <ImgPreview imgData={this.state.jsonValue} visibility={this.state.visibility} brandName={this.state.brandName}>
-              
-                <DraggableComp link={this.state.jsonValue}>Hi</DraggableComp>
-
-              </ImgPreview>
+              <ImgPreview imgData={this.state.jsonValue} visibility={this.state.visibility} brandName={this.state.brandName}></ImgPreview>
               <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
             </div>
            </Fragment> 

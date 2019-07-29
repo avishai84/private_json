@@ -14,22 +14,20 @@ class DraggableComp extends Component {
         console.log(this.props.x);      
       return ( 
         <Draggable
-        axis="both"
-        handle=".draggingContainer"
-        defaultPosition={{x: -100, y: -100}}
-        position={null}
-        grid={[1, 1]}
-        scale={1}
-        onStart={this.handleStart}
-        onDrag={this.handleDrag}
-        onStop={this.handleStop}
-        link={this.state.link}>
-        <div>
-            <div className="draggingContainer">
-               {this.props.children}
-            </div>
-        </div>
-    </Draggable>
+          axis="both"
+          handle=".draggingContainer"
+          defaultPosition={{x: -100, y: -100}}
+          position={null}
+          grid={[1, 1]}
+          scale={1}
+          onStart={this.handleStart}
+          onDrag={this.handleDrag}
+          onStop={this.handleStop}
+          link={this.state.link}>
+          <div className="draggable draggingContainer">
+              {this.props.children}
+          </div>
+        </Draggable>
    
   
         );
