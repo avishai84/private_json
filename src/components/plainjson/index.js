@@ -17,14 +17,12 @@ class PlainJson extends Component {
   render() {
 
     return (
-      <div className="rightDiv" style={{"visibility":`${this.props.visibility}`}}>
         <Fragment>
-          <label htmlFor="textarea-a--json" className="sds_field sds-js_input-control">
+          <label style={{"visibility":`${this.props.visibility}`}} htmlFor="textarea-a--json" className="sds_field sds-js_input-control">
             <textarea disabled="disabled" id="textarea-a--json" value={ JSON.stringify(this.state.jsonValue.json, null, 2) }>
             </textarea>
           </label>
         </Fragment>
-      </div>
     );
   }
 };
