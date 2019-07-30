@@ -14,20 +14,20 @@ class DraggableComp extends Component {
       this.convertToPrecantage=this.convertToPrecantage.bind(this);
     }
 
-    handleStop(e: MouseEvent, data: Object){
-      console.log(e.x);
-      console.log(e.y);
-      console.log('Event: ', e);
-      console.log('Data: ', data);
+    // handleStop(e: MouseEvent, data: Object){
+    //   console.log(e.x);
+    //   console.log(e.y);
+    //   console.log('Event: ', e);
+    //   console.log('Data: ', data);
    
-      console.log((Number.parseFloat(e.x / 16) * 1).toFixed(2));
-      console.log((Number.parseFloat(e.y / 16) * 1).toFixed(2));
+    //   console.log((Number.parseFloat(e.x / 16) * 1).toFixed(2));
+    //   console.log((Number.parseFloat(e.y / 16) * 1).toFixed(2));
  
-    } 
-    convertToPrecantage(e){
+    // } 
+    convertToPrecantage(e, data: Object){
       this.setState({
-        top:(Number.parseFloat(e.y / 16) * 1).toFixed(2)+'%',
-        left: (Number.parseFloat(e.x / 16) * 1).toFixed(2)+'%'
+        top:(Number.parseFloat(data.y / 16) * 1.00).toFixed(2)+'%',
+        left: (Number.parseFloat(data.x / 16) * 1.00).toFixed(2)+'%'
       });
     }
     render() {
@@ -45,7 +45,8 @@ class DraggableComp extends Component {
           onStop={this.handleStop}
           onDrag={this.convertToPrecantage}
           link={this.state.link}
-          bounds={{left:-400, top: -1000, right: 1000, bottom: 1250}}>
+          bounds={{left:0, top: 0, right: 1280, bottom: 1250}}>
+
           <div className="draggable draggingContainer" style={{"color":this.state.desktopStyles.color, "backgroundColor":this.state.desktopStyles.backgroundColor,"fontSize":16}}>
               {this.props.children}
               <Fragment>

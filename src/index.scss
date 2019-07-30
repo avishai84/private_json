@@ -147,7 +147,7 @@
       }
       .rightDiv {
         flex-basis: 50%;
-        /* width: calc(33.3333% - 15px);*/
+        max-width: 1280px;
         label.sds_field.sds-js_input-control{
             position: sticky;
             top: 120px;
@@ -170,6 +170,12 @@
               outline:1px solid rgb(181, 181, 181);
               min-height: 100px;
 
+              &:hover {
+                left: -5%;
+                position: relative;
+                top: -60px;
+              }
+
               &:after{
                 content:'Image Preview is empty';
                 position: absolute;
@@ -186,18 +192,16 @@
                 position: relative;
               }
               &:hover img{
-                max-width: 100%;
-                transform: scale(2);
-                transition: all 250ms;
+                max-width: 1280px;
+                // transform: scale(2);
+                transition: all 40ms;
+                width:1280px;
+                
             }
-              &:hover textarea{
-                outline:2px solid red;
-                margin-top:130%;
-              }
-           
-            &:hover .draggable{
+              &:hover .draggable{
                 visibility: visible;
               }
+
           }
 
            //  Draggble CTA 
