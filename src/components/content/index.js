@@ -188,12 +188,18 @@ callbackPositionFunction = (x,y) => {
     });
     // update json with new positions
     //  console.log('Content x,y: ', this.state.positionX, this.state.positionY);
+    this.state.jsonValue.data.linksContainerStyle.desktop.left = this.state.positionX;
+    this.state.jsonValue.data.linksContainerStyle.desktop.top = this.state.positionY;
+    this.setState({
+      jsonValue: this.state.jsonValue
+    });
+    this.parseJson();
   }
 
 
   render() {  
     console.log('Position: ', 'X: '+this.state.positionX,'Y: '+this.state.positionY);
-    console.log(this.state.jsonValue.data);
+    console.log(this.state.jsonValue.data.linksContainerStyle.desktop);
     return(
       <Fragment>
         <div className="DataGeneral" >
