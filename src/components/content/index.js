@@ -42,7 +42,7 @@ class Content extends Component {
       <div key={index}>`<label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label>`</div>);
     });
 
-
+    // This is the object we create all input fieds to change the json text 
     let instanceHtml =
       <div>
         <label htmlFor={origJson.instanceDesc.replace(/\s/g, '')}>Instance Description:
@@ -167,7 +167,6 @@ class Content extends Component {
     this.setState({
       targetName: e.target.name
     })
-    console.log('mouse leave');
   }
 
   handleBrand(e){
@@ -195,11 +194,8 @@ callbackPositionFunction = (x,y) => {
     });
     this.parseJson();
   }
-
-
   render() {  
-    console.log('Position: ', 'X: '+this.state.positionX,'Y: '+this.state.positionY);
-    console.log(this.state.jsonValue.data.linksContainerStyle.desktop);
+
     return(
       <Fragment>
         <div className="DataGeneral" >
