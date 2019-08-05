@@ -20,8 +20,11 @@ class Content extends Component {
       targetName: '',
       visibility:'hidden',
       brand: brand,
-      brandName:'https://www.gol.wip.gidapps.com'
+      brandName:'https://www.gol.wip.gidapps.com',
+      positionX: '',
+      positionY: ''
     }
+
     this.parseJson = this.parseJson.bind(this);
     this.toUpdate = this.toUpdate.bind(this);
     this.createMarkup = this.createMarkup.bind(this);
@@ -39,7 +42,7 @@ class Content extends Component {
       <div key={index}>`<label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label>`</div>);
     });
 
-
+    // This is the object we create all input fieds to change the json text 
     let instanceHtml =
       <div>
         <label htmlFor={origJson.instanceDesc.replace(/\s/g, '')}>Instance Description:
@@ -171,11 +174,32 @@ class Content extends Component {
       brandName: e.target.value
     })
   }
-  render() {
+
+// Welcome to Prop drilling....
+// We need to get the position X, Y data to update the JSON.
+// The data is coming from Draggable comp. three levels deep
+// Future update to use Contex API
+
+callbackPositionFunction = (x,y) => {
+    this.setState({
+      positionX: x,
+      positionY:y
+    });
+    // update json with new positions
+    //  console.log('Content x,y: ', this.state.positionX, this.state.positionY);
+    this.state.jsonValue.data.linksContainerStyle.desktop.left = this.state.positionX;
+    this.state.jsonValue.data.linksContainerStyle.desktop.top = this.state.positionY;
+    this.setState({
+      jsonValue: this.state.jsonValue
+    });
+    this.parseJson();
+  }
+  render() {  
 
     return(
       <Fragment>
-        <div className="DataGeneral">
+        <div className="DataGeneral" >
+          <h1>{this.state.message}</h1>
         <span className="select-dropdown">
               <select onChange={this.handleBrand}>
                 <option>Select Brand</option>
@@ -203,15 +227,30 @@ class Content extends Component {
             </Fragment>
            <Fragment >
             <div className="rightDiv">
-              <ImgPreview imgData={this.state.jsonValue} visibility={this.state.visibility} brandName={this.state.brandName}/>
-              <PlainJson json={this.state.jsonDataRaw} detect={this.state.changedDetected} markup={this.state.markup} jsonValue={this.state.jsonValue} visibility={this.state.visibility}/>
+
+              <ImgPreview 
+                imgData={this.state.jsonValue} 
+                visibility={this.state.visibility} 
+                brandName={this.state.brandName} 
+                parentPositioningCallback = {this.callbackPositionFunction.bind(this)}
+                ><p> {this.state.positionX} </p><p> {this.state.positionY} </p></ImgPreview>
+
+              <PlainJson
+                json={this.state.jsonDataRaw}
+                detect={this.state.changedDetected}
+                markup={this.state.markup}
+                jsonValue={this.state.jsonValue}
+                visibility={this.state.visibility}/>
             </div>
            </Fragment> 
           </div>
         </div>
         <div>
           <h6>Last Change</h6>
-          <ListItem name={this.state.changedDetected} list={this.state.markup} customName={this.state.customName} />
+          <ListItem 
+            name={this.state.changedDetected} 
+            list={this.state.markup} 
+            customName={this.state.customName} />
         </div>
       </Fragment>
     );
