@@ -40,15 +40,15 @@
 		},
 		"background": {
 			"content": {
-				"smallImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_MOB_V1.jpg",
-				"largeImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_DESK_v2.jpg",
-				"altText": "Summer Starts Now"
+				"smallImg": "/Asset_Archive/GPWeb/content/0017/460/079/assets/unrec_03/G26231_CR0430_AllDiv_NASummerBrights_HPMain_W44M23KB24TG24BB24_MOB.jpg",
+				"largeImg": "/Asset_Archive/GPWeb/content/0017/460/079/assets/unrec_03/G26231_CR0430_AllDiv_NASummerBrights_HPMain_W44M23KB24TG24BB24_DESK.jpg",
+				"altText": "Bright Moves"
 			}
 		},
 		"svgoverlay": {
-			"smallImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_MOB_V1.svg",
-			"largeImg": "/Asset_Archive/GPWeb/content/0017/118/910/assets/unrec_01/G25874_CR0419_AllDiv_EarlyAmericana_HPMain_DESK_V1.svg",
-			"altText": "In everything red, white, and new",
+			"smallImg": "/Asset_Archive/GPWeb/content/0017/460/079/assets/unrec_03/G26231_CR0430_AllDiv_NASummerBrights_HPMain_W44M23KB24TG24BB24_MOB.svg",
+			"largeImg": "/Asset_Archive/GPWeb/content/0017/460/079/assets/unrec_03/G26231_CR0430_AllDiv_NASummerBrights_HPMain_W44M23KB24TG24BB24_DESK.svg",
+			"altText": "Our latest arrivals up your workout game in cool new hues.",
 			"link": {
 				"url": "/browse/category.do?cid=1132018#pageId=0&department=136&mlink=5058,17118910,HP_HERO1_ALLDIV_G25874_IMAGE"
 			}

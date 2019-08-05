@@ -22,8 +22,7 @@ class Content extends Component {
       brand: brand,
       brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
-      positionY: '',
-      imgNaturallSize:''
+      positionY: ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -181,14 +180,13 @@ class Content extends Component {
 // The data is coming from Draggable comp. three levels deep
 // Future update to use Contex API
 
-callbackPositionFunction = (x,y, imgNaturallSize) => {
+callbackPositionFunction = (x,y) => {
     this.setState({
       positionX: x,
-      positionY:y,
-      imgNaturallSize:imgNaturallSize
+      positionY:y
+     
     });
     // update json with new positions
-    //  console.log('Content x,y: ', this.state.positionX, this.state.positionY);
     this.state.jsonValue.data.linksContainerStyle.desktop.left = this.state.positionX;
     this.state.jsonValue.data.linksContainerStyle.desktop.top = this.state.positionY;
     this.setState({
@@ -197,7 +195,7 @@ callbackPositionFunction = (x,y, imgNaturallSize) => {
     this.parseJson();
   }
   render() {  
-    console.dir(this.state.imgNaturallSize);
+
     return(
       <Fragment>
         <div className="DataGeneral" >
