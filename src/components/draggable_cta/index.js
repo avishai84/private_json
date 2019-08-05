@@ -9,7 +9,8 @@ class DraggableComp extends Component {
         link:this.prop,
         desktopStyles: this.props.desktopStyles,
         positionY:'',
-        positionX:''
+        positionX:'',
+        imgNaturallSize:''
   
       };
       this.convertToPrecantage=this.convertToPrecantage.bind(this);
@@ -19,8 +20,8 @@ class DraggableComp extends Component {
 
     convertToPrecantage(e, data: Object){
       this.setState({
-        positionX:(Number.parseFloat(data.x / 16) * 1.00).toFixed(2)+'%',
-        positionY: (Number.parseFloat(data.y / 16) * 1.00).toFixed(2)+'%'
+        positionX:(Number.parseFloat(data.x / 1400) * 100).toFixed(2)+'%',
+        positionY: (Number.parseFloat(data.y / 1400) * 100).toFixed(2)+'%'
       });
       //console.log('CALCULATE Y: ',(Number.parseFloat(data.y / 16) * 1.50).toFixed(2));
     }
@@ -35,7 +36,7 @@ class DraggableComp extends Component {
  }
 
     render() {
-
+     console.log(this.props);
       return ( 
         <Draggable
           axis="both"
@@ -49,7 +50,7 @@ class DraggableComp extends Component {
           onStop={this.handleStop}
           onDrag={this.convertToPrecantage}
           link={this.state.link}
-          bounds={{left:0, top: 0, right: 1920, bottom: 'auto'}}
+          bounds={{left:0, top: 0, right: 1920, bottom: 1920}}
           onStop = {this.sendDataUpTheChain.bind(this)}
           >
           <div className="draggable draggingContainer" 

@@ -20,9 +20,10 @@ class Content extends Component {
       targetName: '',
       visibility:'hidden',
       brand: brand,
-      brandName:'https://www.gol.wip.gidapps.com',
+      brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
-      positionY: ''
+      positionY: '',
+      imgNaturallSize:''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -180,10 +181,11 @@ class Content extends Component {
 // The data is coming from Draggable comp. three levels deep
 // Future update to use Contex API
 
-callbackPositionFunction = (x,y) => {
+callbackPositionFunction = (x,y, imgNaturallSize) => {
     this.setState({
       positionX: x,
-      positionY:y
+      positionY:y,
+      imgNaturallSize:imgNaturallSize
     });
     // update json with new positions
     //  console.log('Content x,y: ', this.state.positionX, this.state.positionY);
@@ -195,7 +197,7 @@ callbackPositionFunction = (x,y) => {
     this.parseJson();
   }
   render() {  
-
+    console.dir(this.state.imgNaturallSize);
     return(
       <Fragment>
         <div className="DataGeneral" >

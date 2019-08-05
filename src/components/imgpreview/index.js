@@ -1,5 +1,15 @@
 import React, { Component, Fragment} from 'react';
 import DraggableComp from '../draggable_cta';
+
+const imgWidth = (brandNamePrefix, desktopImgPath) =>{
+  // console.log(img);
+  // create new image
+  let new_img = new Image();
+  const src =  brandNamePrefix+desktopImgPath;
+  new_img.src = src;
+  console.log(new_img);
+  console.log(src);
+ };
 class ImgPreview extends Component {
 
     constructor(props){
@@ -13,7 +23,8 @@ class ImgPreview extends Component {
         brandUpdate: '',
         imgUrl: 'https://www.gol.wip.gidapps.com',
         positionX: '',
-        positionY: ''
+        positionY: '',
+        imgNaturallSize:''
       };
 
     }
@@ -30,9 +41,13 @@ class ImgPreview extends Component {
   positionsFromDraggable = (x,y) => {
         this.setState({
           positionX:x,
-          positionY:y
+          positionY:y,
+          imgNaturallSize: this.props.imgData.data.background.content.largeImg
         })
-      this.props.parentPositioningCallback(this.state.positionX,this.state.positionY);
+      this.props.parentPositioningCallback(this.state.positionX,this.state.positionY, this.state.imgNaturallSize);
+     
+
+      imgWidth(this.state.brandUpdate, this.state.imgNaturallSize);
     }
 
     render() {
@@ -42,7 +57,8 @@ class ImgPreview extends Component {
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
       const smallImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.smallImg}`;
       const largeImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.largeImg}`;
-      // console.log('ImgPreview ',this.props);
+       console.log('ImgPreview ',this.props);
+       console.log('Brand: '+ this.state.brandUpdate);
       return (
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`}}>
@@ -53,14 +69,11 @@ class ImgPreview extends Component {
                     <img alt={this.state.imgData.data.background.content.altText} src={largeImg}/>
                   </picture>
                 </div>
-                <div className="absolute leftTop">
+                <div className="absolute leftTop foo">
                 <DraggableComp
                  desktopStyles={this.state.imgData.data.links.style.desktop}
                  parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}>
-                   {/* onMouseUp={this.sendData.bind(this)} */}
-               
-                   <div >{this.state.imgData.data.links.content[0].text}</div>
-                    
+                    <div >{this.state.imgData.data.links.content[0].text}</div>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>
