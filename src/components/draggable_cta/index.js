@@ -9,8 +9,10 @@ class DraggableComp extends Component {
         link:this.prop,
         desktopStyles: this.props.desktopStyles,
         positionY:'',
-        positionX:''
-  
+        positionX:'',
+        imgNaturalWidth:this.props.imgNaturalWidth,
+        imgNaturalHeight:this.props.imgNaturalHeight
+        
       };
       this.convertToPrecantage=this.convertToPrecantage.bind(this);
     }
@@ -18,11 +20,12 @@ class DraggableComp extends Component {
   //  https://www.carnaghan.com/knowledge-base/how-to-convert-px-to-percentage/
 
     convertToPrecantage(e, data: Object){
+      
       this.setState({
-        positionX:(Number.parseFloat(data.x / 16) * 1.00).toFixed(2)+'%',
-        positionY: (Number.parseFloat(data.y / 16) * 1.00).toFixed(2)+'%'
+        positionX:(Number.parseFloat(data.x / this.state.imgNaturalWidth) * 100).toFixed(2)+'%',
+        positionY: (Number.parseFloat(data.y / this.state.imgNaturalHeight) * 100).toFixed(2)+'%'
       });
-      //console.log('CALCULATE Y: ',(Number.parseFloat(data.y / 16) * 1.50).toFixed(2));
+      //console.log('CALCULATE Y: ',(Number.parseFloat(data.y / this.state.imgNaturallHeight) * 100).toFixed(2));
     }
   
       // Welcome to Prop drilling....
@@ -31,11 +34,19 @@ class DraggableComp extends Component {
     // Future update to use Contex API
 
     sendDataUpTheChain = () => {
-    this.props.parentPositioningFromDraggbleCallback(this.state.positionX,this.state.positionY);
- }
+      this.props.parentPositioningFromDraggbleCallback(this.state.positionX,this.state.positionY);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        imgNaturalWidth:nextProps.imgNaturalWidth,
+        imgNaturalHeight:nextProps.imgNaturalHeight,
+      });
+  }
+
 
     render() {
-
+ 
       return ( 
         <Draggable
           axis="both"
@@ -49,9 +60,8 @@ class DraggableComp extends Component {
           onStop={this.handleStop}
           onDrag={this.convertToPrecantage}
           link={this.state.link}
-          bounds={{left:0, top: 0, right: 1920, bottom: 'auto'}}
-          onStop = {this.sendDataUpTheChain.bind(this)}
-          >
+          bounds={{left:0, top: 0, right: 1920, bottom: 1920}}
+          onStop = {this.sendDataUpTheChain.bind(this)}>
           <div className="draggable draggingContainer" 
           style={{"color":this.state.desktopStyles.color, "backgroundColor":this.state.desktopStyles.backgroundColor,"fontSize":16}}
           >

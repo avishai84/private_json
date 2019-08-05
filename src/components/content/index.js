@@ -20,7 +20,7 @@ class Content extends Component {
       targetName: '',
       visibility:'hidden',
       brand: brand,
-      brandName:'https://www.gol.wip.gidapps.com',
+      brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
       positionY: ''
     }
@@ -184,9 +184,9 @@ callbackPositionFunction = (x,y) => {
     this.setState({
       positionX: x,
       positionY:y
+     
     });
     // update json with new positions
-    //  console.log('Content x,y: ', this.state.positionX, this.state.positionY);
     this.state.jsonValue.data.linksContainerStyle.desktop.left = this.state.positionX;
     this.state.jsonValue.data.linksContainerStyle.desktop.top = this.state.positionY;
     this.setState({

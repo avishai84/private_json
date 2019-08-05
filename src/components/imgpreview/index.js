@@ -1,5 +1,7 @@
 import React, { Component, Fragment} from 'react';
 import DraggableComp from '../draggable_cta';
+
+
 class ImgPreview extends Component {
 
     constructor(props){
@@ -11,9 +13,11 @@ class ImgPreview extends Component {
         jsonValue : this.props.jsonValue,
         isChecked : this.props,
         brandUpdate: '',
-        imgUrl: 'https://www.gol.wip.gidapps.com',
+        imgUrl: '',
         positionX: '',
-        positionY: ''
+        positionY: '',
+        imgNaturalWidth:0,
+        imgNaturalHeight:0
       };
 
     }
@@ -30,19 +34,33 @@ class ImgPreview extends Component {
   positionsFromDraggable = (x,y) => {
         this.setState({
           positionX:x,
-          positionY:y
+          positionY:y,
+          imgNaturallSize: this.props.imgData.data.background.content.largeImg,
+          brandUpdate: this.props.brandName
         })
-      this.props.parentPositioningCallback(this.state.positionX,this.state.positionY);
+      // natural width/height values of image to help calc. CTA '%' position
+    this.props.parentPositioningCallback(this.state.positionX,this.state.positionY);
+
     }
-
+    imageLoaded(){
+      // Set natural width / Height once image is loaded for desktop
+      this.setState({
+        imgNaturalWidth:this._image.naturalWidth,
+        imgNaturalHeight: this._image.naturalHeight
+      })
+    }
     render() {
-
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
       const smallImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.smallImg}`;
       const largeImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.largeImg}`;
-      // console.log('ImgPreview ',this.props);
+      //console.log('ImgPreview ',this.props);
+      // set context for ref. DOM elem.
+      // For more info, see video: https://www.youtube.com/watch?v=VyMziBh4SYM
+
+      let self = this;
+
       return (
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`}}>
@@ -50,17 +68,25 @@ class ImgPreview extends Component {
               <div className="mkt-image">
                 <picture>
                   <source media="(max-width:767px)" srcSet={smallImg} />
-                    <img alt={this.state.imgData.data.background.content.altText} src={largeImg}/>
+                    <img alt={this.state.imgData.data.background.content.altText} src={largeImg}
+                      //  Getting a reference to the image as DOM elem to calc. width/height for boundaries of draggable CTA
+                       ref={
+                          function(el){
+                            self._image = el;
+                          }
+                        }
+                      onLoad={this.imageLoaded.bind(this)}
+                    />
                   </picture>
                 </div>
                 <div className="absolute leftTop">
                 <DraggableComp
                  desktopStyles={this.state.imgData.data.links.style.desktop}
-                 parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}>
-                   {/* onMouseUp={this.sendData.bind(this)} */}
-               
-                   <div >{this.state.imgData.data.links.content[0].text}</div>
-                    
+                 parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}
+                 imgNaturalWidth={this.state.imgNaturalWidth}
+                 imgNaturalHeight={this.state.imgNaturalHeight}>
+
+                    <div >{this.state.imgData.data.links.content[0].text}</div>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>
