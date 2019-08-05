@@ -21,7 +21,6 @@ class DraggableComp extends Component {
 
     convertToPrecantage(e, data: Object){
       
-
       this.setState({
         positionX:(Number.parseFloat(data.x / this.state.imgNaturalWidth) * 100).toFixed(2)+'%',
         positionY: (Number.parseFloat(data.y / this.state.imgNaturalHeight) * 100).toFixed(2)+'%'

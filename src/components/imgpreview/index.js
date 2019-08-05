@@ -50,7 +50,7 @@ class ImgPreview extends Component {
       })
     }
     render() {
-      console.log("ImagePreview"+ this.props.imgNaturalWidth);
+
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
       const smallImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.smallImg}`;
