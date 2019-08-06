@@ -38,9 +38,7 @@ class MobileToggle extends Component {
                             </label>
                         </div>
                     </div>
-                    <div>
-                        <h6>Mobile Image Preview</h6>
-                    </div>
+               
                     <Fragment>
                         {
                             this.state.isChecked ? <div style={{
@@ -50,7 +48,9 @@ class MobileToggle extends Component {
                                 "borderRadius": "10px",
                                 "position":"relative",
                                 "padding": "12px",
-                                "backgroundColor": "black"}}>
+                                "backgroundColor": "black",
+                                "marginLeft": "15px",
+                                "boxShadow": "2px 2px 10px #040404"}}>
                                     <img style={{"maxWidth":"380px"}} src={smallImg} alt={this.state.imgData.background.content.altText}/>
                                     <div style={{"position":"absolute","top":0,"left":0}}>
                                     <img style={{"maxWidth":"380px"}} src={smallSvg} alt={this.state.imgData.svgoverlay.altText}/>

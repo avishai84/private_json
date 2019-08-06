@@ -334,12 +334,12 @@ img[alt]:after {
           padding: 1.5em 0 0.25em 0.2em;
           margin: 0;
 
-          div:nth-child(2){
-            align-self: center;
-            padding-left: 1em;
-          }
+          // div:nth-child(2){
+          //   align-self: center;
+          //   padding-left: 1em;
+          // }
           .onoffswitch {
-            position: relative; width: 90px;
+            position: relative; width: 130px;
             -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
             .onoffswitch-checkbox {
               display: none;
@@ -358,12 +358,12 @@ img[alt]:after {
               box-sizing: border-box;
             }
             .onoffswitch-inner:before {
-              content: "ON";
+              content: "MOBILE ON";
               padding-left: 10px;
               background-color: #34A7C1; color: #FFFFFF;
             }
             .onoffswitch-inner:after {
-              content: "OFF";
+              content: "MOBILE OFF";
               padding-right: 10px;
               background-color: #EEEEEE; color: #999999;
               text-align: right;
@@ -372,7 +372,7 @@ img[alt]:after {
               display: block; width: 18px; margin: 6px;
               background: #FFFFFF;
               position: absolute; top: 0; bottom: 0;
-              right: 56px;
+              right: 99px;
               border: 2px solid #999999; border-radius: 20px;
               transition: all 0.1s ease-in 0s; 
             }
