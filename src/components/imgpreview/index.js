@@ -1,6 +1,6 @@
 import React, { Component, Fragment} from 'react';
 import DraggableComp from '../draggable_cta';
-
+import MobileToggle from './MobileToggle';
 
 class ImgPreview extends Component {
 
@@ -64,6 +64,7 @@ class ImgPreview extends Component {
       return (
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`}}>
+            <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
             <div className="imgPreview" >
               <div className="mkt-image">
                 <picture>
