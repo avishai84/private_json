@@ -4,6 +4,7 @@ import jsonData from '../../marketing_json/svgOverlay.json';
 import ImgPreview from '../imgpreview'
 import ListItem from '../listitem';
 import PlainJson from '../plainjson';
+import OptionCTA from './OptionCTA';
 
 let json = JSON.parse(JSON.stringify(jsonData));
 
@@ -22,7 +23,8 @@ class Content extends Component {
       brand: brand,
       brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
-      positionY: ''
+      positionY: '',
+      ctaCount : ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -39,7 +41,7 @@ class Content extends Component {
     let ctaLinksArray = origJson.data.links.content;
     let linkInputs = ctaLinksArray.map((item, index) => {
       return (
-      <div key={index}>`<label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label>`</div>);
+      <div key={index}><label key={"key_Text"+index} htmlFor={"text-input-ctaText_"+index}>Text:<input data-instancename="text" id={"text-input-ctaText_"+index} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+index} htmlFor={"text-input-ctaLink_"+index}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+index} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label></div>);
     });
 
     // This is the object we create all input fieds to change the json text 
@@ -194,6 +196,20 @@ callbackPositionFunction = (x,y) => {
     });
     this.parseJson();
   }
+
+  addCtaArr(count, ctaContentArr){
+    this.setState({
+      count: count,
+      ctaContentArr: ctaContentArr
+    });
+  }
+  rmvCtaArr(count, ctaContentArr){
+    this.setState({
+      count: count,
+      ctaContentArr: ctaContentArr
+    });
+
+  }
   render() {  
 
     return(
@@ -222,10 +238,13 @@ callbackPositionFunction = (x,y) => {
                onBlur={this.focusElem}
                onClick={this.focusElem}>
                 {this.state.elem}
+
+                <OptionCTA visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)}/>
+
                </form>
               </div>
             </Fragment>
-           <Fragment >
+           <Fragment>
             <div className="rightDiv">
 
               <ImgPreview 
