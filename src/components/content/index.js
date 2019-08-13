@@ -6,6 +6,8 @@ import ListItem from '../listitem';
 import PlainJson from '../plainjson';
 import OptionCTA from './OptionCTA';
 
+const updatedCTAObjFromOptionCTA = {};
+
 let json = JSON.parse(JSON.stringify(jsonData));
 
 class Content extends Component {
@@ -24,7 +26,7 @@ class Content extends Component {
       brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
       positionY: '',
-      ctaCount : ''
+      ctaAddedContentArr : ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -197,22 +199,70 @@ callbackPositionFunction = (x,y) => {
     this.parseJson();
   }
 
-  addCtaArr(count, ctaContentArr){
-    this.setState({
-      count: count,
-      ctaContentArr: ctaContentArr
-    });
-  }
-  rmvCtaArr(count, ctaContentArr){
-    this.setState({
-      count: count,
-      ctaContentArr: ctaContentArr
+  // update the CTA object in JSON - this call is originating from OptionCTA component
+
+  async addCtaArr(ctaContentArr){
+   await this.setState({
+      ctaAddedContentArr: ctaContentArr
+      //updateCTA: this.state.jsonValue.data.links.content.push(this.state.ctaAddedContentArr.props.children) 
     });
 
+    this.updateCTA_from_OptionCTA();
+
   }
+  async rmvCtaArr(ctaContentArr){
+    await this.setState({
+      ctaAddedContentArr: ctaContentArr
+    });
+  }
+
+  //componentDidUpdate(){}
+
+  updateCTA_from_OptionCTA(){
+    console.log();
+        /*
+        1. Creating a new object from added CTAs and appeding it to the jsonValue text.
+        2. We need to update this.state.jsonValue.data.links.content with the new object
+    */ 
+
+    for(let item of this.state.ctaAddedContentArr){
+      if(item.hasOwnProperty('props')){
+        for(let name of item.props.children){
+          if(item.hasOwnProperty('props')){
+            for(let content of name.props.children){
+              if(content !== 'undefined'){
+                if(content.hasOwnProperty('props')){
+                  if(content.props.hasOwnProperty('defaultValue')){
+                    if(content.props.name === 'text'){
+                        updatedCTAObjFromOptionCTA.text = content.props.defaultValue;
+                      }
+                    if(content.props.name === 'href'){
+                        updatedCTAObjFromOptionCTA.href = content.props.defaultValue;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+    if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
+      console.log(updatedCTAObjFromOptionCTA);
+    }
+  }
+
   render() {  
 
-    return(
+
+
+   // console.dir(this.state.markup);
+   //console.dir(this.state.ctaAddedContentArr);
+   //console.log(JSON.stringify(this.state.ctaAddedContentArr));
+
+ 
+
+  return(
       <Fragment>
         <div className="DataGeneral" >
           <h1>{this.state.message}</h1>
