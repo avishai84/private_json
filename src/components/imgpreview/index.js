@@ -49,6 +49,12 @@ class ImgPreview extends Component {
         imgNaturalHeight: this._image.naturalHeight
       })
     }
+
+    // componentDidUpdate(){
+    
+    // }
+
+
     render() {
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
@@ -60,6 +66,9 @@ class ImgPreview extends Component {
       // For more info, see video: https://www.youtube.com/watch?v=VyMziBh4SYM
 
       let self = this;
+      const linksName = this.state.imgData.data.links.content;
+      console.log("linksName");
+      console.log(linksName);
 
       return (
         <Fragment>
@@ -86,8 +95,14 @@ class ImgPreview extends Component {
                  parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}
                  imgNaturalWidth={this.state.imgNaturalWidth}
                  imgNaturalHeight={this.state.imgNaturalHeight}>
+                    
+                    <div>
+                      {/* get the name of text link from here: this.state.imgData.data.links.content[0] */}
+                        {linksName.map((item, index) => {
+                          return(<span className="cta_children ml-2 pl-1 pt-0 pr-1 pb-1" key={index}>{item.text}</span>);
+                        })}
+                    </div>
 
-                    <div >{this.state.imgData.data.links.content[0].text}</div>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>

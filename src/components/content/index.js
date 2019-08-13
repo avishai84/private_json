@@ -26,7 +26,8 @@ class Content extends Component {
       brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
       positionY: '',
-      ctaAddedContentArr : ''
+      ctaAddedContentArr : '',
+      updatedCTAObjFromOptionCTAState:''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -219,8 +220,7 @@ callbackPositionFunction = (x,y) => {
   //componentDidUpdate(){}
 
   updateCTA_from_OptionCTA(){
-    console.log();
-        /*
+    /*
         1. Creating a new object from added CTAs and appeding it to the jsonValue text.
         2. We need to update this.state.jsonValue.data.links.content with the new object
     */ 
@@ -247,8 +247,25 @@ callbackPositionFunction = (x,y) => {
           }
         }
       };
+     // Check if both text and href properties in object 
     if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
-      console.log(updatedCTAObjFromOptionCTA);
+
+    // update json with new positions
+    this.setState({
+      updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA
+    });
+    // pushing new array into CTA object on json
+     this.state.jsonValue.data.links.content.push(this.state.updatedCTAObjFromOptionCTAState);
+
+    console.dir(this.state.updatedCTAObjFromOptionCTAState);
+    console.dir(this.state.jsonValue.data.links.content);
+
+    
+    this.setState({
+     jsonValue: this.state.jsonValue
+    });
+    this.parseJson();
+
     }
   }
 
@@ -260,7 +277,6 @@ callbackPositionFunction = (x,y) => {
    //console.dir(this.state.ctaAddedContentArr);
    //console.log(JSON.stringify(this.state.ctaAddedContentArr));
 
- 
 
   return(
       <Fragment>
