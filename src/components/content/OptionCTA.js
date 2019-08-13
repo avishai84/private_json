@@ -69,6 +69,12 @@ render(){
                     <input className="p-3" type="checkbox" defaultValue={this.state.isDropdown} onChange={this.dropdownSelected.bind(this)} id="checkbox_dropdown"/>
                     <span className="p-1">Create Dropdown</span>
                 </label>
+                {/* Dropdown heading text */}
+                {this.state.isDropdown ? <label htmlFor="heading_text_dropdown">
+                    <span className="p-1">Header Text</span>
+                    <input className="p-1" type="text" defaultValue='header text' id="heading_text_dropdown" placeholder="header text"/>
+                    
+                </label>: ''}
                 <div className="d-flex">
                     {(this.state.ctaCount >= 2)? <button type="button" className="text-uppercase m-1 btn btn-danger" onClick={this.removingCta.bind(this)}>remove cta</button> : <button type="button" className="text-uppercase m-1 btn btn-danger" disabled>remove cta</button>}
                     <button type="button" className="text-uppercase m-1 btn btn-primary" onClick={this.addingCta.bind(this)}>add cta</button>
