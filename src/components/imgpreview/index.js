@@ -50,11 +50,6 @@ class ImgPreview extends Component {
       })
     }
 
-    // componentDidUpdate(){
-    
-    // }
-
-
     render() {
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
@@ -66,9 +61,8 @@ class ImgPreview extends Component {
       // For more info, see video: https://www.youtube.com/watch?v=VyMziBh4SYM
 
       let self = this;
-      const linksName = this.state.imgData.data.links.content;
-      console.log("linksName");
-      console.log(linksName);
+      const linksText = this.state.imgData.data.links.content;
+
 
       return (
         <Fragment>
@@ -95,10 +89,13 @@ class ImgPreview extends Component {
                  parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}
                  imgNaturalWidth={this.state.imgNaturalWidth}
                  imgNaturalHeight={this.state.imgNaturalHeight}>
-                    
                     <div>
-                      {/* get the name of text link from here: this.state.imgData.data.links.content[0] */}
-                        {linksName.map((item, index) => {
+                      {/* 
+                        1. get the name of text link from here: this.state.imgData.data.links.content
+                        2. create array and output
+                        
+                      */}
+                        {linksText.map((item, index) => {
                           return(<span className="cta_children ml-2 pl-1 pt-0 pr-1 pb-1" key={index}>{item.text}</span>);
                         })}
                     </div>

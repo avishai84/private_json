@@ -44,7 +44,7 @@ class OptionCTA extends Component {
             ctaArr : newArr.length
         })
         // callback to pass on data
-       this.props.addCtaArr(this.state.ctaContent);
+       this.props.rmvCtaArr(this.state.ctaContent);
     }
 
 
@@ -57,22 +57,6 @@ class OptionCTA extends Component {
             isDropdown: !this.state.isDropdown 
         })
     }
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log('nextState: '+nextState.isDropdown?true:false);
-    //     console.log('nextState: '+nextProps.isDropdown?true:false);
-    // }
-    // componentWillReceiveProps(nextProps) {
-    //    // console.log('nextProps: '+nextProps.newArr);
-    //    // this.setState({ctaContent: nextProps.newArr});
-    // }
-    // componentWillRecieveProps(newProps) 
-    // { 
-    //     if (this.props !== newProps) { 
-    //         console.log(" New Props have been assigned "); 
-    //         // Use this.setState() to rerender the page. 
-    //     } 
-    // } 
-
 
 render(){
 

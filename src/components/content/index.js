@@ -215,10 +215,23 @@ callbackPositionFunction = (x,y) => {
     await this.setState({
       ctaAddedContentArr: ctaContentArr
     });
+    this.removeCTA_from_OptionCTA();
   }
 
   //componentDidUpdate(){}
+  removeCTA_from_OptionCTA(){
 
+    this.state.jsonValue.data.links.content.pop();
+    
+    
+    this.setState({
+      updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA,
+      jsonValue: this.state.jsonValue
+     });
+     this.parseJson();
+
+
+  }
   updateCTA_from_OptionCTA(){
     /*
         1. Creating a new object from added CTAs and appeding it to the jsonValue text.
@@ -233,6 +246,7 @@ callbackPositionFunction = (x,y) => {
               if(content !== 'undefined'){
                 if(content.hasOwnProperty('props')){
                   if(content.props.hasOwnProperty('defaultValue')){
+                    // Assigning new properties inside the object
                     if(content.props.name === 'text'){
                         updatedCTAObjFromOptionCTA.text = content.props.defaultValue;
                       }
@@ -247,20 +261,15 @@ callbackPositionFunction = (x,y) => {
           }
         }
       };
-     // Check if both text and href properties in object 
+     // Check if both "text" and "href" properties are updatedCTAObjFromOptionCTA object 
     if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
 
-    // update json with new positions
+    // update state with new object
     this.setState({
       updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA
     });
-    // pushing new array into CTA object on json
+    // pushi new CTA objectinto array and update state on jsonValue. (This is the string json on the right)
      this.state.jsonValue.data.links.content.push(this.state.updatedCTAObjFromOptionCTAState);
-
-    console.dir(this.state.updatedCTAObjFromOptionCTAState);
-    console.dir(this.state.jsonValue.data.links.content);
-
-    
     this.setState({
      jsonValue: this.state.jsonValue
     });
