@@ -312,6 +312,18 @@
 
           }
       }
+
+      // Advances features: added CTA
+      .addCta .inputElems > div:nth-child(odd){
+        box-shadow:4px 3px 9px 0px #dbd196;
+        padding:0.5em 0;
+        margin: 1.5em 0;
+      }
+      .addCta .inputElems > div:nth-child(even){
+        box-shadow:4px 3px 9px 0px #288b8a;
+        padding:0.5em 0;
+        margin: 1.5em 0;
+      }
   }
 
 // overwriting broken image in browser

@@ -1,6 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import { create } from 'istanbul-reports';
-import { SSL_OP_NETSCAPE_CA_DN_BUG } from 'constants';
 const newArr = [];
 
 class OptionCTA extends Component {
@@ -10,11 +8,11 @@ class OptionCTA extends Component {
         this.state={
             json: this.props.jsonOption.content,
             ctaNum : 0,
-            ctaContent: 'No Added CTA Yet.',
+            ctaContent: newArr,
             isDropdown: false,
-            ctaArr : 0,
+            ctaArr : newArr.length,
             lengthCtaArr : this.props.jsonOption.content.length,
-            ctaCount : 0,
+            ctaCount : 1,
         }
     }
     // shouldComponentUpdate(nextProps, nextState) {
@@ -22,30 +20,53 @@ class OptionCTA extends Component {
     //     console.log('nextState: '+nextProps.isDropdown?true:false);
     // }
     componentWillReceiveProps(nextProps) {
-        console.log('nextProps: '+nextProps.newArr);
+       // console.log('nextProps: '+nextProps.newArr);
        // this.setState({ctaContent: nextProps.newArr});
     }
+    // componentWillRecieveProps(newProps) 
+    // { 
+    //     if (this.props !== newProps) { 
+    //         console.log(" New Props have been assigned "); 
+    //         // Use this.setState() to rerender the page. 
+    //     } 
+    // } 
 
-    addingCta(e){
+    componentDidUpdate(){
+        //console.log('componentDidUpdate ctaContent '+this.state.ctaCount);
+ 
+    } 
+
+
+     async addingCta(e){
         // adding a duplicate of the array from this.props.jsonOption.content
         e.preventDefault();
+       await this.setState({
+            ctaCount: this.state.ctaCount + 1,
+            ctaContent: newArr
+           })
 
-        console.log('this.state.ctaCount: '+ this.state.ctaCount);
-
-           const linkInputs = this.props.jsonOption.content.map((item, index) => {
+           const linkInputs = this.state.json.map((item, index) => {
             return (
             <div key={'added_Cta'+this.state.ctaCount}><label key={"key_Text"+this.state.ctaCount} htmlFor={"text-input-ctaText_"+this.state.ctaCount}>Text:<input data-instancename="text" id={"text-input-ctaText_"+this.state.ctaCount} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+this.state.ctaCount} htmlFor={"text-input-ctaLink_"+this.state.ctaCount}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+this.state.ctaCount} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label></div>);
           });
-          for(let i=0; i < this.state.ctaCount; i++){
-            newArr.push(linkInputs)
-         };
 
+       // console.log('this.state.ctaCount: '+ this.state.ctaCount);
+           if(this.state.ctaArr < this.state.ctaContent.length - 1){
+            await this.setState({
+                ctaContent : newArr.push(linkInputs)
+               })
+           }
+  
+          //console.log('linkInputs before push '+ linkInputs);
+          console.log('this.state.ctaCount before push '+ this.state.ctaCount);
+        //   for(let i= 0; i <= this.state.ctaCount - 1; i++){
+        //     newArr.push(linkInputs)
+        //  };
+        
+        //  await this.setState({
+        //     ctaArr : newArr.length
+        //    })
    
-
-       this.setState({
-        ctaCount: this.state.ctaCount + 1,
-        ctaContent: newArr,
-       })
 
        this.props.addCtaArr(this.state.ctaCount, this.state.ctaContent);
 
@@ -70,14 +91,17 @@ class OptionCTA extends Component {
          let ctaCurrNum = this.state.ctaNum;
         // const newArr = [this.props.jsonOption.content];
         e.preventDefault();
-
+        console.log(newArr);
+   
 
        this.setState({
         ctaNum : (ctaCurrNum === 0 ) ? ctaCurrNum : ctaCurrNum - 1,
         // json: newArr.pop(),
-        ctaCount: (this.state.ctaCount !== 0 ) ? this.state.ctaCount - 1 : this.state.ctaCount,
+        ctaCount: this.state.ctaCount - 1,  //(this.state.ctaCount !== 0 ) ? this.state.ctaCount - 1 : this.state.ctaCount,
         ctaContent: newArr.pop(),
+        ctaArr : newArr.length
        })
+       //console.log('this.state.ctaContent: '+this.state.ctaContent);
        this.props.addCtaArr(this.state.ctaCount, this.state.ctaContent);
     }
 
@@ -100,25 +124,28 @@ render(){
     //console.log('this.state.ctaCount ' + this.state.ctaCount );
    // console.log('newArr ' + newArr );
 const pluralS = (this.state.ctaCount > 1) ? `S: `: ':';
-
+//onsole.log('ctaArr array length '+ this.state.ctaArr );
     return(
-        <Fragment>
+        <Fragment> 
             <div className="addCta" style={{"visibility":`${this.props.visibility}`}}>
                 <label htmlFor="checkbox_dropdown">
                     <input className="p-3" type="checkbox" defaultValue={this.state.isDropdown} onChange={this.dropdownSelected.bind(this)} id="checkbox_dropdown"/>
                     <span className="p-1">Create Dropdown</span>
                 </label>
-                {(this.state.ctaCount >= 1)? <button type="button" className="text-uppercase m-1 btn btn-danger" onClick={this.removingCta.bind(this)}>remove cta</button> :''}
-                <button type="button" className="text-uppercase m-1 btn btn-primary" onClick={this.addingCta.bind(this)}>add cta</button>
-                <div className="ctas">
-                    {`Number of CTA${pluralS} ${this.state.ctaCount}`}
+                <div className="d-flex">
+                    {(this.state.ctaCount >= 2)? <button type="button" className="text-uppercase m-1 btn btn-danger" onClick={this.removingCta.bind(this)}>remove cta</button> : <button type="button" className="text-uppercase m-1 btn btn-danger" disabled>remove cta</button>}
+                    <button type="button" className="text-uppercase m-1 btn btn-primary" onClick={this.addingCta.bind(this)}>add cta</button>
+                    <div className="ctas">
+                        {`Number of ${this.state.ctaCount - 1} CTA${pluralS}`}
+                    </div>
+                </div>
                     <Fragment>
                         <div className="inputElems" onChange={this.handleFormChange.bind(this)}>
                             {this.state.ctaContent}
                         </div>
                     </Fragment>
                 </div>
-            </div>
+           
         </Fragment>
     );
 };

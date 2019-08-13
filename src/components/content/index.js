@@ -238,7 +238,7 @@ callbackPositionFunction = (x,y) => {
                onBlur={this.focusElem}
                onClick={this.focusElem}>
                 {this.state.elem}
-
+                {/* Option CTA component for advanced settings */}
                 <OptionCTA visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)}/>
 
                </form>
