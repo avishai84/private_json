@@ -7,11 +7,11 @@ class OptionCTA extends Component {
         super(props);
         this.state={
             json: this.props.jsonOption.content,
-            ctaNum : 0,
+            // ctaNum : 0,
             ctaContent: newArr,
             isDropdown: false,
-            ctaArr : newArr.length,
-            lengthCtaArr : this.props.jsonOption.content.length,
+
+            //lengthCtaArr : this.props.jsonOption.content.length,
             ctaCount : 1,
         }
     }
@@ -58,21 +58,16 @@ class OptionCTA extends Component {
 
 
 
-   async removingCta(e){
-        //console.log('removingCta before ' + this.state.ctaCount );
-        // let ctaCurrNum = this.state.ctaNum;
-        // const newArr = [this.props.jsonOption.content];
+     async removingCta(e){
         e.preventDefault();
 
-        console.log(newArr);
+        // remove last in the array of inputs
         newArr.pop();
-     await this.setState({
-        //ctaNum : (ctaCurrNum === 0 ) ? ctaCurrNum : ctaCurrNum - 1,
-        // json: newArr.pop(),
-        ctaCount: this.state.ctaCount - 1, //(this.state.ctaCount !== 0 ) ? this.state.ctaCount - 1 : this.state.ctaCount,
-         ctaContent: newArr,
-         ctaArr : newArr.length
-       })
+        await this.setState({
+            ctaCount: this.state.ctaCount - 1, //(this.state.ctaCount !== 0 ) ? this.state.ctaCount - 1 : this.state.ctaCount,
+            ctaContent: newArr,
+            ctaArr : newArr.length
+        })
 
 
        //console.log('this.state.ctaContent: '+this.state.ctaContent);
@@ -101,7 +96,7 @@ class OptionCTA extends Component {
 render(){
     //console.log('this.state.ctaCount ' + this.state.ctaCount );
    // console.log('newArr ' + newArr );
-const pluralS = (this.state.ctaCount > 1) ? `S: `: ':';
+const pluralS = (this.state.ctaCount > 1) ? `S `: '';
 //onsole.log('ctaArr array length '+ this.state.ctaArr );
     return(
         <Fragment> 
@@ -114,16 +109,15 @@ const pluralS = (this.state.ctaCount > 1) ? `S: `: ':';
                     {(this.state.ctaCount >= 2)? <button type="button" className="text-uppercase m-1 btn btn-danger" onClick={this.removingCta.bind(this)}>remove cta</button> : <button type="button" className="text-uppercase m-1 btn btn-danger" disabled>remove cta</button>}
                     <button type="button" className="text-uppercase m-1 btn btn-primary" onClick={this.addingCta.bind(this)}>add cta</button>
                     <div className="ctas">
-                        {`Number of ${this.state.ctaCount - 1} CTA${pluralS}`}
+                        <p>{(this.state.ctaCount >= 2)? `Number of ${this.state.ctaCount - 1} CTA${pluralS} added:`:''}</p>
                     </div>
                 </div>
-                    <Fragment>
-                        <div className="inputElems" onChange={this.handleFormChange.bind(this)}>
-                            {this.state.ctaContent}
-                        </div>
-                    </Fragment>
-                </div>
-           
+                <Fragment>
+                    <div className="inputElems" onChange={this.handleFormChange.bind(this)}>
+                        {this.state.ctaContent}
+                    </div>
+                </Fragment>
+            </div>
         </Fragment>
     );
 };
