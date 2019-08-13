@@ -19,10 +19,10 @@ class OptionCTA extends Component {
     //     console.log('nextState: '+nextState.isDropdown?true:false);
     //     console.log('nextState: '+nextProps.isDropdown?true:false);
     // }
-    componentWillReceiveProps(nextProps) {
-       // console.log('nextProps: '+nextProps.newArr);
-       // this.setState({ctaContent: nextProps.newArr});
-    }
+    // componentWillReceiveProps(nextProps) {
+    //    // console.log('nextProps: '+nextProps.newArr);
+    //    // this.setState({ctaContent: nextProps.newArr});
+    // }
     // componentWillRecieveProps(newProps) 
     // { 
     //     if (this.props !== newProps) { 
@@ -31,76 +31,50 @@ class OptionCTA extends Component {
     //     } 
     // } 
 
-    componentDidUpdate(){
-        //console.log('componentDidUpdate ctaContent '+this.state.ctaCount);
- 
-    } 
+
 
 
      async addingCta(e){
         // adding a duplicate of the array from this.props.jsonOption.content
         e.preventDefault();
-       await this.setState({
-            ctaCount: this.state.ctaCount + 1,
-            ctaContent: newArr
-           })
+       
+            const linkInputs = this.state.json.map((item, index) => {
+                return (
+                <div key={'added_Cta'+this.state.ctaCount}><label key={"key_Text"+this.state.ctaCount} htmlFor={"text-input-ctaText_"+this.state.ctaCount}>Text:<input data-instancename="text" id={"text-input-ctaText_"+this.state.ctaCount} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+this.state.ctaCount} htmlFor={"text-input-ctaLink_"+this.state.ctaCount}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+this.state.ctaCount} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label></div>);
+              });
+             // convert array to object to prevent deep nesting
+              const linkInputsObj = Object.assign({}, ...linkInputs);
+              newArr.push(linkInputsObj);
 
-           const linkInputs = this.state.json.map((item, index) => {
-            return (
-            <div key={'added_Cta'+this.state.ctaCount}><label key={"key_Text"+this.state.ctaCount} htmlFor={"text-input-ctaText_"+this.state.ctaCount}>Text:<input data-instancename="text" id={"text-input-ctaText_"+this.state.ctaCount} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+this.state.ctaCount} htmlFor={"text-input-ctaLink_"+this.state.ctaCount}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+this.state.ctaCount} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label></div>);
-          });
-
-       // console.log('this.state.ctaCount: '+ this.state.ctaCount);
-           if(this.state.ctaArr < this.state.ctaContent.length - 1){
             await this.setState({
-                ctaContent : newArr.push(linkInputs)
-               })
-           }
-  
-          //console.log('linkInputs before push '+ linkInputs);
-          console.log('this.state.ctaCount before push '+ this.state.ctaCount);
-        //   for(let i= 0; i <= this.state.ctaCount - 1; i++){
-        //     newArr.push(linkInputs)
-        //  };
-        
-        //  await this.setState({
-        //     ctaArr : newArr.length
-        //    })
-   
+                ctaCount: this.state.ctaCount + 1,
+                ctaContent: newArr
+            })
+        this.props.addCtaArr(this.state.ctaCount, this.state.ctaContent);
 
-       this.props.addCtaArr(this.state.ctaCount, this.state.ctaContent);
+     }
 
 
 
 
 
-        // let linkInputs = this.state.json.map((item, ctaArr) => {
-        //     return();
-        // });
-
-
-
-    }
-
-
-
-
-
-    removingCta(e){
+   async removingCta(e){
         //console.log('removingCta before ' + this.state.ctaCount );
-         let ctaCurrNum = this.state.ctaNum;
+        // let ctaCurrNum = this.state.ctaNum;
         // const newArr = [this.props.jsonOption.content];
         e.preventDefault();
-        console.log(newArr);
-   
 
-       this.setState({
-        ctaNum : (ctaCurrNum === 0 ) ? ctaCurrNum : ctaCurrNum - 1,
+        console.log(newArr);
+        newArr.pop();
+     await this.setState({
+        //ctaNum : (ctaCurrNum === 0 ) ? ctaCurrNum : ctaCurrNum - 1,
         // json: newArr.pop(),
-        ctaCount: this.state.ctaCount - 1,  //(this.state.ctaCount !== 0 ) ? this.state.ctaCount - 1 : this.state.ctaCount,
-        ctaContent: newArr.pop(),
-        ctaArr : newArr.length
+        ctaCount: this.state.ctaCount - 1, //(this.state.ctaCount !== 0 ) ? this.state.ctaCount - 1 : this.state.ctaCount,
+         ctaContent: newArr,
+         ctaArr : newArr.length
        })
+
+
        //console.log('this.state.ctaContent: '+this.state.ctaContent);
        this.props.addCtaArr(this.state.ctaCount, this.state.ctaContent);
     }
@@ -118,6 +92,10 @@ class OptionCTA extends Component {
     }
 
 
+    // componentDidUpdate(){
+    //     alert('rendered');
+ 
+    // } 
 
 
 render(){
