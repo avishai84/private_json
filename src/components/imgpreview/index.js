@@ -96,7 +96,7 @@ class ImgPreview extends Component {
                         
                       */}
                         {linksText.map((item, index) => {
-                          return(<span className="cta_children ml-2 pl-1 pt-0 pr-1 pb-1" key={index}>{item.text}</span>);
+                          return(<span className="cta_children ml-2 pt-0 pb-1" key={index}>{item.text}</span>);
                         })}
                     </div>
 

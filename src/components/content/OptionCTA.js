@@ -16,10 +16,10 @@ class OptionCTA extends Component {
      async addingCta(e){
         // adding a duplicate of the array from this.props.jsonOption.content
         e.preventDefault();
-       
+
             const linkInputs = this.state.json.map((item, index) => {
                 return (
-                <div key={'added_Cta'+this.state.ctaCount}><label key={"key_Text"+this.state.ctaCount} htmlFor={"text-input-ctaText_"+this.state.ctaCount}>Text:<input data-instancename="text" id={"text-input-ctaText_"+this.state.ctaCount} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+this.state.ctaCount} htmlFor={"text-input-ctaLink_"+this.state.ctaCount}>Link:<input data-instancename="href" id={"text-input-ctaLink_"+this.state.ctaCount} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label></div>);
+                <div key={'added_Cta'+this.state.ctaCount}><label key={"key_Text"+this.state.ctaCount} htmlFor={"special_addedCTA_"+this.state.ctaCount}>Text:<input data-added_cta="textAdded" id={"special_addedCTA_"+this.state.ctaCount} name="text" placeholder={item.text} type="text" defaultValue={item.text}/></label><label key={"key__href"+this.state.ctaCount} htmlFor={"slinks_isuniques_"+this.state.ctaCount}>Link:<input data-added_cta="hrefAdded" id={"slinks_isuniques_"+this.state.ctaCount} name="href" placeholder={item.href} type="text" defaultValue={item.href} /></label></div>);
               });
              // convert array to object to prevent deep nesting inside the new array.
               const linkInputsObj = Object.assign({}, ...linkInputs);
@@ -30,7 +30,7 @@ class OptionCTA extends Component {
                 ctaContent: newArr
             })
         
-            this.props.addCtaArr(this.state.ctaContent);
+            this.props.addCtaArr(this.state.ctaContent, this.state.ctaCount);
 
      }
 
@@ -44,12 +44,17 @@ class OptionCTA extends Component {
             ctaArr : newArr.length
         })
         // callback to pass on data
-       this.props.rmvCtaArr(this.state.ctaContent);
+       this.props.rmvCtaArr(this.state.ctaContent, this.state.ctaCount);
     }
 
 
-    handleFormChange(){
+    handleFormChange = (e) => {
        // console.log('change detected!');
+       console.dir(e.target);
+       if(e.target.dataset.added_cta === 'textAdded' || e.target.dataset.added_cta === 'hrefAdded'){
+        console.log(e.target.value);
+
+       }
     }
 
     dropdownSelected(e){
@@ -72,9 +77,8 @@ render(){
                 {/* Dropdown heading text */}
                 {this.state.isDropdown ? <label htmlFor="heading_text_dropdown">
                     <span className="p-1">Header Text</span>
-                    <input className="p-1" type="text" defaultValue='header text' id="heading_text_dropdown" placeholder="header text"/>
-                    
-                </label>: ''}
+                    <input key="heading_text_dropdown100" className="p-1" type="text" defaultValue='header text' id="heading_text_dropdown" placeholder="header text"/>
+                    </label>: ''}
                 <div className="d-flex">
                     {(this.state.ctaCount >= 2)? <button type="button" className="text-uppercase m-1 btn btn-danger" onClick={this.removingCta.bind(this)}>remove cta</button> : <button type="button" className="text-uppercase m-1 btn btn-danger" disabled>remove cta</button>}
                     <button type="button" className="text-uppercase m-1 btn btn-primary" onClick={this.addingCta.bind(this)}>add cta</button>
@@ -82,8 +86,10 @@ render(){
                         <p>{(this.state.ctaCount >= 2)? `Total CTA${pluralS}: ${this.state.ctaCount - 1}`:''}</p>
                     </div>
                 </div>
+                {/* Additional inputs will apear in this div */}
+                {/* onChange={this.handleFormChange.bind(this)} */}
                 <Fragment>
-                    <div className="inputElems" onChange={this.handleFormChange.bind(this)}>
+                    <div className="inputElems" >
                         {this.state.ctaContent}
                     </div>
                 </Fragment>

@@ -27,7 +27,9 @@ class Content extends Component {
       positionX: '',
       positionY: '',
       ctaAddedContentArr : '',
-      updatedCTAObjFromOptionCTAState:''
+      updatedCTAObjFromOptionCTAState:'',
+      ctaCounter: 1,
+      ctaArrayIndexPosition:''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -118,14 +120,32 @@ class Content extends Component {
 
   // Detect change on the form
   elemUpdatedInForm = (e) => {
-    this.setState({
-      changedDetected: `${e.target.nodeName.toLowerCase()}`,
-      markup: e.target.value,
-      customName: e.target.dataset.instancename
-    }, () => { this.makeChangesJson() });
-   // write changes to json
-   // https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
-  }
+    // This condition test to make sure none of the added CTA is triggered
+    
+    if(e.target.dataset.instancename === 'text' || e.target.dataset.instancename === 'href'){
+      console.log('Original CTA');
+      console.dir(e.target);
+      this.setState({
+        changedDetected: `${e.target.nodeName.toLowerCase()}`,
+        markup: e.target.value,
+        customName: e.target.dataset.instancename
+        }, () => { this.makeChangesJson() });
+      // write changes to json
+      // https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
+      // Added CTAs condition
+      }else if(e.target.dataset.added_cta === 'textAdded' || e.target.dataset.added_cta === 'hrefAdded'){
+        console.log('added CTA');
+        console.dir(e.target);
+        this.setState({
+          changedDetected: `${e.target.nodeName.toLowerCase()}`,
+          markup: e.target.value,
+          customName: e.target.dataset.added_cta
+          }, () => { this.makeChangesJson() });
+      }
+    }
+
+
+
   makeChangesJson() {
       // changing json new value
       let currentChange = this.state.jsonValue[this.state.customName];
@@ -159,8 +179,70 @@ class Content extends Component {
         this.state.jsonValue.data.links.content.map((element, index) => {
          return element[this.state.customName]= this.state.markup;
         });
-
       }
+
+// find the correct input!!!!
+      if(this.state.customName === 'textAdded') {
+        if(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]){
+          let tempArr = this.state.jsonValue.data.links.content;
+          console.dir(tempArr);
+          console.dir(this.state.markup);
+          console.log('cta position index: ' + this.state.ctaArrayIndexPosition +'\n' + 'tempArr: ');
+          console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]);
+          console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition].text = this.state.markup);
+         // tempArr = tempArr[this.state.ctaArrayIndexPosition].text = this.state.markup;
+  
+         // console.dir(tempArr);
+          //return tempArr;
+        }
+     
+      }
+
+
+
+
+      // Added CTA / href
+      if (this.state.customName === 'hrefAdded') {
+        this.state.jsonValue.data.links.content.map((element, index) => {
+          console.dir(element);
+          console.log(index);
+          return element['href']= this.state.markup;
+          return element[this.state.customName]= this.state.markup;
+        });
+      }
+      // Solve: how do we know which text was targeted inside the array?
+      // use this.state.ctaCounter to know which text to update
+      // solve which index you are clicking on in the array?
+
+      // if (this.state.customName === 'textAdded') {
+      //   console.dir(this.state.jsonValue.data.links.content);
+      //   console.dir(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]);
+      //   let updatedString = this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition].text;
+      //       updatedString = this.state.markup;
+      //   return updatedString;
+        //return this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition].text = this.state.markup;
+       // console.log(r);
+      //   this.state.jsonValue.data.links.content.map((element, index) => {
+        
+      //     console.dir(element);
+      //     console.log(index);
+      //     console.dir(element[this.state.ctaArrayIndexPosition]);
+      //   // return element[this.state.customName]= this.state.markup;
+      //  });
+        // return this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]['text'] = this.state.markup;
+        // .map((element, index) => {
+        //   return element['text']= this.state.markup;
+        // });
+      //  this.state.jsonValue.data.links.content.map((element, index) => {
+        
+          // console.dir(element);
+          // console.log(index);
+
+        //return element[this.state.customName]= this.state.markup;
+       // });
+
+    //  }
+
       this.setState({
         jsonValue: this.state.jsonValue
       });
@@ -171,7 +253,38 @@ class Content extends Component {
     // this fn helps identify which input elem we are changing
     this.setState({
       targetName: e.target.name
-    })
+    });
+    // we can evaluate which index input box to target based on its id number
+    // we are updating a state to kmow which index is
+    if(e.target.nodeName === "INPUT" && e.target.id !== 'undefined'){
+   
+    //  determind which element in array was clicked on based on its ID.
+      if(e.target.id.includes('special_addedCTA') || e.target.id.includes('slinks_isuniques_')){
+        // get position from ID
+        // stript the text to know the digit at the end. This will determind which position in the array is updating.
+        let arrPosition = e.target.id;
+        // for single digit
+        if(arrPosition.length <= 18){
+          arrPosition = arrPosition.slice(arrPosition.length - 1);
+          this.setState({
+            ctaArrayIndexPosition: parseInt(arrPosition)
+          })
+        }else{
+          arrPosition = arrPosition.slice(arrPosition.length - 2);
+          this.setState({
+            ctaArrayIndexPosition: parseInt(arrPosition)
+          })
+        }
+      }else if(e.target.id.includes('text-input-ctaText_') || e.target.id.includes('text-input-ctaLink_')){
+        // target only [0] cta / href
+        this.setState({
+          ctaArrayIndexPosition: 0
+        })
+      }
+    }
+    // if(e.target.id.nodeValue.includes('text-input-ctaText') || e.target.id.nodeValue.includes('text-input-ctaLink')){
+    //   alert('true');
+    // }
   }
 
   handleBrand(e){
@@ -202,35 +315,30 @@ callbackPositionFunction = (x,y) => {
 
   // update the CTA object in JSON - this call is originating from OptionCTA component
 
-  async addCtaArr(ctaContentArr){
+  async addCtaArr(ctaContentArr, ctaCount){
    await this.setState({
-      ctaAddedContentArr: ctaContentArr
+      ctaAddedContentArr: ctaContentArr,
+      ctaCounter: ctaCount
       //updateCTA: this.state.jsonValue.data.links.content.push(this.state.ctaAddedContentArr.props.children) 
     });
-
     this.updateCTA_from_OptionCTA();
-
   }
-  async rmvCtaArr(ctaContentArr){
+  async rmvCtaArr(ctaContentArr, ctaCount){
     await this.setState({
-      ctaAddedContentArr: ctaContentArr
+      ctaAddedContentArr: ctaContentArr,
+      ctaCounter: ctaCount
     });
     this.removeCTA_from_OptionCTA();
   }
 
   //componentDidUpdate(){}
-  removeCTA_from_OptionCTA(){
-
+  async removeCTA_from_OptionCTA(){
     this.state.jsonValue.data.links.content.pop();
-    
-    
-    this.setState({
+    await this.setState({
       updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA,
       jsonValue: this.state.jsonValue
      });
      this.parseJson();
-
-
   }
   updateCTA_from_OptionCTA(){
     /*
@@ -245,12 +353,12 @@ callbackPositionFunction = (x,y) => {
             for(let content of name.props.children){
               if(content !== 'undefined'){
                 if(content.hasOwnProperty('props')){
-                  if(content.props.hasOwnProperty('defaultValue')){
+                  if(content.props.hasOwnProperty('data-added_cta')){
                     // Assigning new properties inside the object
-                    if(content.props.name === 'text'){
+                    if(content.props['data-added_cta'] === 'textAdded'){
                         updatedCTAObjFromOptionCTA.text = content.props.defaultValue;
                       }
-                    if(content.props.name === 'href'){
+                    if(content.props['data-added_cta'] === 'hrefAdded'){
                         updatedCTAObjFromOptionCTA.href = content.props.defaultValue;
                       }
                     }
@@ -261,9 +369,10 @@ callbackPositionFunction = (x,y) => {
           }
         }
       };
+      // console.log('before updatedCTAObjFromOptionCTA');
+     // console.dir(updatedCTAObjFromOptionCTA);
      // Check if both "text" and "href" properties are updatedCTAObjFromOptionCTA object 
     if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
-
     // update state with new object
     this.setState({
       updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA
