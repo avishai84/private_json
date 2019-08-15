@@ -170,79 +170,58 @@ class Content extends Component {
 
       // links - CTA
       if (this.state.customName === 'href') {
-        this.state.jsonValue.data.links.content.map((element, index) => {
-          return element[this.state.customName]= this.state.markup;
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+            updatedObj,
+            ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+          ]
         });
       }
+         // This code took me two days to complete!!! 
+      // Read the example to understand.
+      // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if (this.state.customName === 'text') {
-        //console.log(this.state.customName);
-        this.state.jsonValue.data.links.content.map((element, index) => {
-         return element[this.state.customName]= this.state.markup;
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+            updatedObj,
+            ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+          ]
         });
       }
 
-// find the correct input!!!!
+      // This code took me two days to complete!!! 
+      // Read the example to understand.
+      // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if(this.state.customName === 'textAdded') {
-
-        if(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]){
-          let tempArr = this.state.jsonValue.data.links.content;
-          console.dir(tempArr);
-          console.dir(this.state.markup);
-          console.log('cta position index: ' + this.state.ctaArrayIndexPosition +'\n' + 'tempArr: ');
-          console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]);
-          console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition][this.state.targetName] = this.state.markup);
-         // tempArr = tempArr[this.state.ctaArrayIndexPosition].text = this.state.markup;
-  
-         // console.dir(tempArr);
-          //return tempArr;
-        }
-     
+        // create a new object and update state with its new value
+        // updatedObj = Object.assign({}, this.state.arr[i],{[name]: value});
+        //   console.dir(updatedObj);
+        //   console.dir([...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+        //   updatedObj,
+        //   ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+        // ]);
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+            updatedObj,
+            ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+          ]
+        });
       }
-
-
-
 
       // Added CTA / href
       if (this.state.customName === 'hrefAdded') {
-        this.state.jsonValue.data.links.content.map((element, index) => {
-          console.dir(element);
-          console.log(index);
-          return element['href']= this.state.markup;
-          return element[this.state.customName]= this.state.markup;
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+            updatedObj,
+            ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+          ]
         });
       }
-      // Solve: how do we know which text was targeted inside the array?
-      // use this.state.ctaCounter to know which text to update
-      // solve which index you are clicking on in the array?
 
-      // if (this.state.customName === 'textAdded') {
-      //   console.dir(this.state.jsonValue.data.links.content);
-      //   console.dir(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]);
-      //   let updatedString = this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition].text;
-      //       updatedString = this.state.markup;
-      //   return updatedString;
-        //return this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition].text = this.state.markup;
-       // console.log(r);
-      //   this.state.jsonValue.data.links.content.map((element, index) => {
-        
-      //     console.dir(element);
-      //     console.log(index);
-      //     console.dir(element[this.state.ctaArrayIndexPosition]);
-      //   // return element[this.state.customName]= this.state.markup;
-      //  });
-        // return this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]['text'] = this.state.markup;
-        // .map((element, index) => {
-        //   return element['text']= this.state.markup;
-        // });
-      //  this.state.jsonValue.data.links.content.map((element, index) => {
-        
-          // console.dir(element);
-          // console.log(index);
-
-        //return element[this.state.customName]= this.state.markup;
-       // });
-
-    //  }
 
       this.setState({
         jsonValue: this.state.jsonValue
