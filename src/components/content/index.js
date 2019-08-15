@@ -123,7 +123,6 @@ class Content extends Component {
     // This condition test to make sure none of the added CTA is triggered
     
     if(e.target.dataset.instancename === 'text' || e.target.dataset.instancename === 'href'){
-      console.log('Original CTA');
       console.dir(e.target);
       this.setState({
         changedDetected: `${e.target.nodeName.toLowerCase()}`,
@@ -134,8 +133,6 @@ class Content extends Component {
       // https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
       // Added CTAs condition
       }else if(e.target.dataset.added_cta === 'textAdded' || e.target.dataset.added_cta === 'hrefAdded'){
-        console.log('added CTA');
-        console.dir(e.target);
         this.setState({
           changedDetected: `${e.target.nodeName.toLowerCase()}`,
           markup: e.target.value,
@@ -184,7 +181,7 @@ class Content extends Component {
           ]
         });
       }
-         // This code took me two days to complete!!! 
+      // This code took me two days to complete!!! 
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if (this.state.customName === 'text') {
@@ -256,6 +253,7 @@ class Content extends Component {
             ctaArrayIndexPosition: parseInt(arrPosition)
           })
         }else{
+          // if array is 2 digits (10 or more...)
           arrPosition = arrPosition.slice(arrPosition.length - 2);
           this.setState({
             ctaArrayIndexPosition: parseInt(arrPosition)
@@ -372,10 +370,11 @@ callbackPositionFunction = (x,y) => {
 
     }
   }
-  dropdownSelected(currentState){
+  dropdownSelected(e, currentState){
     this.setState({
         isDropdown: !currentState
     })
+    console.dir(e.target);
 }
   render() {  
 

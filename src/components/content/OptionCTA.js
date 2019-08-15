@@ -59,7 +59,7 @@ class OptionCTA extends Component {
     dropdownSelected(e){
         this.setState({
             isDropdown: !this.state.isDropdown 
-        },this.props.dropdownSelected(this.state.isDropdown))
+        },this.props.dropdownSelected(e, this.state.isDropdown))
     }
 
 render(){
