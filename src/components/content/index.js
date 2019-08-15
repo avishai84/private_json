@@ -373,9 +373,36 @@ callbackPositionFunction = (x,y) => {
   dropdownSelected(e, currentState){
     this.setState({
         isDropdown: !currentState
-    })
+    });
+    this.createDropdown(e);
+    console.dir(this.state.jsonValue.data.links);
+  }
+  
+  createDropdown(e){
     console.dir(e.target);
-}
+    if(!this.state.isDropdown){
+      // constructing dropdown object
+      const heading = {"heading":{ "text":"Shop women's top denim"},"submenu":[...this.state.jsonValue.data.links.content]};
+      const links = { "type":"dropdown","content":[heading]};
+
+      const updatedObj = Object.assign({links});
+      console.log('show');
+      console.dir(updatedObj);
+    }else{
+      console.log('hide');
+    }
+    // if (this.state.customName === 'hrefAdded') {
+    //   const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+    //   this.setState({
+    //     jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+    //       updatedObj,
+    //       ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+    //     ]
+    //   });
+    // }
+  }
+
+
   render() {  
 
   return(
