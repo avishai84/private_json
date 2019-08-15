@@ -183,13 +183,14 @@ class Content extends Component {
 
 // find the correct input!!!!
       if(this.state.customName === 'textAdded') {
+
         if(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]){
           let tempArr = this.state.jsonValue.data.links.content;
           console.dir(tempArr);
           console.dir(this.state.markup);
           console.log('cta position index: ' + this.state.ctaArrayIndexPosition +'\n' + 'tempArr: ');
           console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition]);
-          console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition].text = this.state.markup);
+          console.log(this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition][this.state.targetName] = this.state.markup);
          // tempArr = tempArr[this.state.ctaArrayIndexPosition].text = this.state.markup;
   
          // console.dir(tempArr);
