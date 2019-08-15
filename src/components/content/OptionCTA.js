@@ -42,25 +42,24 @@ class OptionCTA extends Component {
             ctaCount: this.state.ctaCount - 1, 
             ctaContent: newArr,
             ctaArr : newArr.length
-        })
+        });
         // callback to pass on data
-       this.props.rmvCtaArr(this.state.ctaContent, this.state.ctaCount);
+        this.props.rmvCtaArr(this.state.ctaContent, this.state.ctaCount)
     }
 
 
-    handleFormChange = (e) => {
-       // console.log('change detected!');
-       console.dir(e.target);
-       if(e.target.dataset.added_cta === 'textAdded' || e.target.dataset.added_cta === 'hrefAdded'){
-        console.log(e.target.value);
+    // handleFormChange = (e) => {
+    //    // console.log('change detected!');
+      
+    //     console.log('handleFormChange');
 
-       }
-    }
+      
+    // }
 
     dropdownSelected(e){
         this.setState({
             isDropdown: !this.state.isDropdown 
-        })
+        },this.props.dropdownSelected(this.state.isDropdown))
     }
 
 render(){

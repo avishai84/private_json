@@ -141,6 +141,12 @@ class Content extends Component {
           markup: e.target.value,
           customName: e.target.dataset.added_cta
           }, () => { this.makeChangesJson() });
+      }else{
+        this.setState({
+          changedDetected: `${e.target.nodeName.toLowerCase()}`,
+          markup: e.target.value,
+          customName: e.target.dataset.instancename
+          }, () => { this.makeChangesJson() });
       }
     }
 
@@ -366,15 +372,12 @@ callbackPositionFunction = (x,y) => {
 
     }
   }
-
+  dropdownSelected(currentState){
+    this.setState({
+        isDropdown: !currentState
+    })
+}
   render() {  
-
-
-
-   // console.dir(this.state.markup);
-   //console.dir(this.state.ctaAddedContentArr);
-   //console.log(JSON.stringify(this.state.ctaAddedContentArr));
-
 
   return(
       <Fragment>
@@ -403,7 +406,7 @@ callbackPositionFunction = (x,y) => {
                onClick={this.focusElem}>
                 {this.state.elem}
                 {/* Option CTA component for advanced settings */}
-                <OptionCTA visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)}/>
+                <OptionCTA visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
 
                </form>
               </div>
