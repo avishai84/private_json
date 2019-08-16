@@ -396,10 +396,7 @@ callbackPositionFunction = (x,y) => {
   }
   
     createDropdown(status){
-      console.log(status);
-
      if(status){
-      console.log('show dropdown');
       // constructing new dropdown object
       const heading = {"heading":{ "text":"Shop women's top denim"},"submenu":[...this.state.jsonValue.data.links.content]};
       const links = Object.assign({"type":"dropdown","content":[heading], "style":{...this.state.jsonValue.data.links.style}});
@@ -414,11 +411,8 @@ callbackPositionFunction = (x,y) => {
       });
        this.parseJson();
     }else{
-      console.dir(this.state.jsonValue.data.links);
-      console.log('hide dropdown');
       const copyOfContentArrayObj = [...this.state.jsonValue.data.links.content[0].submenu];
       const links = Object.assign({"style":{...this.state.jsonValue.data.links.style},"content": copyOfContentArrayObj});
-      console.log(links);
 
       this.setState({
         jsonValue: this.state.jsonValue.data.links = links 
