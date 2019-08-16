@@ -22,6 +22,7 @@ class Content extends Component {
       customName: '',
       targetName: '',
       visibility:'hidden',
+      display:'none',
       brand: brand,
       brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
@@ -99,7 +100,8 @@ class Content extends Component {
 
 
     this.setState({
-      visibility: 'visible'
+      visibility: 'visible',
+      display:''
     })
     this.toUpdate(instanceHtml);
   }
@@ -378,16 +380,26 @@ callbackPositionFunction = (x,y) => {
     console.dir(this.state.jsonValue.data.links);
   }
   
-  createDropdown(e){
-    console.dir(e.target);
+   createDropdown(e){
+    //console.dir(e.target);
     if(!this.state.isDropdown){
-      // constructing dropdown object
+      // constructing new dropdown object
       const heading = {"heading":{ "text":"Shop women's top denim"},"submenu":[...this.state.jsonValue.data.links.content]};
-      const links = { "type":"dropdown","content":[heading]};
+      const links = Object.assign({"type":"dropdown","content":[heading], "style":{...this.state.jsonValue.data.links.style}});
 
-      const updatedObj = Object.assign({links});
+      const updatedObj = Object.assign(links);
       console.log('show');
       console.dir(updatedObj);
+      console.dir(this.state.jsonValue.data);
+
+      //console.dir(this.state.jsonValue.data.links = updatedObj);
+       this.setState({
+        jsonValue: this.state.jsonValue.data.links = updatedObj 
+      });
+       this.setState({
+        jsonValue: this.state.jsonValue
+      });
+       this.parseJson();
     }else{
       console.log('hide');
     }
@@ -432,7 +444,7 @@ callbackPositionFunction = (x,y) => {
                onClick={this.focusElem}>
                 {this.state.elem}
                 {/* Option CTA component for advanced settings */}
-                <OptionCTA visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
+                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
 
                </form>
               </div>
@@ -442,7 +454,8 @@ callbackPositionFunction = (x,y) => {
 
               <ImgPreview 
                 imgData={this.state.jsonValue} 
-                visibility={this.state.visibility} 
+                visibility={this.state.visibility}
+                display={this.state.display}  
                 brandName={this.state.brandName} 
                 parentPositioningCallback = {this.callbackPositionFunction.bind(this)}
                 ><p> {this.state.positionX} </p><p> {this.state.positionY} </p></ImgPreview>
