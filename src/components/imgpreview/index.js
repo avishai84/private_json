@@ -62,7 +62,7 @@ class ImgPreview extends Component {
 
       let self = this;
       const linksText = this.state.imgData.data.links.content;
-console.dir(this.state.imgData.data);
+        // console.dir(this.state.imgData.data);
 
       return (
         <Fragment>

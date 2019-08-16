@@ -48,14 +48,6 @@ class OptionCTA extends Component {
     }
 
 
-    // handleFormChange = (e) => {
-    //    // console.log('change detected!');
-      
-    //     console.log('handleFormChange');
-
-      
-    // }
-
     dropdownSelected(e){
         this.setState({
             isDropdown: !this.state.isDropdown 

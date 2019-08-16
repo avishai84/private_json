@@ -30,7 +30,8 @@ class Content extends Component {
       ctaAddedContentArr : '',
       updatedCTAObjFromOptionCTAState:'',
       ctaCounter: 1,
-      ctaArrayIndexPosition:''
+      ctaArrayIndexPosition:'',
+      isDropdown: ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -189,7 +190,7 @@ class Content extends Component {
         }
       }
     
-      // This code took me two days to complete!!! 
+
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if (this.state.customName === 'text') {
@@ -203,7 +204,7 @@ class Content extends Component {
         });
       }
     }
-      // This code took me two days to complete!!! 
+
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if(this.state.customName === 'textAdded') {
@@ -386,19 +387,24 @@ callbackPositionFunction = (x,y) => {
     this.setState({
         isDropdown: !currentState
     });
-    this.createDropdown(e);
-    console.dir(this.state.jsonValue.data.links);
+    this.createDropdown(!currentState);
+    // console.log('dropdownSelected after state: ');
+    // console.log(this.state.isDropdown);
+    //  this.createDropdown();
+    // console.dir(this.state.jsonValue.data.links);
   }
   
-   createDropdown(e){
-    //console.dir(e.target);
-    if(!this.state.isDropdown){
+    createDropdown(status){
+      console.log(status);
+
+     if(status){
+      console.log('show dropdown');
       // constructing new dropdown object
       const heading = {"heading":{ "text":"Shop women's top denim"},"submenu":[...this.state.jsonValue.data.links.content]};
       const links = Object.assign({"type":"dropdown","content":[heading], "style":{...this.state.jsonValue.data.links.style}});
 
       const updatedObj = Object.assign(links);
-      console.log('show');
+ 
       console.dir(updatedObj);
       console.dir(this.state.jsonValue.data);
 
@@ -411,7 +417,19 @@ callbackPositionFunction = (x,y) => {
       });
        this.parseJson();
     }else{
-      console.log('hide');
+      console.log('hide dropdown');
+      // make a copy of the non-dropdown last object submenu array
+      // this will be used to convert back from dropdown to plain CTA 
+      // const lastNonDropdownObj = Object.assign(this.state.jsonValue.data.links.content.submenu);
+      // console.log('submenu array');
+      // console.dir(lastNonDropdownObj);
+
+      // this.setState((prevState) => {
+      //   return { jsonValue: prevState.jsonValue }
+      // })
+      // console.log('prevState');
+      // console.dir(this.state.jsonValue);
+    
     }
     // if (this.state.customName === 'hrefAdded') {
     //   const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
@@ -423,7 +441,14 @@ callbackPositionFunction = (x,y) => {
     //   });
     // }
   }
-
+//   componentWillReceiveProps(nextProps){
+//     console.log('nextProp');
+//     if(nextProps.dropdownSelected !== this.props.dropdownSelected) {
+//       console.log('nextProp');
+//       console.dir(nextProps.dropdownSelected);
+//        this.createDropdown(nextProps.dropdownSelected);
+//     }
+// }
 
   render() {  
 
