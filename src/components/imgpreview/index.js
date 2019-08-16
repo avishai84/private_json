@@ -68,7 +68,7 @@ class ImgPreview extends Component {
       let self = this;
       let headerSubmenu = ''
       let linksText = '';
-      let dropdownClass = '';
+      let dropdownClass = 'noDropdown';
       if(!this.props.dropdownSelected){
         linksText = this.state.imgData.data.links.content;
       }else{
