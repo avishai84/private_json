@@ -22,6 +22,7 @@ class Content extends Component {
       customName: '',
       targetName: '',
       visibility:'hidden',
+      display:'none',
       brand: brand,
       brandName: brand, // 'https://www.gol.wip.gidapps.com',
       positionX: '',
@@ -29,7 +30,8 @@ class Content extends Component {
       ctaAddedContentArr : '',
       updatedCTAObjFromOptionCTAState:'',
       ctaCounter: 1,
-      ctaArrayIndexPosition:''
+      ctaArrayIndexPosition:'',
+      isDropdown: ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -99,7 +101,8 @@ class Content extends Component {
 
 
     this.setState({
-      visibility: 'visible'
+      visibility: 'visible',
+      display:''
     })
     this.toUpdate(instanceHtml);
   }
@@ -171,20 +174,27 @@ class Content extends Component {
           this.state.jsonValue.data.svgoverlay[this.state.customName] = this.state.markup;
         }
 
+
       // links - CTA
-      if (this.state.customName === 'href') {
-        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
-        this.setState({
-          jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
-            updatedObj,
-            ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
-          ]
-        });
+      // check if dropdown is true, then object need different treatment
+     
+        if (this.state.customName === 'href') {
+          if(!this.state.isDropdown){
+          const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+          this.setState({
+            jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+              updatedObj,
+              ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+            ]
+          });
+        }
       }
-      // This code took me two days to complete!!! 
+    
+
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if (this.state.customName === 'text') {
+        if(!this.state.isDropdown){
         const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
         this.setState({
           jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
@@ -193,11 +203,12 @@ class Content extends Component {
           ]
         });
       }
+    }
 
-      // This code took me two days to complete!!! 
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if(this.state.customName === 'textAdded') {
+        if(!this.state.isDropdown){
         // create a new object and update state with its new value
         // updatedObj = Object.assign({}, this.state.arr[i],{[name]: value});
         //   console.dir(updatedObj);
@@ -213,9 +224,10 @@ class Content extends Component {
           ]
         });
       }
-
+    }
       // Added CTA / href
       if (this.state.customName === 'hrefAdded') {
+        if(!this.state.isDropdown){
         const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
         this.setState({
           jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
@@ -224,6 +236,7 @@ class Content extends Component {
           ]
         });
       }
+    }
 
 
       this.setState({
@@ -370,12 +383,48 @@ callbackPositionFunction = (x,y) => {
 
     }
   }
+  // current dropdown status checkbox
   dropdownSelected(e, currentState){
     this.setState({
         isDropdown: !currentState
-    })
-    console.dir(e.target);
-}
+    });
+    this.createDropdown(!currentState);
+    // console.log('dropdownSelected after state: ');
+    // console.log(this.state.isDropdown);
+    //  this.createDropdown();
+    // console.dir(this.state.jsonValue.data.links);
+  }
+  
+    createDropdown(status){
+     if(status){
+      // constructing new dropdown object
+      const heading = {"heading":{ "text":"Shop women's top denim"},"submenu":[...this.state.jsonValue.data.links.content]};
+      const links = Object.assign({"type":"dropdown","content":[heading], "style":{...this.state.jsonValue.data.links.style}});
+
+      const updatedObj = Object.assign(links);
+
+       this.setState({
+        jsonValue: this.state.jsonValue.data.links = updatedObj 
+      });
+       this.setState({
+        jsonValue: this.state.jsonValue
+      });
+       this.parseJson();
+    }else{
+      const copyOfContentArrayObj = [...this.state.jsonValue.data.links.content[0].submenu];
+      const links = Object.assign({"style":{...this.state.jsonValue.data.links.style},"content": copyOfContentArrayObj});
+
+      this.setState({
+        jsonValue: this.state.jsonValue.data.links = links 
+      });
+       this.setState({
+        jsonValue: this.state.jsonValue
+      });
+       this.parseJson();  
+    }
+  }
+
+
   render() {  
 
   return(
@@ -405,7 +454,7 @@ callbackPositionFunction = (x,y) => {
                onClick={this.focusElem}>
                 {this.state.elem}
                 {/* Option CTA component for advanced settings */}
-                <OptionCTA visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
+                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
 
                </form>
               </div>
@@ -415,7 +464,8 @@ callbackPositionFunction = (x,y) => {
 
               <ImgPreview 
                 imgData={this.state.jsonValue} 
-                visibility={this.state.visibility} 
+                visibility={this.state.visibility}
+                display={this.state.display}  
                 brandName={this.state.brandName} 
                 parentPositioningCallback = {this.callbackPositionFunction.bind(this)}
                 ><p> {this.state.positionX} </p><p> {this.state.positionY} </p></ImgPreview>

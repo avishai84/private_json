@@ -62,11 +62,11 @@ class ImgPreview extends Component {
 
       let self = this;
       const linksText = this.state.imgData.data.links.content;
-
+        // console.dir(this.state.imgData.data);
 
       return (
         <Fragment>
-          <div style={{"visibility":`${this.props.visibility}`}}>
+          <div style={{"visibility":`${this.props.visibility}`,"display":`${this.props.display}`}}>
             <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
             <div className="imgPreview" >
               <div className="mkt-image">
