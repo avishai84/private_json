@@ -56,7 +56,7 @@ class ImgPreview extends Component {
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
       const smallImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.smallImg}`;
       const largeImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.largeImg}`;
-      //console.log('ImgPreview ',this.props);
+  
       // set context for ref. DOM elem.
       // For more info, see video: https://www.youtube.com/watch?v=VyMziBh4SYM
 
