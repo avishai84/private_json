@@ -18,6 +18,7 @@ class ImgPreview extends Component {
         positionY: '',
         imgNaturalWidth:0,
         imgNaturalHeight:0
+      
       };
 
     }
@@ -49,8 +50,12 @@ class ImgPreview extends Component {
         imgNaturalHeight: this._image.naturalHeight
       })
     }
-
+// componentDidUpdate(){
+//   console.log('componentDidUpdate ');
+//   console.dir(this.props.dropdownSelected);
+// }
     render() {
+
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
@@ -61,8 +66,17 @@ class ImgPreview extends Component {
       // For more info, see video: https://www.youtube.com/watch?v=VyMziBh4SYM
 
       let self = this;
-      const linksText = this.state.imgData.data.links.content;
-        // console.dir(this.state.imgData.data);
+      let headerSubmenu = ''
+      let linksText = '';
+      let dropdownClass = '';
+      if(!this.props.dropdownSelected){
+        linksText = this.state.imgData.data.links.content;
+      }else{
+        linksText = this.state.imgData.data.links.content[0].submenu;
+        headerSubmenu = this.state.imgData.data.links.content[0].heading.text;
+        dropdownClass = 'dropdownCta';
+      }
+
 
       return (
         <Fragment>
@@ -89,17 +103,20 @@ class ImgPreview extends Component {
                  parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}
                  imgNaturalWidth={this.state.imgNaturalWidth}
                  imgNaturalHeight={this.state.imgNaturalHeight}>
-                    <div>
-                      {/* 
-                        1. get the name of text link from here: this.state.imgData.data.links.content
-                        2. create array and output
-                        
-                      */}
-                        {linksText.map((item, index) => {
-                          return(<span className="cta_children ml-2 pt-0 pb-1" key={index}>{item.text}</span>);
-                        })}
-                    </div>
-
+                   <div className={dropdownClass}>
+                     { (headerSubmenu.length > 0) ? headerSubmenu : ''}
+                      <ul>
+                        {/* 
+                          1. get the name of text link from here: this.state.imgData.data.links.content
+                          2. create array and output
+                          3. if dropdown true - convert
+                          
+                        */}
+                          {linksText.map((item, index) => {
+                            return(<li className="cta_children ml-2 pt-0 pb-1" key={index}>{item.text}</li>);
+                          })}
+                      </ul>
+                   </div>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>

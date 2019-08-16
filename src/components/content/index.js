@@ -507,7 +507,12 @@ callbackPositionFunction = (x,y) => {
                onClick={this.focusElem}>
                 {this.state.elem}
                 {/* Option CTA component for advanced settings */}
-                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)} handleHeaderInputDropdownChange={this.handleHeaderInputDropdownChange.bind(this)}/>
+                <OptionCTA display={this.state.display} visibility={this.state.visibility}
+                 jsonOption={this.state.jsonValue.data.links}
+                 addCtaArr={this.addCtaArr.bind(this)}
+                 rmvCtaArr={this.rmvCtaArr.bind(this)}
+                 dropdownSelected={this.dropdownSelected.bind(this)}
+                 handleHeaderInputDropdownChange={this.handleHeaderInputDropdownChange.bind(this)}/>
 
                </form>
               </div>
@@ -521,6 +526,7 @@ callbackPositionFunction = (x,y) => {
                 display={this.state.display}  
                 brandName={this.state.brandName} 
                 parentPositioningCallback = {this.callbackPositionFunction.bind(this)}
+                dropdownSelected = {this.state.isDropdown}
                 ><p> {this.state.positionX} </p><p> {this.state.positionY} </p></ImgPreview>
 
               <PlainJson
