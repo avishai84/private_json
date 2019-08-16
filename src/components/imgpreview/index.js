@@ -1,7 +1,7 @@
 import React, { Component, Fragment} from 'react';
 import DraggableComp from '../draggable_cta';
 import MobileToggle from './MobileToggle';
-
+import ColorPicker from '../colorPicker/';
 class ImgPreview extends Component {
 
     constructor(props){
@@ -117,6 +117,12 @@ class ImgPreview extends Component {
                           })}
                       </ul>
                    </div>
+                   <Fragment>
+                    <div className="colorPicker" style={{"position":"absolute", "top":"100px","left":"-100px","zIndex":12}}>
+                      <span>Color Picker</span>
+                      <ColorPicker/>
+                    </div>
+                    </Fragment>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>
