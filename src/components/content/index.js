@@ -193,7 +193,10 @@ class Content extends Component {
             ]
           });
         }else{
-          console.log('state is drodown');
+          const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+          this.setState({
+            jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+          })
         }
       }
     
@@ -210,7 +213,10 @@ class Content extends Component {
           ]
         });
       }else{
-        console.log('state is drodown');
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+        })
       }
     }
 
@@ -233,7 +239,10 @@ class Content extends Component {
           ]
         });
       }else{
-        console.log('state is drodown');
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+        })
       }
     }
       // Added CTA / href
@@ -247,7 +256,10 @@ class Content extends Component {
           ]
         });
       }else{
-        console.log('state is drodown');
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+        })
       }
     }
 
