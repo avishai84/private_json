@@ -31,7 +31,8 @@ class Content extends Component {
       updatedCTAObjFromOptionCTAState:'',
       ctaCounter: 1,
       ctaArrayIndexPosition:'',
-      isDropdown: ''
+      isDropdown: '',
+      headerDropdownInputValue: ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -44,7 +45,7 @@ class Content extends Component {
   // Create HTML template from json
   parseJson() {
     const origJson = json;
-    let jsonNew = this.state.jsonValue;
+    //let jsonNew = this.state.jsonValue;
     let ctaLinksArray = origJson.data.links.content;
     let linkInputs = ctaLinksArray.map((item, index) => {
       return (
@@ -153,31 +154,35 @@ class Content extends Component {
 
 
   makeChangesJson() {
-      // changing json new value
-      let currentChange = this.state.jsonValue[this.state.customName];
-      //console.log(this.state.customName);
+
       if (this.state.customName === 'experimentRunning') {
-        currentChange = currentChange ? (this.state.jsonValue[this.state.customName] = false) : (this.state.jsonValue[this.state.customName] = true);
-        // console.log(`2: ${currentChange}`);
+        this.state.jsonValue[this.state.customName] ? (
+          this.setState({
+            jsonValue: this.state.jsonValue[this.state.customName] = false})) : (this.setState({
+              jsonValue: this.state.jsonValue[this.state.customName] = true}));
       }
       if (this.state.customName === 'instanceDesc') {
-        this.state.jsonValue[this.state.customName] = this.state.markup;
-        //console.log(`3: ${currentChange}`);
-      }
+        this.setState({
+          jsonValue: this.state.jsonValue[this.state.customName] = this.state.markup
+        })
 
+      }
       if (this.state.targetName === 'background') {
-         this.state.jsonValue.data.background.content[this.state.customName] = this.state.markup;
+         this.setState({
+          jsonValue: this.state.jsonValue.data.background.content[this.state.customName] = this.state.markup
+        })
       }
-
       // svgoverlay Image, SVG, Alt
       if (this.state.targetName === 'svgoverlay') {
-          this.state.jsonValue.data.svgoverlay[this.state.customName] = this.state.markup;
-        }
-
+        this.setState({
+          jsonValue: this.state.jsonValue.data.svgoverlay[this.state.customName] = this.state.markup
+        })
+      }
 
       // links - CTA
       // check if dropdown is true, then object need different treatment
-     
+      // Read the example to understand the code.
+      // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
         if (this.state.customName === 'href') {
           if(!this.state.isDropdown){
           const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
@@ -187,6 +192,11 @@ class Content extends Component {
               ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
             ]
           });
+        }else{
+          const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+          this.setState({
+            jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+          })
         }
       }
     
@@ -202,6 +212,11 @@ class Content extends Component {
             ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
           ]
         });
+      }else{
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+        })
       }
     }
 
@@ -223,6 +238,11 @@ class Content extends Component {
             ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
           ]
         });
+      }else{
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+        })
       }
     }
       // Added CTA / href
@@ -235,6 +255,11 @@ class Content extends Component {
             ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
           ]
         });
+      }else{
+        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+        this.setState({
+          jsonValue: this.state.jsonValue.data.links.content[0].submenu[this.state.ctaArrayIndexPosition] = updatedObj
+        })
       }
     }
 
@@ -316,7 +341,7 @@ callbackPositionFunction = (x,y) => {
    await this.setState({
       ctaAddedContentArr: ctaContentArr,
       ctaCounter: ctaCount
-      //updateCTA: this.state.jsonValue.data.links.content.push(this.state.ctaAddedContentArr.props.children) 
+ 
     });
     this.updateCTA_from_OptionCTA();
   }
@@ -366,8 +391,8 @@ callbackPositionFunction = (x,y) => {
           }
         }
       };
-      // console.log('before updatedCTAObjFromOptionCTA');
-     // console.dir(updatedCTAObjFromOptionCTA);
+
+
      // Check if both "text" and "href" properties are updatedCTAObjFromOptionCTA object 
     if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
     // update state with new object
@@ -389,10 +414,7 @@ callbackPositionFunction = (x,y) => {
         isDropdown: !currentState
     });
     this.createDropdown(!currentState);
-    // console.log('dropdownSelected after state: ');
-    // console.log(this.state.isDropdown);
-    //  this.createDropdown();
-    // console.dir(this.state.jsonValue.data.links);
+
   }
   
     createDropdown(status){
@@ -424,6 +446,12 @@ callbackPositionFunction = (x,y) => {
     }
   }
 
+  // header input for dropdown
+  handleHeaderInputDropdownChange(e){
+    this.setState({
+      headerDropdownInputValue: this.state.jsonValue.data.links.content[0].heading.text = e.target.value
+    })
+  }
 
   render() {  
 
@@ -454,7 +482,7 @@ callbackPositionFunction = (x,y) => {
                onClick={this.focusElem}>
                 {this.state.elem}
                 {/* Option CTA component for advanced settings */}
-                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
+                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)} handleHeaderInputDropdownChange={this.handleHeaderInputDropdownChange.bind(this)}/>
 
                </form>
               </div>

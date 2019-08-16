@@ -47,13 +47,15 @@ class OptionCTA extends Component {
         this.props.rmvCtaArr(this.state.ctaContent, this.state.ctaCount)
     }
 
-
     dropdownSelected(e){
         this.setState({
             isDropdown: !this.state.isDropdown 
         },this.props.dropdownSelected(e, this.state.isDropdown))
     }
-
+    // pass to content input value for dropdown header
+    handleHeaderInputDropdownChange(e){
+        this.props.handleHeaderInputDropdownChange(e);
+    }
 render(){
 
     const pluralS = (this.state.ctaCount >= 3) ? `S `: '';
@@ -68,7 +70,7 @@ render(){
                 {/* Dropdown heading text */}
                 {this.state.isDropdown ? <label htmlFor="heading_text_dropdown">
                     <span className="p-1">Header Text</span>
-                    <input key="heading_text_dropdown100" className="p-1" type="text" defaultValue='header text' id="heading_text_dropdown" placeholder="header text"/>
+                    <input key="heading_text_dropdown100" className="p-1" type="text" defaultValue='header text' id="heading_text_dropdown" placeholder="header text" onChange={this.handleHeaderInputDropdownChange.bind(this)}/>
                     </label>: ''}
                 <div className="d-flex">
                     {(this.state.ctaCount >= 2)? <button type="button" className="text-uppercase m-1 btn btn-danger" onClick={this.removingCta.bind(this)}>remove cta</button> : <button type="button" className="text-uppercase m-1 btn btn-danger" disabled>remove cta</button>}
