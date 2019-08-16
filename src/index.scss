@@ -160,6 +160,7 @@
       .rightDiv {
         flex-basis: 50%;
         max-width: 1280px;
+
         label.sds_field.sds-js_input-control{
             position: sticky;
             top: 120px;
@@ -236,11 +237,8 @@
             -webkit-font-smoothing: antialiased;
             padding-left: 0;
             padding-right: 0;
-            border-left: none;
-            border-right: none;
-            border-top:none;
+            border: none;
             background-color: transparent;
-            border-bottom: 2px solid;
             color: #fff;
             box-sizing: border-box;
             z-index: 11;
@@ -280,6 +278,9 @@
                 text-transform:capitalize;
               }
           }
+          .cta_children{
+           border-bottom: solid 0.15rem;
+          }
         }
       }
       .absolute{
@@ -311,6 +312,18 @@
           padding: 1.5rem 0 0.4rem;
 
           }
+      }
+
+      // Advances features: added CTA
+      .addCta .inputElems > div:nth-child(odd){
+        box-shadow:4px 3px 9px 0px #dbd196;
+        padding:0.5em 0;
+        margin: 1.5em 0;
+      }
+      .addCta .inputElems > div:nth-child(even){
+        box-shadow:4px 3px 9px 0px #288b8a;
+        padding:0.5em 0;
+        margin: 1.5em 0;
       }
   }
 

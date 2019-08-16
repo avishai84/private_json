@@ -18,6 +18,7 @@ class ImgPreview extends Component {
         positionY: '',
         imgNaturalWidth:0,
         imgNaturalHeight:0
+      
       };
 
     }
@@ -49,21 +50,37 @@ class ImgPreview extends Component {
         imgNaturalHeight: this._image.naturalHeight
       })
     }
+// componentDidUpdate(){
+//   console.log('componentDidUpdate ');
+//   console.dir(this.props.dropdownSelected);
+// }
     render() {
+
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
       const smallImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.smallImg}`;
       const largeImg = `${this.state.imgUrl}${this.state.imgData.data.background.content.largeImg}`;
-      //console.log('ImgPreview ',this.props);
+  
       // set context for ref. DOM elem.
       // For more info, see video: https://www.youtube.com/watch?v=VyMziBh4SYM
 
       let self = this;
+      let headerSubmenu = ''
+      let linksText = '';
+      let dropdownClass = 'noDropdown';
+      if(!this.props.dropdownSelected){
+        linksText = this.state.imgData.data.links.content;
+      }else{
+        linksText = this.state.imgData.data.links.content[0].submenu;
+        headerSubmenu = this.state.imgData.data.links.content[0].heading.text;
+        dropdownClass = 'dropdownCta';
+      }
+
 
       return (
         <Fragment>
-          <div style={{"visibility":`${this.props.visibility}`}}>
+          <div style={{"visibility":`${this.props.visibility}`,"display":`${this.props.display}`}}>
             <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
             <div className="imgPreview" >
               <div className="mkt-image">
@@ -86,8 +103,20 @@ class ImgPreview extends Component {
                  parentPositioningFromDraggbleCallback={this.positionsFromDraggable.bind(this)}
                  imgNaturalWidth={this.state.imgNaturalWidth}
                  imgNaturalHeight={this.state.imgNaturalHeight}>
-
-                    <div >{this.state.imgData.data.links.content[0].text}</div>
+                   <div className={dropdownClass}>
+                     { (headerSubmenu.length > 0) ? headerSubmenu : ''}
+                      <ul>
+                        {/* 
+                          1. get the name of text link from here: this.state.imgData.data.links.content
+                          2. create array and output
+                          3. if dropdown true - convert
+                          
+                        */}
+                          {linksText.map((item, index) => {
+                            return(<li className="cta_children ml-2 pt-0 pb-1" key={index}>{item.text}</li>);
+                          })}
+                      </ul>
+                   </div>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>

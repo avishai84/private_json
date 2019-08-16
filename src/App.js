@@ -5,9 +5,10 @@ import Footer from './components/footer';
 import Content from './components/content';
 
 // This is where the App get assembeld. If you use CSS frameworks you may need to import that here.
-class App extends Component {
+class App extends Component { 
 
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
