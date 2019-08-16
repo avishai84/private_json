@@ -383,6 +383,7 @@ callbackPositionFunction = (x,y) => {
 
     }
   }
+  // current dropdown status checkbox
   dropdownSelected(e, currentState){
     this.setState({
         isDropdown: !currentState
@@ -404,11 +405,7 @@ callbackPositionFunction = (x,y) => {
       const links = Object.assign({"type":"dropdown","content":[heading], "style":{...this.state.jsonValue.data.links.style}});
 
       const updatedObj = Object.assign(links);
- 
-      console.dir(updatedObj);
-      console.dir(this.state.jsonValue.data);
 
-      //console.dir(this.state.jsonValue.data.links = updatedObj);
        this.setState({
         jsonValue: this.state.jsonValue.data.links = updatedObj 
       });
@@ -417,38 +414,22 @@ callbackPositionFunction = (x,y) => {
       });
        this.parseJson();
     }else{
+      console.dir(this.state.jsonValue.data.links);
       console.log('hide dropdown');
-      // make a copy of the non-dropdown last object submenu array
-      // this will be used to convert back from dropdown to plain CTA 
-      // const lastNonDropdownObj = Object.assign(this.state.jsonValue.data.links.content.submenu);
-      // console.log('submenu array');
-      // console.dir(lastNonDropdownObj);
+      const copyOfContentArrayObj = [...this.state.jsonValue.data.links.content[0].submenu];
+      const links = Object.assign({"style":{...this.state.jsonValue.data.links.style},"content": copyOfContentArrayObj});
+      console.log(links);
 
-      // this.setState((prevState) => {
-      //   return { jsonValue: prevState.jsonValue }
-      // })
-      // console.log('prevState');
-      // console.dir(this.state.jsonValue);
-    
+      this.setState({
+        jsonValue: this.state.jsonValue.data.links = links 
+      });
+       this.setState({
+        jsonValue: this.state.jsonValue
+      });
+       this.parseJson();  
     }
-    // if (this.state.customName === 'hrefAdded') {
-    //   const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
-    //   this.setState({
-    //     jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
-    //       updatedObj,
-    //       ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
-    //     ]
-    //   });
-    // }
   }
-//   componentWillReceiveProps(nextProps){
-//     console.log('nextProp');
-//     if(nextProps.dropdownSelected !== this.props.dropdownSelected) {
-//       console.log('nextProp');
-//       console.dir(nextProps.dropdownSelected);
-//        this.createDropdown(nextProps.dropdownSelected);
-//     }
-// }
+
 
   render() {  
 
