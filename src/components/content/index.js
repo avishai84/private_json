@@ -31,7 +31,8 @@ class Content extends Component {
       updatedCTAObjFromOptionCTAState:'',
       ctaCounter: 1,
       ctaArrayIndexPosition:'',
-      isDropdown: ''
+      isDropdown: '',
+      headerDropdownInputValue: ''
     }
 
     this.parseJson = this.parseJson.bind(this);
@@ -424,6 +425,12 @@ callbackPositionFunction = (x,y) => {
     }
   }
 
+  // header input for dropdown
+  handleHeaderInputDropdownChange(e){
+    this.setState({
+      headerDropdownInputValue: this.state.jsonValue.data.links.content[0].heading.text = e.target.value
+    })
+  }
 
   render() {  
 
@@ -454,7 +461,7 @@ callbackPositionFunction = (x,y) => {
                onClick={this.focusElem}>
                 {this.state.elem}
                 {/* Option CTA component for advanced settings */}
-                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)}/>
+                <OptionCTA display={this.state.display} visibility={this.state.visibility} jsonOption={this.state.jsonValue.data.links} addCtaArr={this.addCtaArr.bind(this)} rmvCtaArr={this.rmvCtaArr.bind(this)} dropdownSelected={this.dropdownSelected.bind(this)} handleHeaderInputDropdownChange={this.handleHeaderInputDropdownChange.bind(this)}/>
 
                </form>
               </div>
