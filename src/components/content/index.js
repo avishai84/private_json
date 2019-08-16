@@ -173,20 +173,27 @@ class Content extends Component {
           this.state.jsonValue.data.svgoverlay[this.state.customName] = this.state.markup;
         }
 
+
       // links - CTA
-      if (this.state.customName === 'href') {
-        const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
-        this.setState({
-          jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
-            updatedObj,
-            ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
-          ]
-        });
+      // check if dropdown is true, then object need different treatment
+     
+        if (this.state.customName === 'href') {
+          if(!this.state.isDropdown){
+          const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
+          this.setState({
+            jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
+              updatedObj,
+              ...this.state.jsonValue.data.links.content.slice(this.state.ctaArrayIndexPosition+1)
+            ]
+          });
+        }
       }
+    
       // This code took me two days to complete!!! 
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if (this.state.customName === 'text') {
+        if(!this.state.isDropdown){
         const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
         this.setState({
           jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
@@ -195,11 +202,12 @@ class Content extends Component {
           ]
         });
       }
-
+    }
       // This code took me two days to complete!!! 
       // Read the example to understand.
       // https://stackoverflow.com/questions/28121272/whats-the-best-way-to-update-an-object-in-an-array-in-reactjs
       if(this.state.customName === 'textAdded') {
+        if(!this.state.isDropdown){
         // create a new object and update state with its new value
         // updatedObj = Object.assign({}, this.state.arr[i],{[name]: value});
         //   console.dir(updatedObj);
@@ -215,9 +223,10 @@ class Content extends Component {
           ]
         });
       }
-
+    }
       // Added CTA / href
       if (this.state.customName === 'hrefAdded') {
+        if(!this.state.isDropdown){
         const updatedObj = Object.assign({}, this.state.jsonValue.data.links.content[this.state.ctaArrayIndexPosition],{[[this.state.targetName]]: this.state.markup});
         this.setState({
           jsonValue: this.state.jsonValue.data.links.content = [...this.state.jsonValue.data.links.content.slice(0, this.state.ctaArrayIndexPosition),
@@ -226,6 +235,7 @@ class Content extends Component {
           ]
         });
       }
+    }
 
 
       this.setState({
