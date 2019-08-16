@@ -345,6 +345,7 @@ callbackPositionFunction = (x,y) => {
     });
     this.updateCTA_from_OptionCTA();
   }
+
   async rmvCtaArr(ctaContentArr, ctaCount){
     await this.setState({
       ctaAddedContentArr: ctaContentArr,
@@ -353,21 +354,32 @@ callbackPositionFunction = (x,y) => {
     this.removeCTA_from_OptionCTA();
   }
 
-  //componentDidUpdate(){}
   async removeCTA_from_OptionCTA(){
-    this.state.jsonValue.data.links.content.pop();
-    await this.setState({
-      updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA,
-      jsonValue: this.state.jsonValue
-     });
-     this.parseJson();
+
+    if(!this.state.isDropdown){
+      this.state.jsonValue.data.links.content.pop();
+      await this.setState({
+        updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA,
+        jsonValue: this.state.jsonValue
+       });
+       this.parseJson();
+    }else{
+      this.state.jsonValue.data.links.content[0].submenu.pop();
+      await this.setState({
+        updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA,
+        jsonValue: this.state.jsonValue
+       });
+       this.parseJson();
+    }
   }
+
+
   updateCTA_from_OptionCTA(){
+  
     /*
         1. Creating a new object from added CTAs and appeding it to the jsonValue text.
         2. We need to update this.state.jsonValue.data.links.content with the new object
     */ 
-
     for(let item of this.state.ctaAddedContentArr){
       if(item.hasOwnProperty('props')){
         for(let name of item.props.children){
@@ -392,22 +404,35 @@ callbackPositionFunction = (x,y) => {
         }
       };
 
-
+  if(!this.state.isDropdown){
      // Check if both "text" and "href" properties are updatedCTAObjFromOptionCTA object 
     if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
     // update state with new object
     this.setState({
       updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA
     });
-    // pushi new CTA objectinto array and update state on jsonValue. (This is the string json on the right)
+    // push new CTA object into array and update state on jsonValue. (This is the string json on the right)
      this.state.jsonValue.data.links.content.push(this.state.updatedCTAObjFromOptionCTAState);
     this.setState({
      jsonValue: this.state.jsonValue
     });
     this.parseJson();
-
+    }
+  }else{
+    if(updatedCTAObjFromOptionCTA.hasOwnProperty('text') && updatedCTAObjFromOptionCTA.hasOwnProperty('href')){
+      this.setState({
+        updatedCTAObjFromOptionCTAState: updatedCTAObjFromOptionCTA
+      });
+      this.state.jsonValue.data.links.content[0].submenu.push(this.state.updatedCTAObjFromOptionCTAState);
+      this.setState({
+        jsonValue: this.state.jsonValue
+       });
+       this.parseJson();
     }
   }
+}
+
+
   // current dropdown status checkbox
   dropdownSelected(e, currentState){
     this.setState({
