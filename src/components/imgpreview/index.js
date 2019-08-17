@@ -18,7 +18,8 @@ class ImgPreview extends Component {
         positionY: '',
         imgNaturalWidth:0,
         imgNaturalHeight:0,
-        aria: false
+        aria: false,
+        toggleCTA: ''
         
       };
     }
@@ -57,7 +58,8 @@ class ImgPreview extends Component {
     }
     dropdownButtonClicked(){
       this.setState({
-        aria: !this.state.aria
+        aria: !this.state.aria,
+        toggleCTA: (this.state.toggleCTA === '') ?  this.state.toggleCTA = 'open' : this.state.toggleCTA = ''
       })
     }
     render() {
@@ -119,7 +121,7 @@ class ImgPreview extends Component {
                  imgNaturalHeight={this.state.imgNaturalHeight}>
                    <div className={dropdownClass}>
                      { (headerSubmenu.length > 0) ? <button aria-expanded={this.state.aria} onClick={this.dropdownButtonClicked.bind(this)}><span>{headerSubmenu}</span></button> : ''}
-                      <ul>
+                      <ul className={this.state.toggleCTA}>
                         {/* 
                           1. get the name of text link from here: this.state.imgData.data.links.content
                           2. create array and output

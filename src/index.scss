@@ -295,16 +295,21 @@
           }
           .dropdown_cta_on {
             button[aria-expanded~="true"] span:after{  
-              content:'+';
+              content:'-';
               display:inline;
               width:100%;
              
             }
             button[aria-expanded~="false"] span:after{  
-              content:'-';
+              content:'+';
               display:inline;
               width:100%;
-             
+            }
+            ul{
+              height:0;
+            }
+            ul.open{
+              height:100%;
             }
             button {
               padding: .75rem 1.5rem;
@@ -341,7 +346,7 @@
               margin:0;
               padding: 0 1.5rem;
               max-height: 800px;
-              transition: max-height .3s ease-in;
+              transition: height .3s ease-in;
               box-shadow: 0 1px 2px 0 rgba(0,0,0,.3);
               background: #fff;
               box-sizing: border-box;
