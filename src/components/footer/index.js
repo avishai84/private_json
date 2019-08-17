@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import toolData from '../../toolData.json'
+import toolData from '../../toolData.json';
+const date = new Date();
 
 class Footer extends Component {
     constructor(props){
@@ -16,6 +17,7 @@ class Footer extends Component {
     return (
       <div className="AppData">
         <small>Version: {this.state.version.version}</small><br/>
+        <small>Created: 2019-{date.getFullYear()}</small><br/>
         <small>WCD contributors: {contributor}</small>
       </div>
     );

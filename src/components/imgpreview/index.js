@@ -17,10 +17,10 @@ class ImgPreview extends Component {
         positionX: '',
         positionY: '',
         imgNaturalWidth:0,
-        imgNaturalHeight:0
-      
+        imgNaturalHeight:0,
+        aria: false
+        
       };
-
     }
 
     componentWillReceiveProps(nextProps) {
@@ -50,12 +50,17 @@ class ImgPreview extends Component {
         imgNaturalHeight: this._image.naturalHeight
       })
     }
-// componentDidUpdate(){
-//   console.log('componentDidUpdate ');
-//   console.dir(this.props.dropdownSelected);
-// }
+    getColor(){
+      this.setState({
+        color:this.props.color
+      });
+    }
+    dropdownButtonClicked(){
+      this.setState({
+        aria: !this.state.aria
+      })
+    }
     render() {
-
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
@@ -68,13 +73,13 @@ class ImgPreview extends Component {
       let self = this;
       let headerSubmenu = ''
       let linksText = '';
-      let dropdownClass = 'noDropdown';
+      let dropdownClass = 'no_dropdown';
       if(!this.props.dropdownSelected){
         linksText = this.state.imgData.data.links.content;
       }else{
         linksText = this.state.imgData.data.links.content[0].submenu;
         headerSubmenu = this.state.imgData.data.links.content[0].heading.text;
-        dropdownClass = 'dropdownCta';
+        dropdownClass = 'dropdown_cta_on';
       }
 
 
@@ -82,7 +87,16 @@ class ImgPreview extends Component {
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`,"display":`${this.props.display}`}}>
             <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
-            <div className="imgPreview" >
+            <div className="imgPreview">
+
+              <Fragment>
+                
+                  <div className="colorPicker" style={{"position":"absolute", "top":"100px","left":"0px","zIndex":12}}>
+                    <ColorPicker colors={this.getColor.bind(this)}/>
+                  </div>
+            
+              </Fragment>
+
               <div className="mkt-image">
                 <picture>
                   <source media="(max-width:767px)" srcSet={smallImg} />
@@ -104,7 +118,7 @@ class ImgPreview extends Component {
                  imgNaturalWidth={this.state.imgNaturalWidth}
                  imgNaturalHeight={this.state.imgNaturalHeight}>
                    <div className={dropdownClass}>
-                     { (headerSubmenu.length > 0) ? headerSubmenu : ''}
+                     { (headerSubmenu.length > 0) ? <button aria-expanded={this.state.aria} onClick={this.dropdownButtonClicked.bind(this)}><span>{headerSubmenu}</span></button> : ''}
                       <ul>
                         {/* 
                           1. get the name of text link from here: this.state.imgData.data.links.content
@@ -113,16 +127,10 @@ class ImgPreview extends Component {
                           
                         */}
                           {linksText.map((item, index) => {
-                            return(<li className="cta_children ml-2 pt-0 pb-1" key={index}>{item.text}</li>);
+                            return(<li key={index}>{item.text}</li>);
                           })}
                       </ul>
                    </div>
-                   <Fragment>
-                    <div className="colorPicker" style={{"position":"absolute", "top":"100px","left":"-100px","zIndex":12}}>
-                      <span>Color Picker</span>
-                      <ColorPicker/>
-                    </div>
-                    </Fragment>
                   </DraggableComp>
                   <picture>
                     <source media="(max-width: 767px)" srcSet={smallSvg}/>
