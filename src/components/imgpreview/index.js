@@ -1,7 +1,6 @@
 import React, { Component, Fragment} from 'react';
 import DraggableComp from '../draggable_cta';
 import MobileToggle from './MobileToggle';
-import ColorPicker from '../colorPicker/';
 class ImgPreview extends Component {
 
     constructor(props){
@@ -51,11 +50,6 @@ class ImgPreview extends Component {
         imgNaturalHeight: this._image.naturalHeight
       })
     }
-    getColor(){
-      this.setState({
-        color:this.props.color
-      });
-    }
     dropdownButtonClicked(){
       this.setState({
         aria: !this.state.aria,
@@ -89,11 +83,6 @@ class ImgPreview extends Component {
           <div style={{"visibility":`${this.props.visibility}`,"display":`${this.props.display}`}}>
             <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
             <div className="imgPreview">
-            <Fragment>
-              <div className="colorPicker" style={{"position":"absolute", "top":0,"left":"326%","zIndex":12}}>
-                <ColorPicker colors={this.getColor.bind(this)}/>
-              </div>
-            </Fragment>
               <div className="mkt-image">
                 <picture>
                   <source media="(max-width:767px)" srcSet={smallImg} />
