@@ -84,21 +84,16 @@ class ImgPreview extends Component {
         dropdownClass = 'dropdown_cta_on';
       }
 
-
       return (
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`,"display":`${this.props.display}`}}>
             <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
             <div className="imgPreview">
-
-              <Fragment>
-                
-                  <div className="colorPicker" style={{"position":"absolute", "top":"100px","left":"0px","zIndex":12}}>
-                    <ColorPicker colors={this.getColor.bind(this)}/>
-                  </div>
-            
-              </Fragment>
-
+            <Fragment>
+              <div className="colorPicker" style={{"position":"absolute", "top":0,"left":"326%","zIndex":12}}>
+                <ColorPicker colors={this.getColor.bind(this)}/>
+              </div>
+            </Fragment>
               <div className="mkt-image">
                 <picture>
                   <source media="(max-width:767px)" srcSet={smallImg} />
