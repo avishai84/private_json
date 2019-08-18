@@ -1,6 +1,7 @@
 import React, { Component, Fragment} from 'react';
 import Draggable from 'react-draggable';
 
+
 class DraggableComp extends Component {
     constructor(props){
       super(props);
@@ -56,8 +57,6 @@ class DraggableComp extends Component {
           grid={[1, 1]}
           scale={1}
           onStart={this.handleStart}
-          // onDrag={this.handleDrag}
-          // onStop={this.handleStop}
           onDrag={this.convertToPrecantage}
           link={this.state.link}
           bounds={{left:0, top: 0, right: 1920, bottom: 1920}}
@@ -73,7 +72,6 @@ class DraggableComp extends Component {
                 </div>
               </Fragment>
           </div>
-          
         </Draggable>
    
   

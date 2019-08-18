@@ -1,7 +1,6 @@
 import React, { Component, Fragment} from 'react';
 import DraggableComp from '../draggable_cta';
 import MobileToggle from './MobileToggle';
-
 class ImgPreview extends Component {
 
     constructor(props){
@@ -17,10 +16,11 @@ class ImgPreview extends Component {
         positionX: '',
         positionY: '',
         imgNaturalWidth:0,
-        imgNaturalHeight:0
-      
+        imgNaturalHeight:0,
+        aria: false,
+        toggleCTA: ''
+        
       };
-
     }
 
     componentWillReceiveProps(nextProps) {
@@ -50,12 +50,13 @@ class ImgPreview extends Component {
         imgNaturalHeight: this._image.naturalHeight
       })
     }
-// componentDidUpdate(){
-//   console.log('componentDidUpdate ');
-//   console.dir(this.props.dropdownSelected);
-// }
+    dropdownButtonClicked(){
+      this.setState({
+        aria: !this.state.aria,
+        toggleCTA: (this.state.toggleCTA === '') ?  this.state.toggleCTA = 'open' : this.state.toggleCTA = ''
+      })
+    }
     render() {
-
 
       const smallSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.smallImg}`;
       const largeSvg = `${this.state.imgUrl}${this.state.imgData.data.svgoverlay.largeImg}`;
@@ -68,21 +69,20 @@ class ImgPreview extends Component {
       let self = this;
       let headerSubmenu = ''
       let linksText = '';
-      let dropdownClass = 'noDropdown';
+      let dropdownClass = 'no_dropdown';
       if(!this.props.dropdownSelected){
         linksText = this.state.imgData.data.links.content;
       }else{
         linksText = this.state.imgData.data.links.content[0].submenu;
         headerSubmenu = this.state.imgData.data.links.content[0].heading.text;
-        dropdownClass = 'dropdownCta';
+        dropdownClass = 'dropdown_cta_on';
       }
-
 
       return (
         <Fragment>
           <div style={{"visibility":`${this.props.visibility}`,"display":`${this.props.display}`}}>
             <MobileToggle imgData={this.state.imgData.data} imgUrl={this.state.imgUrl}/>
-            <div className="imgPreview" >
+            <div className="imgPreview">
               <div className="mkt-image">
                 <picture>
                   <source media="(max-width:767px)" srcSet={smallImg} />
@@ -104,8 +104,8 @@ class ImgPreview extends Component {
                  imgNaturalWidth={this.state.imgNaturalWidth}
                  imgNaturalHeight={this.state.imgNaturalHeight}>
                    <div className={dropdownClass}>
-                     { (headerSubmenu.length > 0) ? headerSubmenu : ''}
-                      <ul>
+                     { (headerSubmenu.length > 0) ? <button aria-expanded={this.state.aria} onClick={this.dropdownButtonClicked.bind(this)}><span>{headerSubmenu}</span></button> : ''}
+                      <ul className={this.state.toggleCTA}>
                         {/* 
                           1. get the name of text link from here: this.state.imgData.data.links.content
                           2. create array and output
@@ -113,7 +113,7 @@ class ImgPreview extends Component {
                           
                         */}
                           {linksText.map((item, index) => {
-                            return(<li className="cta_children ml-2 pt-0 pb-1" key={index}>{item.text}</li>);
+                            return(<li key={index}>{item.text}</li>);
                           })}
                       </ul>
                    </div>
